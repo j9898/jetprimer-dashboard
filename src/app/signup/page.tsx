@@ -5,21 +5,35 @@ import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
-export default function LoginPage() {
+export default function SignUpPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null)
   const router = useRouter()
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
     setMessage(null)
 
+    // 비밀번호 확인
+    if (password !== confirmPassword) {
+      setMessage({ type: 'error', text: '비밀번호가 일치하지 않습니다.' })
+      setIsLoading(false)
+      return
+    }
+
+    if (password.length < 6) {
+      setMessage({ type: 'error', text: '비밀번호는 최소 6자 이상이어야 합니다.' })
+      setIsLoading(false)
+      return
+    }
+
     const supabase = createClient()
 
-    const { error } = await supabase.auth.signInWithPassword({
+    const { error } = await supabase.auth.signUp({
       email,
       password,
     })
@@ -28,7 +42,10 @@ export default function LoginPage() {
       setMessage({ type: 'error', text: error.message })
       setIsLoading(false)
     } else {
-      router.push('/dashboard')
+      setMessage({ type: 'success', text: '회원가입 완료! 로그인 페이지로 이동합니다.' })
+      setTimeout(() => {
+        router.push('/login')
+      }, 1500)
     }
   }
 
@@ -43,14 +60,14 @@ export default function LoginPage() {
             </svg>
           </div>
           <h1 className="text-3xl font-bold text-slate-800">JetPrimer</h1>
-          <p className="text-slate-500 mt-2">Flight Center에 오신 것을 환영합니다</p>
+          <p className="text-slate-500 mt-2">새로운 여정을 시작하세요</p>
         </div>
 
-        {/* Login Card */}
+        {/* Signup Card */}
         <div className="bg-white/70 backdrop-blur-xl border border-white/50 shadow-lg shadow-sky-200/30 rounded-2xl p-8">
-          <h2 className="text-xl font-semibold text-slate-800 mb-6">로그인</h2>
+          <h2 className="text-xl font-semibold text-slate-800 mb-6">회원가입</h2>
 
-          <form onSubmit={handleLogin} className="space-y-4">
+          <form onSubmit={handleSignUp} className="space-y-4">
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-2">
                 이메일 주소
@@ -75,7 +92,23 @@ export default function LoginPage() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
+                placeholder="최소 6자 이상"
+                required
+                minLength={6}
+                className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-400/20 outline-none transition-all bg-white/50"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="confirmPassword" className="block text-sm font-medium text-slate-700 mb-2">
+                비밀번호 확인
+              </label>
+              <input
+                id="confirmPassword"
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                placeholder="비밀번호를 다시 입력하세요"
                 required
                 minLength={6}
                 className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-400/20 outline-none transition-all bg-white/50"
@@ -103,19 +136,19 @@ export default function LoginPage() {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                   </svg>
-                  로그인 중...
+                  가입 중...
                 </span>
               ) : (
-                '로그인'
+                '회원가입'
               )}
             </button>
           </form>
 
           <div className="mt-6 text-center">
             <p className="text-slate-500 text-sm">
-              아직 계정이 없으신가요?{' '}
-              <Link href="/signup" className="text-sky-600 hover:text-sky-700 font-medium">
-                회원가입
+              이미 계정이 있으신가요?{' '}
+              <Link href="/login" className="text-sky-600 hover:text-sky-700 font-medium">
+                로그인
               </Link>
             </p>
           </div>

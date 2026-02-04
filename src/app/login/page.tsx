@@ -59,7 +59,6 @@ export default function LoginPage() {
       })
       setEmail('')
     }
-
     setIsMagicLinkLoading(false)
   }
 
@@ -74,19 +73,18 @@ export default function LoginPage() {
             </svg>
           </div>
           <h1 className="text-3xl font-bold text-slate-800">JetPrimer</h1>
-          <p className="text-slate-500 mt-2">Flight Center에 오신 것을 환영합니다</p>
+          <p className="text-slate-500 mt-2">미국 법인 설립의 새로운 기준</p>
         </div>
 
         {/* Login Card */}
         <div className="bg-white/70 backdrop-blur-xl border border-white/50 shadow-lg shadow-sky-200/30 rounded-2xl p-8">
-          <h2 className="text-xl font-semibold text-slate-800 mb-6">로그인 / 가입</h2>
+          <h2 className="text-xl font-semibold text-slate-800 mb-6 text-center">로그인</h2>
 
-          {/* Google Sign In Button - Primary */}
+          {/* Google Login Button */}
           <button
-            type="button"
             onClick={handleGoogleLogin}
             disabled={isGoogleLoading}
-            className="w-full py-3 px-4 bg-white border-2 border-slate-200 text-slate-700 font-medium rounded-xl shadow-sm hover:bg-slate-50 hover:border-slate-300 hover:shadow-md transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+            className="w-full py-3 px-4 bg-white border border-slate-200 text-slate-700 font-medium rounded-xl shadow-sm hover:shadow-md hover:bg-slate-50 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
           >
             {isGoogleLoading ? (
               <span className="flex items-center justify-center gap-2">
@@ -115,7 +113,7 @@ export default function LoginPage() {
               <div className="w-full border-t border-slate-200"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-white/70 text-slate-500">또는 이메일로</span>
+              <span className="px-4 bg-white/70 text-slate-500">또는 이메일로 로그인</span>
             </div>
           </div>
 
@@ -130,8 +128,7 @@ export default function LoginPage() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="captain@example.com"
-                required
+                placeholder="example@company.com"
                 className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-400/20 outline-none transition-all bg-white/50"
               />
             </div>
@@ -142,15 +139,7 @@ export default function LoginPage() {
                   ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
                   : 'bg-rose-50 text-rose-700 border border-rose-200'
               }`}>
-                {message.type === 'success' && (
-                  <div className="flex items-start gap-2">
-                    <svg className="w-5 h-5 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                    <span>{message.text}</span>
-                  </div>
-                )}
-                {message.type === 'error' && message.text}
+                {message.text}
               </div>
             )}
 
@@ -168,21 +157,17 @@ export default function LoginPage() {
                   전송 중...
                 </span>
               ) : (
-                <span className="flex items-center justify-center gap-2">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                  로그인 링크 받기
-                </span>
+                '로그인 링크 받기'
               )}
             </button>
           </form>
 
-          {/* Info */}
-          <div className="mt-6 p-4 bg-sky-50/50 rounded-xl border border-sky-100">
-            <p className="text-sm text-slate-600 text-center">
-              <span className="font-medium text-sky-700">비밀번호가 필요 없습니다.</span><br />
-              이메일로 받은 링크를 클릭하면 바로 로그인됩니다.
+          {/* Info Box */}
+          <div className="mt-6 p-4 bg-sky-50 rounded-xl border border-sky-100">
+            <p className="text-sm text-sky-700">
+              <strong>비밀번호 없이 로그인하세요!</strong><br />
+              이메일로 전송된 링크를 클릭하면 바로 로그인됩니다.
+              신규 사용자는 자동으로 계정이 생성됩니다.
             </p>
           </div>
         </div>

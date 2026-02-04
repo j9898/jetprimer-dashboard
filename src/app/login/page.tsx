@@ -3,35 +3,13 @@
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
-import Link from 'next/link'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
   const [isGoogleLoading, setIsGoogleLoading] = useState(false)
+  const [isMagicLinkLoading, setIsMagicLinkLoading] = useState(false)
   const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null)
   const router = useRouter()
-
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-    setMessage(null)
-
-    const supabase = createClient()
-
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    })
-
-    if (error) {
-      setMessage({ type: 'error', text: error.message })
-      setIsLoading(false)
-    } else {
-      router.push('/dashboard')
-    }
-  }
 
   const handleGoogleLogin = async () => {
     setIsGoogleLoading(true)
@@ -52,6 +30,39 @@ export default function LoginPage() {
     }
   }
 
+  const handleMagicLink = async (e: React.FormEvent) => {
+    e.preventDefault()
+
+    if (!email) {
+      setMessage({ type: 'error', text: '이메일 주소를 입력해주세요.' })
+      return
+    }
+
+    setIsMagicLinkLoading(true)
+    setMessage(null)
+
+    const supabase = createClient()
+
+    const { error } = await supabase.auth.signInWithOtp({
+      email,
+      options: {
+        emailRedirectTo: `${window.location.origin}/auth/callback`,
+      },
+    })
+
+    if (error) {
+      setMessage({ type: 'error', text: error.message })
+    } else {
+      setMessage({
+        type: 'success',
+        text: '로그인 링크를 이메일로 보냈습니다. 이메일을 확인해주세요.'
+      })
+      setEmail('')
+    }
+
+    setIsMagicLinkLoading(false)
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-sky-100 via-blue-50 to-indigo-100 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
@@ -68,85 +79,14 @@ export default function LoginPage() {
 
         {/* Login Card */}
         <div className="bg-white/70 backdrop-blur-xl border border-white/50 shadow-lg shadow-sky-200/30 rounded-2xl p-8">
-          <h2 className="text-xl font-semibold text-slate-800 mb-6">로그인</h2>
+          <h2 className="text-xl font-semibold text-slate-800 mb-6">로그인 / 가입</h2>
 
-          <form onSubmit={handleLogin} className="space-y-4">
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-2">
-                이메일 주소
-              </label>
-              <input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="captain@example.com"
-                required
-                className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-400/20 outline-none transition-all bg-white/50"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-slate-700 mb-2">
-                비밀번호
-              </label>
-              <input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
-                required
-                minLength={6}
-                className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-400/20 outline-none transition-all bg-white/50"
-              />
-            </div>
-
-            {message && (
-              <div className={`p-4 rounded-xl text-sm ${
-                message.type === 'success'
-                  ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                  : 'bg-rose-50 text-rose-700 border border-rose-200'
-              }`}>
-                {message.text}
-              </div>
-            )}
-
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full py-3 px-4 bg-gradient-to-r from-sky-500 to-blue-500 text-white font-medium rounded-xl shadow-lg shadow-sky-400/30 hover:shadow-xl hover:shadow-sky-400/40 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {isLoading ? (
-                <span className="flex items-center justify-center gap-2">
-                  <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                  </svg>
-                  로그인 중...
-                </span>
-              ) : (
-                '로그인'
-              )}
-            </button>
-          </form>
-
-          {/* Divider */}
-          <div className="relative my-6">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-slate-200"></div>
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-white/70 text-slate-500">또는</span>
-            </div>
-          </div>
-
-          {/* Google Sign In Button */}
+          {/* Google Sign In Button - Primary */}
           <button
             type="button"
             onClick={handleGoogleLogin}
             disabled={isGoogleLoading}
-            className="w-full py-3 px-4 bg-white border border-slate-200 text-slate-700 font-medium rounded-xl shadow-sm hover:bg-slate-50 hover:shadow-md transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+            className="w-full py-3 px-4 bg-white border-2 border-slate-200 text-slate-700 font-medium rounded-xl shadow-sm hover:bg-slate-50 hover:border-slate-300 hover:shadow-md transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
           >
             {isGoogleLoading ? (
               <span className="flex items-center justify-center gap-2">
@@ -164,17 +104,85 @@ export default function LoginPage() {
                   <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
                   <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
                 </svg>
-                Google로 로그인
+                Google로 계속하기
               </>
             )}
           </button>
 
-          <div className="mt-6 text-center">
-            <p className="text-slate-500 text-sm">
-              아직 계정이 없으신가요?{' '}
-              <Link href="/signup" className="text-sky-600 hover:text-sky-700 font-medium">
-                회원가입
-              </Link>
+          {/* Divider */}
+          <div className="relative my-6">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-slate-200"></div>
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="px-4 bg-white/70 text-slate-500">또는 이메일로</span>
+            </div>
+          </div>
+
+          {/* Magic Link Form */}
+          <form onSubmit={handleMagicLink} className="space-y-4">
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-2">
+                이메일 주소
+              </label>
+              <input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="captain@example.com"
+                required
+                className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-400/20 outline-none transition-all bg-white/50"
+              />
+            </div>
+
+            {message && (
+              <div className={`p-4 rounded-xl text-sm ${
+                message.type === 'success'
+                  ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                  : 'bg-rose-50 text-rose-700 border border-rose-200'
+              }`}>
+                {message.type === 'success' && (
+                  <div className="flex items-start gap-2">
+                    <svg className="w-5 h-5 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    <span>{message.text}</span>
+                  </div>
+                )}
+                {message.type === 'error' && message.text}
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={isMagicLinkLoading}
+              className="w-full py-3 px-4 bg-gradient-to-r from-sky-500 to-blue-500 text-white font-medium rounded-xl shadow-lg shadow-sky-400/30 hover:shadow-xl hover:shadow-sky-400/40 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isMagicLinkLoading ? (
+                <span className="flex items-center justify-center gap-2">
+                  <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                  </svg>
+                  전송 중...
+                </span>
+              ) : (
+                <span className="flex items-center justify-center gap-2">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  로그인 링크 받기
+                </span>
+              )}
+            </button>
+          </form>
+
+          {/* Info */}
+          <div className="mt-6 p-4 bg-sky-50/50 rounded-xl border border-sky-100">
+            <p className="text-sm text-slate-600 text-center">
+              <span className="font-medium text-sky-700">비밀번호가 필요 없습니다.</span><br />
+              이메일로 받은 링크를 클릭하면 바로 로그인됩니다.
             </p>
           </div>
         </div>

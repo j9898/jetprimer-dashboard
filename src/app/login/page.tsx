@@ -2,11 +2,15 @@
 
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null)
+  const router = useRouter()
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -15,20 +19,17 @@ export default function LoginPage() {
 
     const supabase = createClient()
 
-    const { error } = await supabase.auth.signInWithOtp({
+    const { error } = await supabase.auth.signInWithPassword({
       email,
-      options: {
-        emailRedirectTo: `${window.location.origin}/auth/callback`,
-      },
+      password,
     })
 
     if (error) {
       setMessage({ type: 'error', text: error.message })
+      setIsLoading(false)
     } else {
-      setMessage({ type: 'success', text: '이메일을 확인해주세요! 로그인 링크를 보냈습니다.' })
+      router.push('/dashboard')
     }
-
-    setIsLoading(false)
   }
 
   return (
@@ -65,6 +66,22 @@ export default function LoginPage() {
               />
             </div>
 
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium text-slate-700 mb-2">
+                비밀번호
+              </label>
+              <input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                required
+                minLength={6}
+                className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-400/20 outline-none transition-all bg-white/50"
+              />
+            </div>
+
             {message && (
               <div className={`p-4 rounded-xl text-sm ${
                 message.type === 'success'
@@ -86,17 +103,22 @@ export default function LoginPage() {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                   </svg>
-                  전송 중...
+                  로그인 중...
                 </span>
               ) : (
-                '매직 링크로 로그인'
+                '로그인'
               )}
             </button>
           </form>
 
-          <p className="text-center text-slate-500 text-sm mt-6">
-            비밀번호 없이 이메일로 안전하게 로그인하세요
-          </p>
+          <div className="mt-6 text-center">
+            <p className="text-slate-500 text-sm">
+              아직 계정이 없으신가요?{' '}
+              <Link href="/signup" className="text-sky-600 hover:text-sky-700 font-medium">
+                회원가입
+              </Link>
+            </p>
+          </div>
         </div>
 
         {/* Footer */}

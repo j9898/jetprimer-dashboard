@@ -106,6 +106,8 @@ export default function AdminClient({ user, customers }: Props) {
 
   // 현재 진행 단계 계산
   const getCurrentStep = (steps: Step[]) => {
+    if (!steps || steps.length === 0) return null
+
     const inProgress = steps.find(s => s.status === 'in_progress')
     if (inProgress) return inProgress.step_key || inProgress.step_name
 
@@ -117,6 +119,7 @@ export default function AdminClient({ user, customers }: Props) {
 
   // 진행률 계산
   const getProgress = (steps: Step[]) => {
+    if (!steps || steps.length === 0) return 0
     const completed = steps.filter(s => s.status === 'completed').length
     return Math.round((completed / steps.length) * 100)
   }
@@ -226,7 +229,11 @@ export default function AdminClient({ user, customers }: Props) {
                       <ClockIcon />
                       <span className="text-slate-500">{t('currentStep')}:</span>
                       <span className="text-slate-700 font-medium">
-                        {tDashboard(`steps.${getCurrentStep(customer.steps)}`)}
+                        {getCurrentStep(customer.steps)
+                          ? (getCurrentStep(customer.steps) === 'completed'
+                              ? t('status.completed')
+                              : tDashboard(`steps.${getCurrentStep(customer.steps)}`))
+                          : '-'}
                       </span>
                     </div>
                   </div>
@@ -267,7 +274,9 @@ export default function AdminClient({ user, customers }: Props) {
                   <div className="bg-white/70 backdrop-blur-xl border border-white/50 shadow-lg shadow-slate-200/30 rounded-2xl p-6">
                     <h3 className="text-lg font-semibold text-slate-800 mb-4">{t('steps')}</h3>
                     <div className="space-y-3">
-                      {selectedCustomer.steps.map((step) => {
+                      {(!selectedCustomer.steps || selectedCustomer.steps.length === 0) ? (
+                        <p className="text-slate-400 text-sm text-center py-4">No steps data</p>
+                      ) : selectedCustomer.steps.map((step) => {
                         const stepKey = step.step_key || step.step_name || ''
 
                         return (

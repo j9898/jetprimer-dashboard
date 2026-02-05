@@ -126,6 +126,10 @@
       "inProgress": "進行中",
       "completed": "完了"
     },
-    "completedAt": "完了日"
+    "completedAt": "完了日",
+    "sendEmail": "通知を送信",
+    "sendingEmail": "送信中...",
+    "emailSent": "メールが正常に送信されました。",
+    "emailFailed": "メール送信に失敗しました"
   }
 }

@@ -37,6 +37,12 @@ const ClockIcon = () => (
   </svg>
 )
 
+const MailIcon = () => (
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+  </svg>
+)
+
 interface Step {
   id: number
   customer_id: number
@@ -67,6 +73,7 @@ export default function AdminClient({ user, customers }: Props) {
   const [isLoggingOut, setIsLoggingOut] = useState(false)
   const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null)
   const [isUpdating, setIsUpdating] = useState(false)
+  const [isSendingEmail, setIsSendingEmail] = useState<number | null>(null)
   const t = useTranslations('admin')
   const tCommon = useTranslations('common')
   const tDashboard = useTranslations('dashboard')
@@ -102,6 +109,35 @@ export default function AdminClient({ user, customers }: Props) {
       router.refresh()
     }
     setIsUpdating(false)
+  }
+
+  // 이메일 발송
+  const sendNotificationEmail = async (customerId: number, stepKey: string, status: string) => {
+    setIsSendingEmail(customerId)
+    try {
+      const response = await fetch('/api/admin/send-notification', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          customerId,
+          stepKey,
+          newStatus: status,
+          locale: 'ko'
+        })
+      })
+
+      const result = await response.json()
+
+      if (result.success) {
+        alert(t('emailSent'))
+      } else {
+        alert(t('emailFailed') + ': ' + result.error)
+      }
+    } catch (error) {
+      console.error('Email send error:', error)
+      alert(t('emailFailed'))
+    }
+    setIsSendingEmail(null)
   }
 
   // 현재 진행 단계 계산
@@ -337,11 +373,25 @@ export default function AdminClient({ user, customers }: Props) {
                               </button>
                             </div>
 
-                            {step.completed_at && (
-                              <p className="text-slate-400 text-xs mt-2">
-                                {t('completedAt')}: {new Date(step.completed_at).toLocaleDateString()}
-                              </p>
-                            )}
+                            {/* Email & Completed Info */}
+                            <div className="flex items-center justify-between mt-3 pt-3 border-t border-slate-200">
+                              {step.completed_at && (
+                                <p className="text-slate-400 text-xs">
+                                  {t('completedAt')}: {new Date(step.completed_at).toLocaleDateString()}
+                                </p>
+                              )}
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation()
+                                  sendNotificationEmail(selectedCustomer.id, stepKey, step.status)
+                                }}
+                                disabled={isSendingEmail === selectedCustomer.id}
+                                className="flex items-center gap-1 px-3 py-1.5 text-xs font-medium text-sky-600 bg-sky-50 hover:bg-sky-100 rounded-lg transition-all disabled:opacity-50 ml-auto"
+                              >
+                                <MailIcon />
+                                {isSendingEmail === selectedCustomer.id ? t('sendingEmail') : t('sendEmail')}
+                              </button>
+                            </div>
                           </div>
                         )
                       })}

@@ -126,6 +126,10 @@
       "inProgress": "In Progress",
       "completed": "Completed"
     },
-    "completedAt": "Completed"
+    "completedAt": "Completed",
+    "sendEmail": "Send Notification",
+    "sendingEmail": "Sending...",
+    "emailSent": "Email sent successfully.",
+    "emailFailed": "Failed to send email"
   }
 }

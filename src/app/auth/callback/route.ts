@@ -40,11 +40,15 @@ export async function GET(request: Request) {
                           user.email?.split('@')[0] ||
                           'New Customer'
 
-          await supabase.from('customers').insert({
+          const { error: insertError } = await supabase.from('customers').insert({
             user_id: user.id,
             flight_code: flightCode,
             name: userName,
           })
+
+          if (insertError) {
+            console.error('Customer insert error:', insertError)
+          }
         }
       }
 

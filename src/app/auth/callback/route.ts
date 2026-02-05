@@ -54,13 +54,13 @@ export async function GET(request: Request) {
             console.error('Customer insert error:', insertError)
           }
 
-          // 신규 고객에게 기본 Steps 생성
+          // 신규 고객에게 기본 Steps 생성 (step_key는 번역 키로 사용)
           if (newCustomer) {
             const defaultSteps = [
-              { customer_id: newCustomer.id, step_name: '서류 준비', step_order: 1, status: 'in_progress' },
-              { customer_id: newCustomer.id, step_name: 'LLC 설립', step_order: 2, status: 'pending' },
-              { customer_id: newCustomer.id, step_name: 'EIN 신청', step_order: 3, status: 'pending' },
-              { customer_id: newCustomer.id, step_name: '은행 계좌', step_order: 4, status: 'pending' },
+              { customer_id: newCustomer.id, step_key: 'documents', step_order: 1, status: 'in_progress' },
+              { customer_id: newCustomer.id, step_key: 'llc', step_order: 2, status: 'pending' },
+              { customer_id: newCustomer.id, step_key: 'ein', step_order: 3, status: 'pending' },
+              { customer_id: newCustomer.id, step_key: 'bank', step_order: 4, status: 'pending' },
             ]
 
             const { error: stepsError } = await supabase

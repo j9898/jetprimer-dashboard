@@ -40,8 +40,8 @@ interface Company {
 
 interface Waypoint {
   id: number
-  name: string
-  dueDate: string
+  stepKey: string
+  dueDate: string | null
   daysLeft: number
   status: string
 }
@@ -226,8 +226,8 @@ export default function DashboardClient({ user, company, waypoints, locale }: Pr
                       <span className="text-lg">📍</span>
                     </div>
                     <div>
-                      <p className="text-slate-800 font-medium">{wp.name}</p>
-                      <p className="text-slate-500 text-sm">{wp.dueDate}</p>
+                      <p className="text-slate-800 font-medium">{t(`steps.${wp.stepKey}`)}</p>
+                      <p className="text-slate-500 text-sm">{wp.dueDate || t(`status.${wp.status}`)}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-4">

@@ -54,26 +54,35 @@ export default async function DashboardPage() {
     bankStatus: "Active"
   }
 
+  // step_name을 step_key로 매핑 (기존 한국어 데이터 호환)
+  const stepNameToKey: Record<string, string> = {
+    '서류 준비': 'documents',
+    'LLC 설립': 'llc',
+    'EIN 신청': 'ein',
+    '은행 계좌': 'bank',
+  }
+
   // 실제 steps가 있으면 변환, 없으면 데모 데이터
   const waypoints = steps && steps.length > 0
     ? steps.map(step => ({
         id: step.id,
-        name: step.step_name,
+        // step_key가 있으면 사용, 없으면 step_name에서 변환
+        stepKey: step.step_key || stepNameToKey[step.step_name] || 'documents',
         dueDate: step.completed_at
           ? new Date(step.completed_at).toLocaleDateString('en-US', {
               month: 'short',
               day: 'numeric',
               year: 'numeric'
             })
-          : "진행 중",
+          : null,
         daysLeft: 0,
         status: step.status === 'completed' ? 'clear' : step.status === 'in_progress' ? 'prepare' : 'pending'
       }))
     : [
-        { id: 1, name: "서류 준비", dueDate: "진행 중", daysLeft: 0, status: "prepare" },
-        { id: 2, name: "LLC 설립", dueDate: "대기", daysLeft: 0, status: "pending" },
-        { id: 3, name: "EIN 신청", dueDate: "대기", daysLeft: 0, status: "pending" },
-        { id: 4, name: "은행 계좌", dueDate: "대기", daysLeft: 0, status: "pending" },
+        { id: 1, stepKey: "documents", dueDate: null, daysLeft: 0, status: "prepare" },
+        { id: 2, stepKey: "llc", dueDate: null, daysLeft: 0, status: "pending" },
+        { id: 3, stepKey: "ein", dueDate: null, daysLeft: 0, status: "pending" },
+        { id: 4, stepKey: "bank", dueDate: null, daysLeft: 0, status: "pending" },
       ]
 
   return (

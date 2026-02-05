@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JetPrimer | Flight Center</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'jet-blue': '#0ea5e9',
+            'jet-blue-dark': '#0284c7',
+            'jet-blue-light': '#38bdf8',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+    body {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      color: #1e293b;
+      margin: 0;
+      min-height: 100vh;
+    }
+    .departure-text {
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    @keyframes pulse-green {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+      50% { box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
+    }
+    @keyframes pulse-blue {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.4); }
+      50% { box-shadow: 0 0 0 8px rgba(14, 165, 233, 0); }
+    }
+    .pulse-green { animation: pulse-green 2s infinite; }
+    .pulse-blue { animation: pulse-blue 2s infinite; }
+    .glow-green { box-shadow: 0 0 15px rgba(34, 197, 94, 0.3); }
+    .glow-blue { box-shadow: 0 0 20px rgba(14, 165, 233, 0.3); }
+    .card-hover { transition: all 0.3s ease; }
+    .card-hover:hover { transform: translateY(-2px); box-shadow: 0 20px 40px rgba(14, 165, 233, 0.15); }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+    }
+  </style>
+</head>
+<body>
+  <div class="flex min-h-screen">
+    <!-- Sidebar -->
+    <div class="w-64 bg-white/90 backdrop-blur-lg border-r border-sky-100 flex flex-col h-screen fixed left-0 top-0 shadow-lg">
+      <!-- Logo -->
+      <div class="p-6 border-b border-sky-100">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-gradient-to-br from-sky-400 to-blue-600 rounded-xl flex items-center justify-center shadow-lg glow-blue">
+            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+            </svg>
+          </div>
+          <div>
+            <h1 class="text-lg font-bold text-slate-800">JetPrimer</h1>
+            <p class="text-xs text-sky-500 font-medium">Flight Center</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="flex-1 p-4">
+        <ul class="space-y-2">
+          <li>
+            <button class="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-gradient-to-r from-sky-500 to-blue-500 text-white shadow-md">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+              </svg>
+              <span class="text-sm font-medium">Flight Center</span>
+            </button>
+          </li>
+          <li>
+            <button class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-sky-50 hover:text-sky-600 transition-all">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span class="text-sm font-medium">Flight Plan</span>
+            </button>
+          </li>
+          <li>
+            <button class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-sky-50 hover:text-sky-600 transition-all">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+              </svg>
+              <span class="text-sm font-medium">Checklist</span>
+            </button>
+          </li>
+          <li>
+            <button class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-sky-50 hover:text-sky-600 transition-all">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+              </svg>
+              <span class="text-sm font-medium">Cargo Hold</span>
+            </button>
+          </li>
+          <li>
+            <button class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-sky-50 hover:text-sky-600 transition-all">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
+              </svg>
+              <span class="text-sm font-medium">My Passport</span>
+            </button>
+          </li>
+          <li>
+            <button class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-sky-50 hover:text-sky-600 transition-all">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              <span class="text-sm font-medium">Settings</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Support -->
+      <div class="p-4 border-t border-sky-100">
+        <button class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-sky-50 hover:text-sky-600 transition-all">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          <span class="text-sm font-medium">Call Crew</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="ml-64 p-8 flex-1">
+      <div class="max-w-5xl space-y-8">
+        <!-- Header -->
+        <div class="flex items-center justify-between">
+          <div>
+            <h1 class="text-3xl font-bold text-slate-800 mb-2">Flight Center</h1>
+            <p class="text-slate-500">Welcome aboard, Captain Alex Chen</p>
+          </div>
+          <div class="text-right">
+            <p class="text-slate-400 text-sm">Local Time</p>
+            <p class="text-2xl font-mono text-slate-800" id="current-time">--:--</p>
+          </div>
+        </div>
+
+        <!-- Main Grid -->
+        <div class="grid grid-cols-3 gap-6">
+          <!-- Flight Status Card -->
+          <div class="col-span-2 glass-card rounded-2xl p-6 card-hover shadow-xl">
+            <div class="flex items-start justify-between mb-6">
+              <div>
+                <p class="text-slate-400 text-sm mb-1">Flight</p>
+                <p class="text-sky-500 font-mono text-lg font-semibold">JP-2026-0042</p>
+              </div>
+              <div class="flex items-center gap-2 bg-emerald-50 px-3 py-1.5 rounded-full">
+                <div class="w-2 h-2 rounded-full bg-emerald-500 pulse-green"></div>
+                <span class="text-xs font-semibold departure-text text-emerald-600">CRUISING</span>
+              </div>
+            </div>
+
+            <div class="mb-6">
+              <h2 class="text-2xl font-bold text-slate-800 mb-1">Horizon Ventures LLC</h2>
+              <p class="text-slate-500">Captain Alex Chen</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 pt-4 border-t border-slate-100">
+              <div>
+                <p class="text-slate-400 text-xs mb-1">DESTINATION</p>
+                <p class="text-slate-700 font-medium">Wyoming, USA 🇺🇸</p>
+              </div>
+              <div>
+                <p class="text-slate-400 text-xs mb-1">FORMED</p>
+                <p class="text-slate-700 font-medium">Feb 7, 2026</p>
+              </div>
+              <div>
+                <p class="text-slate-400 text-xs mb-1">EIN</p>
+                <p class="text-slate-700 font-mono">88-1234567</p>
+              </div>
+              <div>
+                <p class="text-slate-400 text-xs mb-1">BANK</p>
+                <p class="text-emerald-600 font-medium">Mercury Financial ✓</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Stats -->
+          <div class="space-y-4">
+            <div class="bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-100 rounded-2xl p-6 text-center shadow-lg">
+              <div class="w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <p class="text-emerald-700 font-semibold">All Systems Normal</p>
+              <p class="text-emerald-600/70 text-sm mt-1">No action required</p>
+            </div>
+
+            <div class="glass-card rounded-2xl p-6 shadow-lg">
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-slate-500">Tasks</span>
+                <span class="text-slate-800 font-bold">2/3</span>
+              </div>
+              <div class="w-full bg-slate-100 rounded-full h-2.5">
+                <div class="bg-gradient-to-r from-sky-400 to-blue-500 h-2.5 rounded-full" style="width: 66%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Upcoming Waypoints -->
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-xl font-bold text-slate-800">Upcoming Waypoints</h2>
+            <button class="text-sky-500 text-sm font-medium hover:text-sky-600 transition-colors">View Flight Plan →</button>
+          </div>
+          <div class="space-y-3">
+            <!-- Waypoint 1 - Prepare -->
+            <div class="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 shadow-sm">
+              <div class="flex items-center gap-4">
+                <div class="w-10 h-10 rounded-xl flex items-center justify-center bg-amber-100">
+                  <span class="text-lg">📍</span>
+                </div>
+                <div>
+                  <p class="text-slate-800 font-medium">BOI Report</p>
+                  <p class="text-slate-500 text-sm">Apr 15, 2026</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <div class="px-3 py-1 rounded-full text-sm font-mono bg-amber-100 text-amber-700 font-semibold">D-71</div>
+                <div class="flex items-center gap-2 bg-amber-100 px-3 py-1 rounded-full">
+                  <div class="w-2 h-2 rounded-full bg-amber-500"></div>
+                  <span class="text-xs font-semibold departure-text text-amber-700">PREPARE</span>
+                </div>
+              </div>
+            </div>
+            <!-- Waypoint 2 - Clear -->
+            <div class="flex items-center justify-between p-4 rounded-xl glass-card shadow-sm">
+              <div class="flex items-center gap-4">
+                <div class="w-10 h-10 rounded-xl flex items-center justify-center bg-slate-100">
+                  <span class="text-lg">📍</span>
+                </div>
+                <div>
+                  <p class="text-slate-800 font-medium">Annual Report</p>
+                  <p class="text-slate-500 text-sm">Jan 1, 2027</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <div class="px-3 py-1 rounded-full text-sm font-mono bg-slate-100 text-slate-600">D-298</div>
+                <div class="flex items-center gap-2 bg-emerald-50 px-3 py-1 rounded-full">
+                  <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+                  <span class="text-xs font-semibold departure-text text-emerald-600">CLEAR</span>
+                </div>
+              </div>
+            </div>
+            <!-- Waypoint 3 - Clear -->
+            <div class="flex items-center justify-between p-4 rounded-xl glass-card shadow-sm">
+              <div class="flex items-center gap-4">
+                <div class="w-10 h-10 rounded-xl flex items-center justify-center bg-slate-100">
+                  <span class="text-lg">📍</span>
+                </div>
+                <div>
+                  <p class="text-slate-800 font-medium">RA Renewal</p>
+                  <p class="text-slate-500 text-sm">Feb 7, 2027</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <div class="px-3 py-1 rounded-full text-sm font-mono bg-slate-100 text-slate-600">D-362</div>
+                <div class="flex items-center gap-2 bg-emerald-50 px-3 py-1 rounded-full">
+                  <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+                  <span class="text-xs font-semibold departure-text text-emerald-600">CLEAR</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Crew Message -->
+        <div class="bg-gradient-to-r from-sky-50 to-blue-50 border border-sky-200 rounded-2xl p-6 shadow-lg">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 bg-gradient-to-br from-sky-400 to-blue-500 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg">
+              <span class="text-white text-lg">✈️</span>
+            </div>
+            <div>
+              <p class="text-sky-700 font-semibold mb-1">Crew Message</p>
+              <p class="text-slate-600">"Smooth cruising at 35,000 ft. Your next waypoint is BOI Report in 71 days. Enjoy the flight, Captain."</p>
+              <p class="text-slate-400 text-sm mt-2">— JetPrimer Flight Crew • 2 hours ago</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Update time
+    function updateTime() {
+      const now = new Date();
+      const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
+      document.getElementById('current-time').textContent = time;
+    }
+    updateTime();
+    setInterval(updateTime, 1000);
+  </script>
+</body>
+</html>

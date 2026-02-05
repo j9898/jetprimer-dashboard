@@ -11,22 +11,12 @@ export default async function DashboardPage() {
     redirect('/login')
   }
 
-  // 실제 고객 데이터 조회 - 디버깅용으로 모든 고객 조회
-  const { data: allCustomers, error: allCustomersError } = await supabase
+  // 고객 데이터 조회
+  const { data: customer } = await supabase
     .from('customers')
     .select('*')
-
-  console.log('=== DEBUG START ===')
-  console.log('User ID:', user.id)
-  console.log('All customers:', JSON.stringify(allCustomers))
-  console.log('All customers error:', allCustomersError)
-
-  // user_id로 필터링
-  const customer = allCustomers?.find(c => c.user_id === user.id) || null
-  const customerError = allCustomersError
-
-  console.log('Filtered customer:', JSON.stringify(customer))
-  console.log('=== DEBUG END ===')
+    .eq('user_id', user.id)
+    .single()
 
   // 고객의 진행 단계 조회
   const { data: steps } = await supabase

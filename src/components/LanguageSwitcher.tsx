@@ -1,9 +1,11 @@
 'use client'
 
-import { useTransition } from 'react'
+import { useTransition, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { setLocale } from '@/lib/actions/locale'
-import { type Locale } from '@/i18n/request'
+
+type Locale = 'ko' | 'en' | 'ja'
+const DEFAULT_LOCALE = 'ko'
 
 const languages: { code: Locale; label: string; flag: string }[] = [
   { code: 'ko', label: '한국어', flag: '🇰🇷' },
@@ -12,15 +14,29 @@ const languages: { code: Locale; label: string; flag: string }[] = [
 ]
 
 interface LanguageSwitcherProps {
-  currentLocale: string
+  currentLocale?: string
   variant?: 'default' | 'compact'
 }
 
-export default function LanguageSwitcher({ currentLocale, variant = 'default' }: LanguageSwitcherProps) {
+export default function LanguageSwitcher({ currentLocale: propLocale, variant = 'default' }: LanguageSwitcherProps) {
   const [isPending, startTransition] = useTransition()
+  const [currentLocale, setCurrentLocale] = useState(propLocale || DEFAULT_LOCALE)
   const router = useRouter()
 
+  // 쿠키에서 현재 locale 읽기 (클라이언트 사이드)
+  useEffect(() => {
+    if (!propLocale) {
+      const cookies = document.cookie.split(';')
+      const localeCookie = cookies.find(c => c.trim().startsWith('NEXT_LOCALE='))
+      if (localeCookie) {
+        const locale = localeCookie.split('=')[1]
+        setCurrentLocale(locale)
+      }
+    }
+  }, [propLocale])
+
   const handleLocaleChange = (locale: Locale) => {
+    setCurrentLocale(locale)
     startTransition(async () => {
       await setLocale(locale)
       router.refresh()

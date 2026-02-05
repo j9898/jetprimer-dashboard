@@ -8,6 +8,29 @@
     "loggingOut": "Logging out...",
     "localTime": "Local Time"
   },
+  "home": {
+    "tagline": "Your Business, Ready for Takeoff",
+    "description": "Premium US LLC Formation & Management Services",
+    "enterFlightCenter": "Enter Flight Center",
+    "copyright": "© 2026 JetPrimer. Premium US LLC Formation for Global Entrepreneurs."
+  },
+  "login": {
+    "title": "Login",
+    "subtitle": "The New Standard in US Business Formation",
+    "continueWithGoogle": "Continue with Google",
+    "connecting": "Connecting...",
+    "orEmailLogin": "or login with email",
+    "emailAddress": "Email Address",
+    "emailPlaceholder": "example@company.com",
+    "getMagicLink": "Get Login Link",
+    "sending": "Sending...",
+    "magicLinkSent": "Login link sent to your email. Please check your inbox.",
+    "emailRequired": "Please enter your email address.",
+    "passwordlessTitle": "Login without password!",
+    "passwordlessDescription": "Click the link sent to your email to log in instantly. New users will have an account created automatically.",
+    "copyright": "© 2026 JetPrimer. Your Business, Ready for Takeoff.",
+    "redirecting": "Redirecting to login page..."
+  },
   "errors": {
     "notFound": {
       "title": "Page Not Found",

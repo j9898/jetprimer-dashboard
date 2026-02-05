@@ -8,6 +8,29 @@
     "loggingOut": "ログアウト中...",
     "localTime": "現地時間"
   },
+  "home": {
+    "tagline": "Your Business, Ready for Takeoff",
+    "description": "米国LLC設立から管理まで、プレミアムサービス",
+    "enterFlightCenter": "フライトセンターへ",
+    "copyright": "© 2026 JetPrimer. Premium US LLC Formation for Global Entrepreneurs."
+  },
+  "login": {
+    "title": "ログイン",
+    "subtitle": "米国法人設立の新しい基準",
+    "continueWithGoogle": "Googleで続ける",
+    "connecting": "接続中...",
+    "orEmailLogin": "またはメールでログイン",
+    "emailAddress": "メールアドレス",
+    "emailPlaceholder": "example@company.com",
+    "getMagicLink": "ログインリンクを取得",
+    "sending": "送信中...",
+    "magicLinkSent": "ログインリンクをメールで送信しました。メールをご確認ください。",
+    "emailRequired": "メールアドレスを入力してください。",
+    "passwordlessTitle": "パスワードなしでログイン！",
+    "passwordlessDescription": "メールで送信されたリンクをクリックすると、すぐにログインできます。新規ユーザーは自動的にアカウントが作成されます。",
+    "copyright": "© 2026 JetPrimer. Your Business, Ready for Takeoff.",
+    "redirecting": "ログインページに移動中..."
+  },
   "errors": {
     "notFound": {
       "title": "ページが見つかりません",

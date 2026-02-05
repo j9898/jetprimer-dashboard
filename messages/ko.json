@@ -1,0 +1,64 @@
+{
+  "common": {
+    "loading": "로딩 중...",
+    "retry": "다시 시도",
+    "returnHome": "홈으로 돌아가기"
+  },
+  "errors": {
+    "notFound": {
+      "title": "페이지를 찾을 수 없습니다",
+      "flightStatus": "운항 상태",
+      "gate": "게이트",
+      "heading": "항로를 찾을 수 없습니다",
+      "subheading": "목적지 없음",
+      "description": "요청하신 페이지를 찾을 수 없습니다.\n항로를 다시 확인하시거나 안내 데스크로 문의해 주세요.",
+      "returnToTerminal": "터미널로 돌아가기",
+      "flightCenter": "비행 센터",
+      "brand": "JetPrimer Airways",
+      "errorCode": "ERR-404"
+    },
+    "serverError": {
+      "title": "서버 오류",
+      "systemAlert": "시스템 경고",
+      "code": "코드 500",
+      "heading": "기술적 문제 발생",
+      "subheading": "일시적 지연",
+      "description": "기술적 문제가 발생했습니다.\n잠시 후 다시 시도하시거나 지상 관제에 문의해 주세요.",
+      "retryConnection": "연결 재시도",
+      "returnToTerminal": "터미널로 돌아가기",
+      "brand": "JetPrimer Airways"
+    },
+    "globalError": {
+      "title": "시스템 오류",
+      "description": "심각한 오류가 발생했습니다.\n페이지를 새로고침하거나 잠시 후 다시 시도해 주세요.",
+      "retry": "다시 시도"
+    }
+  },
+  "loading": {
+    "preparing": "이륙 준비 중",
+    "pleaseWait": "잠시만 기다려 주세요..."
+  },
+  "dashboard": {
+    "title": "대시보드",
+    "welcome": "환영합니다",
+    "flightCode": "항공편 코드",
+    "progress": "진행 상황",
+    "steps": {
+      "documents": "서류 준비",
+      "llc": "LLC 설립",
+      "ein": "EIN 신청",
+      "bank": "은행 계좌"
+    },
+    "status": {
+      "pending": "대기 중",
+      "inProgress": "진행 중",
+      "completed": "완료"
+    }
+  },
+  "language": {
+    "select": "언어 선택",
+    "ko": "한국어",
+    "en": "English",
+    "ja": "日本語"
+  }
+}

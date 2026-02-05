@@ -1,0 +1,64 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "retry": "Retry",
+    "returnHome": "Return Home"
+  },
+  "errors": {
+    "notFound": {
+      "title": "Page Not Found",
+      "flightStatus": "FLIGHT STATUS",
+      "gate": "GATE",
+      "heading": "FLIGHT NOT FOUND",
+      "subheading": "DESTINATION UNAVAILABLE",
+      "description": "The page you requested could not be found.\nPlease check the route or contact the help desk.",
+      "returnToTerminal": "Return to Terminal",
+      "flightCenter": "Flight Center",
+      "brand": "JetPrimer Airways",
+      "errorCode": "ERR-404"
+    },
+    "serverError": {
+      "title": "Server Error",
+      "systemAlert": "SYSTEM ALERT",
+      "code": "CODE 500",
+      "heading": "TECHNICAL TURBULENCE",
+      "subheading": "TEMPORARY DELAY",
+      "description": "A technical issue has occurred.\nPlease try again later or contact ground control.",
+      "retryConnection": "Retry Connection",
+      "returnToTerminal": "Return to Terminal",
+      "brand": "JetPrimer Airways"
+    },
+    "globalError": {
+      "title": "System Error",
+      "description": "A critical error has occurred.\nPlease refresh the page or try again later.",
+      "retry": "Try Again"
+    }
+  },
+  "loading": {
+    "preparing": "PREPARING FOR TAKEOFF",
+    "pleaseWait": "Please wait..."
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome",
+    "flightCode": "Flight Code",
+    "progress": "Progress",
+    "steps": {
+      "documents": "Document Preparation",
+      "llc": "LLC Formation",
+      "ein": "EIN Application",
+      "bank": "Bank Account"
+    },
+    "status": {
+      "pending": "Pending",
+      "inProgress": "In Progress",
+      "completed": "Completed"
+    }
+  },
+  "language": {
+    "select": "Select Language",
+    "ko": "한국어",
+    "en": "English",
+    "ja": "日本語"
+  }
+}

@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
+import { useTranslations } from 'next-intl'
 
 export default function Error({
   error,
@@ -9,6 +10,8 @@ export default function Error({
   error: Error & { digest?: string }
   reset: () => void
 }) {
+  const t = useTranslations('errors.serverError')
+
   useEffect(() => {
     console.error('Application error:', error)
   }, [error])
@@ -26,9 +29,9 @@ export default function Error({
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-3 h-3 rounded-full bg-white animate-pulse" />
-                <span className="text-white font-medium tracking-wider text-sm">SYSTEM ALERT</span>
+                <span className="text-white font-medium tracking-wider text-sm">{t('systemAlert')}</span>
               </div>
-              <span className="text-red-100 text-sm font-mono">CODE 500</span>
+              <span className="text-red-100 text-sm font-mono">{t('code')}</span>
             </div>
           </div>
 
@@ -45,19 +48,18 @@ export default function Error({
 
             {/* 상태 메시지 */}
             <div className="mb-6">
-              <h1 className="text-2xl font-bold text-white mb-2">TECHNICAL TURBULENCE</h1>
+              <h1 className="text-2xl font-bold text-white mb-2">{t('heading')}</h1>
               <div className="flex items-center justify-center gap-2 text-amber-400">
                 <svg className="w-5 h-5 animate-pulse" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                 </svg>
-                <span className="font-medium text-sm tracking-wide">TEMPORARY DELAY</span>
+                <span className="font-medium text-sm tracking-wide">{t('subheading')}</span>
               </div>
             </div>
 
             {/* 안내 메시지 */}
-            <p className="text-slate-400 mb-8 text-sm leading-relaxed">
-              기술적 문제가 발생했습니다.<br />
-              잠시 후 다시 시도하시거나 지상 관제에 문의해 주세요.
+            <p className="text-slate-400 mb-8 text-sm leading-relaxed whitespace-pre-line">
+              {t('description')}
             </p>
 
             {/* 버튼들 */}
@@ -66,20 +68,20 @@ export default function Error({
                 onClick={() => reset()}
                 className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-all hover:shadow-lg hover:shadow-blue-500/25"
               >
-                Retry Connection
+                {t('retryConnection')}
               </button>
               <a
                 href="/"
                 className="px-6 py-3 bg-[#1a3a5c] hover:bg-[#234b73] text-blue-100 font-medium rounded-lg transition-all border border-blue-500/20"
               >
-                Return to Terminal
+                {t('returnToTerminal')}
               </a>
             </div>
           </div>
 
           {/* 하단 정보 바 */}
           <div className="bg-[#081325] px-6 py-3 flex items-center justify-between text-xs text-slate-500">
-            <span>JetPrimer Airways</span>
+            <span>{t('brand')}</span>
             <span className="font-mono">ERR-{error.digest || '500'}</span>
           </div>
         </div>

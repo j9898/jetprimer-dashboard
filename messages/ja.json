@@ -1,0 +1,64 @@
+{
+  "common": {
+    "loading": "読み込み中...",
+    "retry": "再試行",
+    "returnHome": "ホームに戻る"
+  },
+  "errors": {
+    "notFound": {
+      "title": "ページが見つかりません",
+      "flightStatus": "フライト状況",
+      "gate": "ゲート",
+      "heading": "フライトが見つかりません",
+      "subheading": "目的地不明",
+      "description": "お探しのページが見つかりませんでした。\n経路をご確認いただくか、案内デスクまでお問い合わせください。",
+      "returnToTerminal": "ターミナルに戻る",
+      "flightCenter": "フライトセンター",
+      "brand": "JetPrimer Airways",
+      "errorCode": "ERR-404"
+    },
+    "serverError": {
+      "title": "サーバーエラー",
+      "systemAlert": "システム警告",
+      "code": "コード 500",
+      "heading": "技術的な問題が発生",
+      "subheading": "一時的な遅延",
+      "description": "技術的な問題が発生しました。\nしばらくしてから再度お試しいただくか、グランドコントロールまでお問い合わせください。",
+      "retryConnection": "接続を再試行",
+      "returnToTerminal": "ターミナルに戻る",
+      "brand": "JetPrimer Airways"
+    },
+    "globalError": {
+      "title": "システムエラー",
+      "description": "重大なエラーが発生しました。\nページを更新するか、しばらくしてから再度お試しください。",
+      "retry": "再試行"
+    }
+  },
+  "loading": {
+    "preparing": "離陸準備中",
+    "pleaseWait": "お待ちください..."
+  },
+  "dashboard": {
+    "title": "ダッシュボード",
+    "welcome": "ようこそ",
+    "flightCode": "フライトコード",
+    "progress": "進捗状況",
+    "steps": {
+      "documents": "書類準備",
+      "llc": "LLC設立",
+      "ein": "EIN申請",
+      "bank": "銀行口座"
+    },
+    "status": {
+      "pending": "保留中",
+      "inProgress": "進行中",
+      "completed": "完了"
+    }
+  },
+  "language": {
+    "select": "言語を選択",
+    "ko": "한국어",
+    "en": "English",
+    "ja": "日本語"
+  }
+}

@@ -33,8 +33,8 @@ https://supabase.com/dashboard
 
 ### Google OAuth Provider
 - **상태**: 활성화됨 (Enabled)
-- **Client ID**: `687294216305-gt2g0hv1uv78nnetud3m34bjebk9v0j1.apps.googleusercontent.com`
-- **Client Secret**: `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`
+- **Client ID**: [Google Cloud Console에서 확인 - 보안상 Git에 저장하지 않음]
+- **Client Secret**: [Google Cloud Console에서 확인 - 보안상 Git에 저장하지 않음]
 
 ### 리디렉션 URL
 Supabase가 OAuth 콜백을 처리하는 URL:

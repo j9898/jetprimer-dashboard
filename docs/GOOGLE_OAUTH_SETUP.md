@@ -34,12 +34,12 @@ JetPrimer 대시보드의 Google OAuth 로그인 기능 설정에 대한 문서�
 
 #### 클라이언트 ID
 ```
-687294216305-gt2g0hv1uv78nnetud3m34bjebk9v0j1.apps.googleusercontent.com
+[Google Cloud Console에서 확인 - 보안상 Git에 저장하지 않음]
 ```
 
 #### 클라이언트 시크릿
 ```
-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
+[Google Cloud Console에서 확인 - 보안상 Git에 저장하지 않음]
 ```
 
 #### 승인된 JavaScript 원본 (Authorized JavaScript origins)

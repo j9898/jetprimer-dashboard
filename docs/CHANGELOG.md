@@ -1,5 +1,34 @@
 # 변경 이력 (Changelog)
 
+## 2026-02-05
+
+### GitHub 연결 및 보안 키 로테이션
+
+#### 변경 사항
+
+1. **로컬 폴더 ↔ GitHub 연결 완료**
+   - `git init`으로 로컬 저장소 초기화
+   - 기존 GitHub 저장소 (j9898/jetprimer-dashboard)와 연결
+   - 충돌 해결 후 성공적으로 push 완료
+
+2. **보안 이슈 발견 및 해결**
+   - GitHub Push Protection이 문서 내 노출된 OAuth 키 감지
+   - `GOOGLE_OAUTH_SETUP.md`와 `SUPABASE_CONFIGURATION.md`에서 Client ID/Secret 제거
+   - 실제 키 값을 `[Google Cloud Console에서 확인 - 보안상 Git에 저장하지 않음]`으로 대체
+
+3. **Google OAuth Client Secret 로테이션**
+   - 기존 Secret (****uVQg) 삭제
+   - 새 Secret (****CeAp) 생성
+   - Supabase Google Provider에 새 Secret 적용 완료
+
+#### 보안 관련 학습 내용
+- Client ID: Google Cloud Console에서 언제든 확인 가능
+- Client Secret: 생성 시에만 전체 값 확인 가능 (이후 끝 4자리만 표시)
+- Secret 저장 불필요: Supabase에 저장되어 있으면 충분
+- 키 로테이션해도 기존 사용자 데이터는 영향 없음
+
+---
+
 ## 2026-02-04 (저녁)
 
 ### 비밀번호 없는 인증으로 전환
@@ -152,8 +181,26 @@ jetprimer-dashboard/
 
 ## 향후 계획
 
+- [ ] Google 로그인 테스트 (키 로테이션 후 정상 작동 확인)
 - [ ] 대시보드 UI 완성
 - [ ] 사용자 프로필 관리
 - [ ] 데이터 시각화 기능
 - [ ] 추가 OAuth 제공자 (GitHub, Kakao 등)
 - [ ] Google OAuth 앱 프로덕션 승인 신청
+
+---
+
+## 서비스 구조 요약
+
+| 서비스 | 역할 | 비유 |
+|--------|------|------|
+| **Vercel** | 웹사이트를 인터넷에 보여줌 | 🏪 가게 건물 |
+| **Supabase** | 데이터 저장 & 로그인 처리 | 🗄️ 냉장고 + 금고 |
+| **GitHub** | 코드 저장 & 버전 관리 | 📁 설계도 보관소 |
+| **Google Cloud** | OAuth 인증 제공 | 🔑 신분증 발급소 |
+
+### 도메인 구조
+| 도메인 | 용도 | Vercel 프로젝트 |
+|--------|------|----------------|
+| jetprimer.com | 마케팅 랜딩 페이지 | 별도 프로젝트 |
+| dashboard.jetprimer.com | 고객 대시보드 | jetprimer-dashboard |

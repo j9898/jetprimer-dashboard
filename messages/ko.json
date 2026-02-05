@@ -2,7 +2,11 @@
   "common": {
     "loading": "로딩 중...",
     "retry": "다시 시도",
-    "returnHome": "홈으로 돌아가기"
+    "returnHome": "홈으로 돌아가기",
+    "loggedInAs": "로그인 계정",
+    "logout": "로그아웃",
+    "loggingOut": "로그아웃 중...",
+    "localTime": "현지 시간"
   },
   "errors": {
     "notFound": {
@@ -39,21 +43,39 @@
     "pleaseWait": "잠시만 기다려 주세요..."
   },
   "dashboard": {
-    "title": "대시보드",
-    "welcome": "환영합니다",
-    "flightCode": "항공편 코드",
-    "progress": "진행 상황",
+    "title": "비행 센터",
+    "welcome": "환영합니다, {captain} 기장님",
+    "flight": "항공편",
+    "flightCenter": "비행 센터",
+    "destination": "목적지",
+    "formed": "설립일",
+    "ein": "EIN",
+    "bank": "은행",
+    "allSystemsNormal": "모든 시스템 정상",
+    "noActionRequired": "즉각적인 조치가 필요하지 않습니다",
+    "upcomingWaypoints": "예정된 웨이포인트",
+    "crewMessage": "승무원 메시지",
+    "crewMessageContent": "35,000피트 상공에서 순항 중입니다. 다음 웨이포인트는 {days}일 후 BOI 보고입니다. 즐거운 비행 되세요, 기장님.",
+    "crewSignature": "— JetPrimer 승무원 • {time}",
+    "hoursAgo": "{hours}시간 전",
+    "status": {
+      "cruising": "순항 중",
+      "boarding": "탑승 중",
+      "clear": "완료",
+      "prepare": "준비 중",
+      "pending": "대기"
+    },
     "steps": {
       "documents": "서류 준비",
       "llc": "LLC 설립",
       "ein": "EIN 신청",
       "bank": "은행 계좌"
     },
-    "status": {
-      "pending": "대기 중",
-      "inProgress": "진행 중",
-      "completed": "완료"
-    }
+    "daysLeft": "D-{days}",
+    "inProgress": "진행 중",
+    "waiting": "대기",
+    "applying": "신청 중",
+    "preparing": "준비 중"
   },
   "language": {
     "select": "언어 선택",

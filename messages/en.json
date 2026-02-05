@@ -2,7 +2,11 @@
   "common": {
     "loading": "Loading...",
     "retry": "Retry",
-    "returnHome": "Return Home"
+    "returnHome": "Return Home",
+    "loggedInAs": "Logged in as",
+    "logout": "Logout",
+    "loggingOut": "Logging out...",
+    "localTime": "Local Time"
   },
   "errors": {
     "notFound": {
@@ -39,21 +43,39 @@
     "pleaseWait": "Please wait..."
   },
   "dashboard": {
-    "title": "Dashboard",
-    "welcome": "Welcome",
-    "flightCode": "Flight Code",
-    "progress": "Progress",
+    "title": "Flight Center",
+    "welcome": "Welcome aboard, Captain {captain}",
+    "flight": "Flight",
+    "flightCenter": "Flight Center",
+    "destination": "DESTINATION",
+    "formed": "FORMED",
+    "ein": "EIN",
+    "bank": "BANK",
+    "allSystemsNormal": "All Systems Normal",
+    "noActionRequired": "No immediate action required",
+    "upcomingWaypoints": "Upcoming Waypoints",
+    "crewMessage": "Crew Message",
+    "crewMessageContent": "Smooth cruising at 35,000 ft. Your next waypoint is BOI Report in {days} days. Enjoy the flight, Captain.",
+    "crewSignature": "— JetPrimer Flight Crew • {time}",
+    "hoursAgo": "{hours} hours ago",
+    "status": {
+      "cruising": "CRUISING",
+      "boarding": "BOARDING",
+      "clear": "CLEAR",
+      "prepare": "PREPARE",
+      "pending": "PENDING"
+    },
     "steps": {
       "documents": "Document Preparation",
       "llc": "LLC Formation",
       "ein": "EIN Application",
       "bank": "Bank Account"
     },
-    "status": {
-      "pending": "Pending",
-      "inProgress": "In Progress",
-      "completed": "Completed"
-    }
+    "daysLeft": "D-{days}",
+    "inProgress": "In Progress",
+    "waiting": "Waiting",
+    "applying": "Applying",
+    "preparing": "Preparing"
   },
   "language": {
     "select": "Select Language",

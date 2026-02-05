@@ -2,7 +2,11 @@
   "common": {
     "loading": "読み込み中...",
     "retry": "再試行",
-    "returnHome": "ホームに戻る"
+    "returnHome": "ホームに戻る",
+    "loggedInAs": "ログイン中",
+    "logout": "ログアウト",
+    "loggingOut": "ログアウト中...",
+    "localTime": "現地時間"
   },
   "errors": {
     "notFound": {
@@ -39,21 +43,39 @@
     "pleaseWait": "お待ちください..."
   },
   "dashboard": {
-    "title": "ダッシュボード",
-    "welcome": "ようこそ",
-    "flightCode": "フライトコード",
-    "progress": "進捗状況",
+    "title": "フライトセンター",
+    "welcome": "ようこそ、{captain}機長",
+    "flight": "フライト",
+    "flightCenter": "フライトセンター",
+    "destination": "目的地",
+    "formed": "設立日",
+    "ein": "EIN",
+    "bank": "銀行",
+    "allSystemsNormal": "全システム正常",
+    "noActionRequired": "対応が必要な項目はありません",
+    "upcomingWaypoints": "今後のウェイポイント",
+    "crewMessage": "クルーメッセージ",
+    "crewMessageContent": "高度35,000フィートで順調に飛行中です。次のウェイポイントはBOI報告で、{days}日後です。機長、良いフライトを。",
+    "crewSignature": "— JetPrimerフライトクルー • {time}",
+    "hoursAgo": "{hours}時間前",
+    "status": {
+      "cruising": "巡航中",
+      "boarding": "搭乗中",
+      "clear": "完了",
+      "prepare": "準備中",
+      "pending": "保留"
+    },
     "steps": {
       "documents": "書類準備",
       "llc": "LLC設立",
       "ein": "EIN申請",
       "bank": "銀行口座"
     },
-    "status": {
-      "pending": "保留中",
-      "inProgress": "進行中",
-      "completed": "完了"
-    }
+    "daysLeft": "D-{days}",
+    "inProgress": "進行中",
+    "waiting": "待機中",
+    "applying": "申請中",
+    "preparing": "準備中"
   },
   "language": {
     "select": "言語を選択",

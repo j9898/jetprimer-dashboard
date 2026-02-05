@@ -3,7 +3,9 @@
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import type { User } from '@supabase/supabase-js'
+import LanguageSwitcher from '@/components/LanguageSwitcher'
 
 // Icons
 const PlaneIcon = () => (
@@ -48,14 +50,16 @@ interface Props {
   user: User
   company: Company
   waypoints: Waypoint[]
+  locale: string
 }
 
-function StatusBadge({ status }: { status: string }) {
-  const statusConfig: Record<string, { label: string; bgColor: string; textColor: string; dotColor: string }> = {
-    cruising: { label: 'CRUISING', bgColor: 'bg-emerald-100', textColor: 'text-emerald-600', dotColor: 'bg-emerald-500' },
-    boarding: { label: 'BOARDING', bgColor: 'bg-sky-100', textColor: 'text-sky-600', dotColor: 'bg-sky-500' },
-    clear: { label: 'CLEAR', bgColor: 'bg-emerald-100', textColor: 'text-emerald-600', dotColor: 'bg-emerald-500' },
-    prepare: { label: 'PREPARE', bgColor: 'bg-amber-100', textColor: 'text-amber-600', dotColor: 'bg-amber-500' },
+function StatusBadge({ status, t }: { status: string; t: (key: string) => string }) {
+  const statusConfig: Record<string, { labelKey: string; bgColor: string; textColor: string; dotColor: string }> = {
+    cruising: { labelKey: 'status.cruising', bgColor: 'bg-emerald-100', textColor: 'text-emerald-600', dotColor: 'bg-emerald-500' },
+    boarding: { labelKey: 'status.boarding', bgColor: 'bg-sky-100', textColor: 'text-sky-600', dotColor: 'bg-sky-500' },
+    clear: { labelKey: 'status.clear', bgColor: 'bg-emerald-100', textColor: 'text-emerald-600', dotColor: 'bg-emerald-500' },
+    prepare: { labelKey: 'status.prepare', bgColor: 'bg-amber-100', textColor: 'text-amber-600', dotColor: 'bg-amber-500' },
+    pending: { labelKey: 'status.pending', bgColor: 'bg-slate-100', textColor: 'text-slate-500', dotColor: 'bg-slate-400' },
   }
 
   const config = statusConfig[status] || statusConfig.clear
@@ -63,14 +67,16 @@ function StatusBadge({ status }: { status: string }) {
   return (
     <div className={`flex items-center gap-2 px-3 py-1 rounded-full ${config.bgColor}`}>
       <div className={`w-2 h-2 rounded-full ${config.dotColor} ${status === 'cruising' ? 'animate-pulse' : ''}`}></div>
-      <span className={`text-xs font-semibold ${config.textColor}`}>{config.label}</span>
+      <span className={`text-xs font-semibold ${config.textColor}`}>{t(config.labelKey)}</span>
     </div>
   )
 }
 
-export default function DashboardClient({ user, company, waypoints }: Props) {
+export default function DashboardClient({ user, company, waypoints, locale }: Props) {
   const router = useRouter()
   const [isLoggingOut, setIsLoggingOut] = useState(false)
+  const t = useTranslations('dashboard')
+  const tCommon = useTranslations('common')
 
   const handleLogout = async () => {
     setIsLoggingOut(true)
@@ -97,7 +103,7 @@ export default function DashboardClient({ user, company, waypoints }: Props) {
             </div>
             <div>
               <h1 className="text-lg font-bold text-slate-800">JetPrimer</h1>
-              <p className="text-xs text-sky-600">Flight Center</p>
+              <p className="text-xs text-sky-600">{t('flightCenter')}</p>
             </div>
           </div>
         </div>
@@ -108,16 +114,21 @@ export default function DashboardClient({ user, company, waypoints }: Props) {
             <li>
               <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-gradient-to-r from-sky-500 to-blue-500 text-white shadow-lg shadow-sky-400/30">
                 <DashboardIcon />
-                <span className="text-sm font-medium">Flight Center</span>
+                <span className="text-sm font-medium">{t('flightCenter')}</span>
               </button>
             </li>
           </ul>
         </nav>
 
+        {/* Language Switcher */}
+        <div className="px-4 pb-2">
+          <LanguageSwitcher currentLocale={locale} variant="compact" />
+        </div>
+
         {/* User Info & Logout */}
         <div className="p-4 border-t border-sky-200/50">
           <div className="mb-3 px-4">
-            <p className="text-xs text-slate-400">Logged in as</p>
+            <p className="text-xs text-slate-400">{tCommon('loggedInAs')}</p>
             <p className="text-sm text-slate-700 truncate">{user.email}</p>
           </div>
           <button
@@ -127,7 +138,7 @@ export default function DashboardClient({ user, company, waypoints }: Props) {
           >
             <LogoutIcon />
             <span className="text-sm font-medium">
-              {isLoggingOut ? 'Logging out...' : 'Logout'}
+              {isLoggingOut ? tCommon('loggingOut') : tCommon('logout')}
             </span>
           </button>
         </div>
@@ -139,11 +150,11 @@ export default function DashboardClient({ user, company, waypoints }: Props) {
           {/* Header */}
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-slate-800 mb-2">Flight Center</h1>
-              <p className="text-slate-500">Welcome aboard, Captain {company.captain}</p>
+              <h1 className="text-3xl font-bold text-slate-800 mb-2">{t('title')}</h1>
+              <p className="text-slate-500">{t('welcome', { captain: company.captain })}</p>
             </div>
             <div className="text-right">
-              <p className="text-slate-400 text-sm">Local Time</p>
+              <p className="text-slate-400 text-sm">{tCommon('localTime')}</p>
               <p className="text-2xl font-mono text-slate-700">{currentTime}</p>
             </div>
           </div>
@@ -154,10 +165,10 @@ export default function DashboardClient({ user, company, waypoints }: Props) {
             <div className="col-span-2 bg-white/70 backdrop-blur-xl border border-white/50 shadow-lg shadow-sky-200/30 rounded-2xl p-6">
               <div className="flex items-start justify-between mb-6">
                 <div>
-                  <p className="text-slate-500 text-sm mb-1">Flight</p>
+                  <p className="text-slate-500 text-sm mb-1">{t('flight')}</p>
                   <p className="text-sky-600 font-mono text-lg font-semibold">{company.flightNumber}</p>
                 </div>
-                <StatusBadge status={company.status} />
+                <StatusBadge status={company.status} t={t} />
               </div>
 
               <div className="mb-6">
@@ -167,19 +178,19 @@ export default function DashboardClient({ user, company, waypoints }: Props) {
 
               <div className="grid grid-cols-2 gap-4 pt-4 border-t border-sky-200/50">
                 <div>
-                  <p className="text-slate-400 text-xs mb-1">DESTINATION</p>
+                  <p className="text-slate-400 text-xs mb-1">{t('destination')}</p>
                   <p className="text-slate-700 font-medium">{company.state}, USA 🇺🇸</p>
                 </div>
                 <div>
-                  <p className="text-slate-400 text-xs mb-1">FORMED</p>
+                  <p className="text-slate-400 text-xs mb-1">{t('formed')}</p>
                   <p className="text-slate-700 font-medium">{company.formed}</p>
                 </div>
                 <div>
-                  <p className="text-slate-400 text-xs mb-1">EIN</p>
+                  <p className="text-slate-400 text-xs mb-1">{t('ein')}</p>
                   <p className="text-slate-700 font-mono">{company.ein}</p>
                 </div>
                 <div>
-                  <p className="text-slate-400 text-xs mb-1">BANK</p>
+                  <p className="text-slate-400 text-xs mb-1">{t('bank')}</p>
                   <p className="text-emerald-600 font-medium">{company.bank}</p>
                 </div>
               </div>
@@ -189,15 +200,15 @@ export default function DashboardClient({ user, company, waypoints }: Props) {
             <div className="space-y-4">
               <div className="bg-white/70 backdrop-blur-xl border border-white/50 shadow-lg shadow-sky-200/30 rounded-2xl p-6 text-center">
                 <div className="text-4xl font-bold text-emerald-500 mb-2">✓</div>
-                <p className="text-emerald-600 font-medium">All Systems Normal</p>
-                <p className="text-slate-500 text-sm mt-1">No immediate action required</p>
+                <p className="text-emerald-600 font-medium">{t('allSystemsNormal')}</p>
+                <p className="text-slate-500 text-sm mt-1">{t('noActionRequired')}</p>
               </div>
             </div>
           </div>
 
           {/* Upcoming Waypoints */}
           <div>
-            <h2 className="text-xl font-bold text-slate-800 mb-4">Upcoming Waypoints</h2>
+            <h2 className="text-xl font-bold text-slate-800 mb-4">{t('upcomingWaypoints')}</h2>
             <div className="space-y-3">
               {waypoints.map((wp) => (
                 <div
@@ -229,7 +240,7 @@ export default function DashboardClient({ user, company, waypoints }: Props) {
                     }`}>
                       D-{wp.daysLeft}
                     </div>
-                    <StatusBadge status={wp.status} />
+                    <StatusBadge status={wp.status} t={t} />
                   </div>
                 </div>
               ))}
@@ -243,9 +254,9 @@ export default function DashboardClient({ user, company, waypoints }: Props) {
                 <span className="text-lg">💬</span>
               </div>
               <div>
-                <p className="text-sky-700 font-medium mb-1">Crew Message</p>
-                <p className="text-slate-600">&quot;Smooth cruising at 35,000 ft. Your next waypoint is BOI Report in 71 days. Enjoy the flight, Captain.&quot;</p>
-                <p className="text-slate-400 text-sm mt-2">— JetPrimer Flight Crew • 2 hours ago</p>
+                <p className="text-sky-700 font-medium mb-1">{t('crewMessage')}</p>
+                <p className="text-slate-600">&quot;{t('crewMessageContent', { days: 71 })}&quot;</p>
+                <p className="text-slate-400 text-sm mt-2">{t('crewSignature', { time: t('hoursAgo', { hours: 2 }) })}</p>
               </div>
             </div>
           </div>

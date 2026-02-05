@@ -105,5 +105,27 @@
     "ko": "한국어",
     "en": "English",
     "ja": "日本語"
+  },
+  "admin": {
+    "title": "고객 관리",
+    "console": "Admin Console",
+    "totalCustomers": "총 {count}명의 고객",
+    "noCustomers": "등록된 고객이 없습니다.",
+    "selectCustomer": "고객을 선택하세요",
+    "customerInfo": "고객 정보",
+    "name": "이름",
+    "email": "이메일",
+    "flightCode": "Flight Code",
+    "joinDate": "가입일",
+    "progress": "진행률",
+    "currentStep": "현재 단계",
+    "steps": "진행 단계",
+    "administrator": "관리자",
+    "status": {
+      "pending": "대기",
+      "inProgress": "진행 중",
+      "completed": "완료"
+    },
+    "completedAt": "완료일"
   }
 }

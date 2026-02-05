@@ -105,5 +105,27 @@
     "ko": "한국어",
     "en": "English",
     "ja": "日本語"
+  },
+  "admin": {
+    "title": "Customer Management",
+    "console": "Admin Console",
+    "totalCustomers": "{count} customers total",
+    "noCustomers": "No customers registered.",
+    "selectCustomer": "Select a customer",
+    "customerInfo": "Customer Info",
+    "name": "Name",
+    "email": "Email",
+    "flightCode": "Flight Code",
+    "joinDate": "Join Date",
+    "progress": "Progress",
+    "currentStep": "Current Step",
+    "steps": "Steps",
+    "administrator": "Administrator",
+    "status": {
+      "pending": "Pending",
+      "inProgress": "In Progress",
+      "completed": "Completed"
+    },
+    "completedAt": "Completed"
   }
 }

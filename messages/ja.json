@@ -105,5 +105,27 @@
     "ko": "한국어",
     "en": "English",
     "ja": "日本語"
+  },
+  "admin": {
+    "title": "顧客管理",
+    "console": "管理コンソール",
+    "totalCustomers": "合計{count}名の顧客",
+    "noCustomers": "登録された顧客がいません。",
+    "selectCustomer": "顧客を選択してください",
+    "customerInfo": "顧客情報",
+    "name": "名前",
+    "email": "メール",
+    "flightCode": "フライトコード",
+    "joinDate": "登録日",
+    "progress": "進捗",
+    "currentStep": "現在のステップ",
+    "steps": "進行ステップ",
+    "administrator": "管理者",
+    "status": {
+      "pending": "待機",
+      "inProgress": "進行中",
+      "completed": "完了"
+    },
+    "completedAt": "完了日"
   }
 }

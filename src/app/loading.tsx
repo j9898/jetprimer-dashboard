@@ -19,10 +19,9 @@ export default function Loading() {
             </svg>
           </div>
 
-          {/* 로딩 바 */}
-          <div className="w-48 h-1 bg-[#1a3a5c] rounded-full mx-auto mb-4 overflow-hidden">
-            <div className="h-full bg-gradient-to-r from-blue-500 to-blue-400 rounded-full animate-[loading_1.5s_ease-in-out_infinite]"
-                 style={{ width: '30%', animation: 'loading 1.5s ease-in-out infinite' }} />
+          {/* 로딩 스피너 */}
+          <div className="flex justify-center mb-4">
+            <div className="w-8 h-8 border-2 border-blue-500/20 border-t-blue-500 rounded-full animate-spin" />
           </div>
 
           {/* 텍스트 */}
@@ -30,14 +29,6 @@ export default function Loading() {
           <p className="text-slate-500 text-xs mt-1">Please wait...</p>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes loading {
-          0% { transform: translateX(-100%); }
-          50% { transform: translateX(250%); }
-          100% { transform: translateX(-100%); }
-        }
-      `}</style>
     </div>
   )
 }

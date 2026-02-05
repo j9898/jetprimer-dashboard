@@ -40,14 +40,36 @@ export async function GET(request: Request) {
                           user.email?.split('@')[0] ||
                           'New Customer'
 
-          const { error: insertError } = await supabase.from('customers').insert({
-            user_id: user.id,
-            flight_code: flightCode,
-            name: userName,
-          })
+          const { data: newCustomer, error: insertError } = await supabase
+            .from('customers')
+            .insert({
+              user_id: user.id,
+              flight_code: flightCode,
+              name: userName,
+            })
+            .select('id')
+            .single()
 
           if (insertError) {
             console.error('Customer insert error:', insertError)
+          }
+
+          // 신규 고객에게 기본 Steps 생성
+          if (newCustomer) {
+            const defaultSteps = [
+              { customer_id: newCustomer.id, step_name: '서류 준비', step_order: 1, status: 'in_progress' },
+              { customer_id: newCustomer.id, step_name: 'LLC 설립', step_order: 2, status: 'pending' },
+              { customer_id: newCustomer.id, step_name: 'EIN 신청', step_order: 3, status: 'pending' },
+              { customer_id: newCustomer.id, step_name: '은행 계좌', step_order: 4, status: 'pending' },
+            ]
+
+            const { error: stepsError } = await supabase
+              .from('steps')
+              .insert(defaultSteps)
+
+            if (stepsError) {
+              console.error('Steps insert error:', stepsError)
+            }
           }
         }
       }

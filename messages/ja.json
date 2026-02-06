@@ -143,6 +143,9 @@
     "emailSentStatus": "送信済み",
     "emailFailedStatus": "失敗",
     "language": "メール言語",
+    "customerLanguage": "顧客設定言語",
+    "emailLanguageSettings": "メール送信言語",
+    "emailLanguageDescription": "この顧客に送信するメールの言語を選択してください。",
     "localeUpdateFailed": "言語設定の変更に失敗しました。"
   }
 }

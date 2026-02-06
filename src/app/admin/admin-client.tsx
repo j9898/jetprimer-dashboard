@@ -378,25 +378,34 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
                       <div>
                         <p className="text-slate-400 text-xs flex items-center gap-1">
                           <GlobeIcon />
-                          {t('language')}
+                          {t('customerLanguage')}
                         </p>
-                        <div className="flex gap-1 mt-1">
-                          {(['ko', 'en', 'ja'] as const).map((locale) => (
-                            <button
-                              key={locale}
-                              onClick={() => updateCustomerLocale(selectedCustomer.id, locale)}
-                              disabled={isUpdatingLocale}
-                              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
-                                (selectedCustomer.locale || 'ko') === locale
-                                  ? 'bg-slate-700 text-white'
-                                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                              } disabled:opacity-50`}
-                            >
-                              {tLanguage(locale)}
-                            </button>
-                          ))}
-                        </div>
+                        <p className="text-slate-700 font-medium">
+                          {tLanguage(selectedCustomer.locale || 'ko')}
+                        </p>
                       </div>
+                    </div>
+                  </div>
+
+                  {/* Email Language Selection Card */}
+                  <div className="bg-white/70 backdrop-blur-xl border border-white/50 shadow-lg shadow-slate-200/30 rounded-2xl p-6">
+                    <h3 className="text-lg font-semibold text-slate-800 mb-4">{t('emailLanguageSettings')}</h3>
+                    <p className="text-slate-500 text-xs mb-3">{t('emailLanguageDescription')}</p>
+                    <div className="flex gap-2">
+                      {(['ko', 'en', 'ja'] as const).map((locale) => (
+                        <button
+                          key={locale}
+                          onClick={() => updateCustomerLocale(selectedCustomer.id, locale)}
+                          disabled={isUpdatingLocale}
+                          className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-all ${
+                            (selectedCustomer.locale || 'ko') === locale
+                              ? 'bg-slate-700 text-white'
+                              : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                          } disabled:opacity-50`}
+                        >
+                          {tLanguage(locale)}
+                        </button>
+                      ))}
                     </div>
                   </div>
 

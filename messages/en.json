@@ -143,6 +143,9 @@
     "emailSentStatus": "Sent",
     "emailFailedStatus": "Failed",
     "language": "Email Language",
+    "customerLanguage": "Customer's Language",
+    "emailLanguageSettings": "Email Language Settings",
+    "emailLanguageDescription": "Select the language for emails sent to this customer.",
     "localeUpdateFailed": "Failed to update language setting."
   }
 }

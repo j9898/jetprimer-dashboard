@@ -14,6 +14,15 @@ export default async function DashboardPage() {
     redirect('/login')
   }
 
+  // Google 프로필 이름이 있으면 customers.name 자동 업데이트
+  const googleName = user.user_metadata?.full_name || user.user_metadata?.name
+  if (googleName) {
+    await supabase
+      .from('customers')
+      .update({ name: googleName })
+      .eq('user_id', user.id)
+  }
+
   // 고객 데이터 조회 (admin_notes 제외 - 고객에게 보이면 안 됨)
   const { data: customer } = await supabase
     .from('customers')

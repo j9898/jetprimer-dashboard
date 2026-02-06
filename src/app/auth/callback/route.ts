@@ -1,14 +1,11 @@
 import { createClient } from '@/lib/supabase/server'
 import { NextResponse } from 'next/server'
 
-// PNR 스타일 flight_code 생성 (예: KRX847)
+// 고객번호 생성 (예: JP-2026-0042)
 function generateFlightCode(): string {
-  const letters = 'ABCDEFGHJKLMNPQRSTUVWXYZ' // I, O 제외 (숫자와 혼동 방지)
-  const randomLetters = Array.from({ length: 3 }, () =>
-    letters[Math.floor(Math.random() * letters.length)]
-  ).join('')
-  const randomNumbers = Math.floor(Math.random() * 900 + 100).toString() // 100-999
-  return randomLetters + randomNumbers
+  const year = new Date().getFullYear()
+  const randomNum = Math.floor(Math.random() * 9000 + 1000) // 1000-9999
+  return `JP-${year}-${randomNum}`
 }
 
 // 기본 할 일 제목 (다국어)

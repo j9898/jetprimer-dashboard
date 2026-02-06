@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
-import LanguageDetectionPrompt from '@/components/LanguageDetectionPrompt'
 
 export default function Home() {
   const t = useTranslations('home')
@@ -14,9 +13,6 @@ export default function Home() {
       <div className="absolute top-4 right-4">
         <LanguageSwitcher variant="compact" />
       </div>
-
-      {/* Language Detection Prompt */}
-      <LanguageDetectionPrompt />
 
       <div className="text-center">
         {/* Logo */}

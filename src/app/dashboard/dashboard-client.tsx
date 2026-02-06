@@ -26,6 +26,18 @@ const LogoutIcon = () => (
   </svg>
 )
 
+const MenuIcon = () => (
+  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+  </svg>
+)
+
+const CloseIcon = () => (
+  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+  </svg>
+)
+
 interface Company {
   name: string
   flightNumber: string
@@ -75,6 +87,7 @@ function StatusBadge({ status, t }: { status: string; t: (key: string) => string
 export default function DashboardClient({ user, company, waypoints, locale }: Props) {
   const router = useRouter()
   const [isLoggingOut, setIsLoggingOut] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const t = useTranslations('dashboard')
   const tCommon = useTranslations('common')
 
@@ -93,18 +106,56 @@ export default function DashboardClient({ user, company, waypoints, locale }: Pr
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sky-100 via-blue-50 to-indigo-100">
-      {/* Sidebar */}
-      <div className="w-64 bg-white/70 backdrop-blur-xl border-r border-white/50 shadow-lg shadow-sky-200/30 flex flex-col h-screen fixed left-0 top-0">
-        {/* Logo */}
-        <div className="p-6 border-b border-sky-200/50">
+      {/* Mobile Header */}
+      <div className="lg:hidden fixed top-0 left-0 right-0 z-40 bg-white/80 backdrop-blur-xl border-b border-sky-200/50 px-4 py-3">
+        <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-sky-400 to-blue-500 rounded-lg flex items-center justify-center text-white shadow-lg shadow-sky-400/30">
+            <div className="w-9 h-9 bg-gradient-to-br from-sky-400 to-blue-500 rounded-lg flex items-center justify-center text-white shadow-lg shadow-sky-400/30">
               <PlaneIcon />
             </div>
-            <div>
-              <h1 className="text-lg font-bold text-slate-800">JetPrimer</h1>
-              <p className="text-xs text-sky-600">{t('flightCenter')}</p>
+            <h1 className="text-lg font-bold text-slate-800">JetPrimer</h1>
+          </div>
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="p-2 rounded-lg hover:bg-sky-100 text-slate-700"
+          >
+            {isMobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      {isMobileMenuOpen && (
+        <div
+          className="lg:hidden fixed inset-0 z-30 bg-black/50"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+
+      {/* Sidebar - Desktop: fixed, Mobile: slide-in */}
+      <div className={`
+        w-64 bg-white/70 backdrop-blur-xl border-r border-white/50 shadow-lg shadow-sky-200/30 flex flex-col h-screen fixed left-0 top-0 z-40
+        transition-transform duration-300 ease-in-out
+        lg:translate-x-0 ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
+      `}>
+        {/* Logo */}
+        <div className="p-6 border-b border-sky-200/50">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-sky-400 to-blue-500 rounded-lg flex items-center justify-center text-white shadow-lg shadow-sky-400/30">
+                <PlaneIcon />
+              </div>
+              <div>
+                <h1 className="text-lg font-bold text-slate-800">JetPrimer</h1>
+                <p className="text-xs text-sky-600">{t('flightCenter')}</p>
+              </div>
             </div>
+            <button
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="lg:hidden p-2 rounded-lg hover:bg-sky-100 text-slate-700"
+            >
+              <CloseIcon />
+            </button>
           </div>
         </div>
 
@@ -145,24 +196,24 @@ export default function DashboardClient({ user, company, waypoints, locale }: Pr
       </div>
 
       {/* Main Content */}
-      <main className="ml-64 p-8">
-        <div className="max-w-5xl space-y-8">
+      <main className="lg:ml-64 p-4 md:p-8 pt-20 lg:pt-8">
+        <div className="max-w-5xl space-y-6 md:space-y-8">
           {/* Header */}
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <h1 className="text-3xl font-bold text-slate-800 mb-2">{t('title')}</h1>
-              <p className="text-slate-500">{t('welcome', { captain: company.captain })}</p>
+              <h1 className="text-2xl md:text-3xl font-bold text-slate-800 mb-1 md:mb-2">{t('title')}</h1>
+              <p className="text-slate-500 text-sm md:text-base">{t('welcome', { captain: company.captain })}</p>
             </div>
-            <div className="text-right">
+            <div className="text-left sm:text-right">
               <p className="text-slate-400 text-sm">{tCommon('localTime')}</p>
-              <p className="text-2xl font-mono text-slate-700">{currentTime}</p>
+              <p className="text-xl md:text-2xl font-mono text-slate-700">{currentTime}</p>
             </div>
           </div>
 
           {/* Main Grid */}
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
             {/* Flight Status Card */}
-            <div className="col-span-2 bg-white/70 backdrop-blur-xl border border-white/50 shadow-lg shadow-sky-200/30 rounded-2xl p-6">
+            <div className="lg:col-span-2 bg-white/70 backdrop-blur-xl border border-white/50 shadow-lg shadow-sky-200/30 rounded-2xl p-4 md:p-6">
               <div className="flex items-start justify-between mb-6">
                 <div>
                   <p className="text-slate-500 text-sm mb-1">{t('flight')}</p>

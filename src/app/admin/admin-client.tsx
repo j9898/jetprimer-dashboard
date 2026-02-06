@@ -61,6 +61,18 @@ const SaveIcon = () => (
   </svg>
 )
 
+const MenuIcon = () => (
+  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+  </svg>
+)
+
+const CloseIcon = () => (
+  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+  </svg>
+)
+
 interface Step {
   id: number
   customer_id: number
@@ -112,6 +124,7 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
   const [adminNotes, setAdminNotes] = useState('')
   const [isSavingNotes, setIsSavingNotes] = useState(false)
   const [notesSaved, setNotesSaved] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const t = useTranslations('admin')
   const tCommon = useTranslations('common')
   const tDashboard = useTranslations('dashboard')
@@ -256,18 +269,56 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-100 via-slate-50 to-zinc-100">
-      {/* Sidebar */}
-      <div className="w-64 bg-white/70 backdrop-blur-xl border-r border-white/50 shadow-lg shadow-slate-200/30 flex flex-col h-screen fixed left-0 top-0">
-        {/* Logo */}
-        <div className="p-6 border-b border-slate-200/50">
+      {/* Mobile Header */}
+      <div className="lg:hidden fixed top-0 left-0 right-0 z-40 bg-white/80 backdrop-blur-xl border-b border-slate-200/50 px-4 py-3">
+        <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-slate-700 to-slate-900 rounded-lg flex items-center justify-center text-white shadow-lg shadow-slate-400/30">
+            <div className="w-9 h-9 bg-gradient-to-br from-slate-700 to-slate-900 rounded-lg flex items-center justify-center text-white shadow-lg shadow-slate-400/30">
               <PlaneIcon />
             </div>
-            <div>
-              <h1 className="text-lg font-bold text-slate-800">JetPrimer</h1>
-              <p className="text-xs text-slate-500">{t('console')}</p>
+            <h1 className="text-lg font-bold text-slate-800">JetPrimer Admin</h1>
+          </div>
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="p-2 rounded-lg hover:bg-slate-100 text-slate-700"
+          >
+            {isMobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      {isMobileMenuOpen && (
+        <div
+          className="lg:hidden fixed inset-0 z-30 bg-black/50"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+
+      {/* Sidebar - Desktop: fixed, Mobile: slide-in */}
+      <div className={`
+        w-64 bg-white/70 backdrop-blur-xl border-r border-white/50 shadow-lg shadow-slate-200/30 flex flex-col h-screen fixed left-0 top-0 z-40
+        transition-transform duration-300 ease-in-out
+        lg:translate-x-0 ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
+      `}>
+        {/* Logo */}
+        <div className="p-6 border-b border-slate-200/50">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-slate-700 to-slate-900 rounded-lg flex items-center justify-center text-white shadow-lg shadow-slate-400/30">
+                <PlaneIcon />
+              </div>
+              <div>
+                <h1 className="text-lg font-bold text-slate-800">JetPrimer</h1>
+                <p className="text-xs text-slate-500">{t('console')}</p>
+              </div>
             </div>
+            <button
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="lg:hidden p-2 rounded-lg hover:bg-slate-100 text-slate-700"
+            >
+              <CloseIcon />
+            </button>
           </div>
         </div>
 
@@ -323,14 +374,14 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
       </div>
 
       {/* Main Content */}
-      <main className="ml-64 p-8">
+      <main className="lg:ml-64 p-4 md:p-8 pt-20 lg:pt-8">
         <div className="max-w-6xl">
           {/* Header */}
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-slate-800 mb-2">
+          <div className="mb-6 md:mb-8">
+            <h1 className="text-2xl md:text-3xl font-bold text-slate-800 mb-2">
               {activeTab === 'customers' ? t('title') : t('emailHistory')}
             </h1>
-            <p className="text-slate-500">
+            <p className="text-slate-500 text-sm md:text-base">
               {activeTab === 'customers'
                 ? t('totalCustomers', { count: customers.length })
                 : t('totalEmails', { count: emailLogs.length })}
@@ -338,9 +389,9 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
           </div>
 
           {activeTab === 'customers' ? (
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
             {/* Customer List */}
-            <div className="col-span-2 space-y-4">
+            <div className="lg:col-span-2 space-y-4">
               {customers.length === 0 ? (
                 <div className="bg-white/70 backdrop-blur-xl border border-white/50 shadow-lg shadow-slate-200/30 rounded-2xl p-8 text-center">
                   <p className="text-slate-500">{t('noCustomers')}</p>
@@ -356,12 +407,12 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
                         : 'border-white/50 hover:border-slate-300'
                     }`}
                   >
-                    <div className="flex items-center justify-between mb-4">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-2">
                       <div>
                         <h3 className="text-lg font-semibold text-slate-800">{customer.name}</h3>
-                        <p className="text-slate-500 text-sm">{customer.email}</p>
+                        <p className="text-slate-500 text-sm truncate">{customer.email}</p>
                       </div>
-                      <div className="text-right">
+                      <div className="sm:text-right">
                         <p className="text-slate-400 text-xs">{t('flightCode')}</p>
                         <p className="font-mono text-slate-700">{customer.flight_code}</p>
                       </div>
@@ -595,12 +646,12 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
               <table className="w-full">
                 <thead>
                   <tr className="bg-slate-50 border-b border-slate-200">
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">{t('sentAt')}</th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">{t('recipient')}</th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">{t('subject')}</th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">{t('step')}</th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">{t('emailStatus')}</th>
-                    <th className="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">{t('sentBy')}</th>
+                    <th className="px-3 md:px-6 py-3 md:py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider whitespace-nowrap">{t('sentAt')}</th>
+                    <th className="px-3 md:px-6 py-3 md:py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider whitespace-nowrap">{t('recipient')}</th>
+                    <th className="px-3 md:px-6 py-3 md:py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider whitespace-nowrap">{t('subject')}</th>
+                    <th className="px-3 md:px-6 py-3 md:py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider whitespace-nowrap">{t('step')}</th>
+                    <th className="px-3 md:px-6 py-3 md:py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider whitespace-nowrap">{t('emailStatus')}</th>
+                    <th className="px-3 md:px-6 py-3 md:py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider whitespace-nowrap">{t('sentBy')}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
@@ -613,19 +664,19 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
                   ) : (
                     emailLogs.map((log) => (
                       <tr key={log.id} className="hover:bg-slate-50 transition-colors">
-                        <td className="px-6 py-4 text-sm text-slate-600">
+                        <td className="px-3 md:px-6 py-3 md:py-4 text-xs md:text-sm text-slate-600 whitespace-nowrap">
                           {new Date(log.created_at).toLocaleString()}
                         </td>
-                        <td className="px-6 py-4 text-sm text-slate-700">
+                        <td className="px-3 md:px-6 py-3 md:py-4 text-xs md:text-sm text-slate-700">
                           {log.recipient_email}
                         </td>
-                        <td className="px-6 py-4 text-sm text-slate-700 max-w-xs truncate">
+                        <td className="px-3 md:px-6 py-3 md:py-4 text-xs md:text-sm text-slate-700 max-w-xs truncate">
                           {log.subject}
                         </td>
-                        <td className="px-6 py-4 text-sm text-slate-600">
+                        <td className="px-3 md:px-6 py-3 md:py-4 text-xs md:text-sm text-slate-600 whitespace-nowrap">
                           {log.step_key ? tDashboard(`steps.${log.step_key}`) : '-'}
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-3 md:px-6 py-3 md:py-4">
                           <span className={`px-2 py-1 rounded-full text-xs font-medium ${
                             log.status === 'sent'
                               ? 'bg-emerald-100 text-emerald-600'
@@ -634,7 +685,7 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
                             {log.status === 'sent' ? t('emailSentStatus') : t('emailFailedStatus')}
                           </span>
                         </td>
-                        <td className="px-6 py-4 text-sm text-slate-500 truncate max-w-[150px]">
+                        <td className="px-3 md:px-6 py-3 md:py-4 text-xs md:text-sm text-slate-500 truncate max-w-[150px]">
                           {log.sent_by}
                         </td>
                       </tr>

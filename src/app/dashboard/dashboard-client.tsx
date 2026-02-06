@@ -106,7 +106,10 @@ export default function DashboardClient({ user, company, waypoints, locale, isPa
       .then(data => {
         if (data.success && data.message) {
           const msg = data.message
-          const localeKey = `message_${locale}` as keyof typeof msg
+          const localeColumnMap: Record<string, string> = {
+            'zh-CN': 'message_zh_cn', 'zh-TW': 'message_zh_tw', 'pt-BR': 'message_pt_br',
+          }
+          const localeKey = (localeColumnMap[locale] || `message_${locale}`) as keyof typeof msg
           const message = msg[localeKey] || msg.message_ko || msg.message_en
           if (message) {
             setCrewMessage(message)
@@ -195,9 +198,18 @@ export default function DashboardClient({ user, company, waypoints, locale, isPa
           </div>
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 -mr-2 rounded-lg hover:bg-sky-100 text-slate-700"
+            className={`flex items-center gap-1.5 px-3 py-2 -mr-2 rounded-lg font-semibold text-xs tracking-wider transition-all ${
+              isMobileMenuOpen
+                ? 'bg-slate-800 text-white shadow-lg'
+                : 'bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-md shadow-sky-400/30 animate-pulse hover:animate-none hover:shadow-lg hover:shadow-sky-400/40'
+            }`}
           >
-            {isMobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
+            {isMobileMenuOpen ? <CloseIcon /> : (
+              <>
+                <MenuIcon />
+                <span>MENU</span>
+              </>
+            )}
           </button>
         </div>
       </div>

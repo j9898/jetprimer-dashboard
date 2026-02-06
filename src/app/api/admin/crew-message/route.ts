@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json()
-    const { message_ko, message_en, message_ja, message_ar } = body
+    const { message_ko, message_en, message_ja, message_ar, message_zh_cn, message_zh_tw, message_es, message_hi, message_pt_br, message_fr, message_de, message_vi, message_id, message_ru } = body
 
     const adminSupabase = createAdminClient()
 
@@ -75,6 +75,16 @@ export async function POST(request: NextRequest) {
           message_en: message_en || '',
           message_ja: message_ja || '',
           message_ar: message_ar || '',
+          message_zh_cn: message_zh_cn || '',
+          message_zh_tw: message_zh_tw || '',
+          message_es: message_es || '',
+          message_hi: message_hi || '',
+          message_pt_br: message_pt_br || '',
+          message_fr: message_fr || '',
+          message_de: message_de || '',
+          message_vi: message_vi || '',
+          message_id: message_id || '',
+          message_ru: message_ru || '',
           updated_at: new Date().toISOString(),
         })
         .eq('id', existing.id)
@@ -92,6 +102,16 @@ export async function POST(request: NextRequest) {
           message_en: message_en || '',
           message_ja: message_ja || '',
           message_ar: message_ar || '',
+          message_zh_cn: message_zh_cn || '',
+          message_zh_tw: message_zh_tw || '',
+          message_es: message_es || '',
+          message_hi: message_hi || '',
+          message_pt_br: message_pt_br || '',
+          message_fr: message_fr || '',
+          message_de: message_de || '',
+          message_vi: message_vi || '',
+          message_id: message_id || '',
+          message_ru: message_ru || '',
         })
         .select()
         .single()

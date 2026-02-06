@@ -15,12 +15,38 @@ const DEFAULT_TODO_TITLES: Record<string, string> = {
   en: 'Purchase JetPrimer US LLC Formation Ticket',
   ja: 'JetPrimer 米国LLC設立チケットを購入する',
   ar: 'شراء تذكرة تأسيس شركة أمريكية من JetPrimer',
+  'zh-CN': '购买JetPrimer美国LLC注册机票',
+  'zh-TW': '購買JetPrimer美國LLC註冊機票',
+  es: 'Comprar boleto de formación de LLC en EE.UU. de JetPrimer',
+  hi: 'JetPrimer US LLC गठन टिकट खरीदें',
+  'pt-BR': 'Comprar bilhete de abertura de LLC nos EUA da JetPrimer',
+  fr: 'Acheter le billet de création de LLC aux États-Unis JetPrimer',
+  de: 'JetPrimer US-LLC-Gründungsticket kaufen',
+  vi: 'Mua vé thành lập LLC Mỹ JetPrimer',
+  id: 'Beli tiket pembentukan LLC AS JetPrimer',
+  ru: 'Купить билет на регистрацию LLC в США от JetPrimer',
 }
 
 function getLocaleFromRequest(request: Request): string {
   const acceptLanguage = request.headers.get('accept-language') || ''
+
+  // Chinese variants
+  if (acceptLanguage.includes('zh-TW') || acceptLanguage.includes('zh-Hant')) return 'zh-TW'
+  if (acceptLanguage.includes('zh')) return 'zh-CN'
+
+  // Portuguese variant
+  if (acceptLanguage.includes('pt-BR') || acceptLanguage.includes('pt')) return 'pt-BR'
+
+  // Other languages
   if (acceptLanguage.includes('ar')) return 'ar'
   if (acceptLanguage.includes('ja')) return 'ja'
+  if (acceptLanguage.includes('es')) return 'es'
+  if (acceptLanguage.includes('hi')) return 'hi'
+  if (acceptLanguage.includes('fr')) return 'fr'
+  if (acceptLanguage.includes('de')) return 'de'
+  if (acceptLanguage.includes('vi')) return 'vi'
+  if (acceptLanguage.includes('id')) return 'id'
+  if (acceptLanguage.includes('ru')) return 'ru'
   if (acceptLanguage.includes('en')) return 'en'
   return 'ko'
 }
@@ -133,6 +159,52 @@ export async function GET(request: Request) {
               } catch (emailError) {
                 console.error('Welcome email error:', emailError)
               }
+            }
+
+            // 관리자에게 신규 고객 가입 알림 이메일 발송
+            try {
+              const signupDate = new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' })
+              const adminNotifHtml = `
+                <!DOCTYPE html>
+                <html>
+                <head><meta charset="utf-8"></head>
+                <body style="margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f0f9ff;">
+                  <div style="max-width:600px;margin:0 auto;padding:40px 20px;">
+                    <div style="text-align:center;margin-bottom:30px;">
+                      <div style="display:inline-block;background:linear-gradient(135deg,#38bdf8,#3b82f6);padding:15px;border-radius:12px;">
+                        <span style="color:white;font-size:24px;">🛬</span>
+                      </div>
+                      <h1 style="color:#1e293b;font-size:24px;margin:15px 0 0;">JetPrimer 신규 탑승객 알림</h1>
+                    </div>
+                    <div style="background:white;border-radius:16px;padding:30px;box-shadow:0 4px 6px rgba(0,0,0,0.05);">
+                      <h2 style="color:#1e293b;font-size:20px;margin:0 0 20px;">✈️ 새로운 CEO님이 탑승하셨습니다!</h2>
+                      <div style="background:linear-gradient(135deg,#f0f9ff,#e0f2fe);border-radius:12px;padding:20px;margin-bottom:20px;">
+                        <table style="width:100%;border-collapse:collapse;">
+                          <tr><td style="padding:8px 0;color:#64748b;font-size:13px;">이름</td><td style="padding:8px 0;color:#1e293b;font-weight:600;text-align:right;">${userName}</td></tr>
+                          <tr><td style="padding:8px 0;color:#64748b;font-size:13px;">이메일</td><td style="padding:8px 0;color:#1e293b;font-weight:600;text-align:right;">${user.email}</td></tr>
+                          <tr><td style="padding:8px 0;color:#64748b;font-size:13px;">고객번호</td><td style="padding:8px 0;color:#38bdf8;font-weight:700;text-align:right;letter-spacing:1px;">${flightCode}</td></tr>
+                          <tr><td style="padding:8px 0;color:#64748b;font-size:13px;">감지된 언어</td><td style="padding:8px 0;color:#1e293b;font-weight:600;text-align:right;">${userLocale}</td></tr>
+                          <tr><td style="padding:8px 0;color:#64748b;font-size:13px;">가입 시간</td><td style="padding:8px 0;color:#1e293b;font-weight:600;text-align:right;">${signupDate}</td></tr>
+                        </table>
+                      </div>
+                      <a href="${process.env.NEXT_PUBLIC_SITE_URL || 'https://jetprimer.com'}/admin" style="display:block;text-align:center;background:linear-gradient(135deg,#38bdf8,#3b82f6);color:white;text-decoration:none;padding:14px 24px;border-radius:10px;font-weight:600;font-size:16px;">
+                        Admin Console에서 확인하기
+                      </a>
+                    </div>
+                    <div style="text-align:center;margin-top:30px;">
+                      <p style="color:#cbd5e1;font-size:12px;">© 2026 JetPrimer. 관리자 전용 알림입니다.</p>
+                    </div>
+                  </div>
+                </body>
+                </html>
+              `
+              await sendEmail({
+                to: 'support@jetprimer.com',
+                subject: `[JetPrimer] 신규 CEO 가입 - ${userName} (${flightCode})`,
+                html: adminNotifHtml,
+              })
+            } catch (adminEmailError) {
+              console.error('Admin notification email error:', adminEmailError)
             }
           }
         }

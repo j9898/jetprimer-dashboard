@@ -193,6 +193,16 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
   const [crewMessageEn, setCrewMessageEn] = useState('')
   const [crewMessageJa, setCrewMessageJa] = useState('')
   const [crewMessageAr, setCrewMessageAr] = useState('')
+  const [crewMessageZhCN, setCrewMessageZhCN] = useState('')
+  const [crewMessageZhTW, setCrewMessageZhTW] = useState('')
+  const [crewMessageEs, setCrewMessageEs] = useState('')
+  const [crewMessageHi, setCrewMessageHi] = useState('')
+  const [crewMessagePtBR, setCrewMessagePtBR] = useState('')
+  const [crewMessageFr, setCrewMessageFr] = useState('')
+  const [crewMessageDe, setCrewMessageDe] = useState('')
+  const [crewMessageVi, setCrewMessageVi] = useState('')
+  const [crewMessageId, setCrewMessageId] = useState('')
+  const [crewMessageRu, setCrewMessageRu] = useState('')
   const [isSavingCrewMessage, setIsSavingCrewMessage] = useState(false)
   const [crewMessageSaved, setCrewMessageSaved] = useState(false)
   const [isDeletingCustomer, setIsDeletingCustomer] = useState(false)
@@ -368,6 +378,16 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
           setCrewMessageEn(data.message.message_en || '')
           setCrewMessageJa(data.message.message_ja || '')
           setCrewMessageAr(data.message.message_ar || '')
+          setCrewMessageZhCN(data.message.message_zh_cn || '')
+          setCrewMessageZhTW(data.message.message_zh_tw || '')
+          setCrewMessageEs(data.message.message_es || '')
+          setCrewMessageHi(data.message.message_hi || '')
+          setCrewMessagePtBR(data.message.message_pt_br || '')
+          setCrewMessageFr(data.message.message_fr || '')
+          setCrewMessageDe(data.message.message_de || '')
+          setCrewMessageVi(data.message.message_vi || '')
+          setCrewMessageId(data.message.message_id || '')
+          setCrewMessageRu(data.message.message_ru || '')
         }
       })
       .catch(() => {})
@@ -385,6 +405,16 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
           message_en: crewMessageEn,
           message_ja: crewMessageJa,
           message_ar: crewMessageAr,
+          message_zh_cn: crewMessageZhCN,
+          message_zh_tw: crewMessageZhTW,
+          message_es: crewMessageEs,
+          message_hi: crewMessageHi,
+          message_pt_br: crewMessagePtBR,
+          message_fr: crewMessageFr,
+          message_de: crewMessageDe,
+          message_vi: crewMessageVi,
+          message_id: crewMessageId,
+          message_ru: crewMessageRu,
         })
       })
 
@@ -996,6 +1026,66 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
                   />
                 </div>
 
+                {/* Chinese Simplified */}
+                <div>
+                  <label className="block text-sm font-medium text-slate-600 mb-1">🇨🇳 {t('crewMessageZhCN')}</label>
+                  <textarea value={crewMessageZhCN} onChange={(e) => { setCrewMessageZhCN(e.target.value); setCrewMessageSaved(false) }} placeholder={t('crewMessagePlaceholder')} className="w-full p-3 border border-slate-200 rounded-lg resize-none h-20 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                </div>
+
+                {/* Chinese Traditional */}
+                <div>
+                  <label className="block text-sm font-medium text-slate-600 mb-1">🇹🇼 {t('crewMessageZhTW')}</label>
+                  <textarea value={crewMessageZhTW} onChange={(e) => { setCrewMessageZhTW(e.target.value); setCrewMessageSaved(false) }} placeholder={t('crewMessagePlaceholder')} className="w-full p-3 border border-slate-200 rounded-lg resize-none h-20 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                </div>
+
+                {/* Spanish */}
+                <div>
+                  <label className="block text-sm font-medium text-slate-600 mb-1">🇪🇸 {t('crewMessageEs')}</label>
+                  <textarea value={crewMessageEs} onChange={(e) => { setCrewMessageEs(e.target.value); setCrewMessageSaved(false) }} placeholder={t('crewMessagePlaceholder')} className="w-full p-3 border border-slate-200 rounded-lg resize-none h-20 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                </div>
+
+                {/* Hindi */}
+                <div>
+                  <label className="block text-sm font-medium text-slate-600 mb-1">🇮🇳 {t('crewMessageHi')}</label>
+                  <textarea value={crewMessageHi} onChange={(e) => { setCrewMessageHi(e.target.value); setCrewMessageSaved(false) }} placeholder={t('crewMessagePlaceholder')} className="w-full p-3 border border-slate-200 rounded-lg resize-none h-20 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                </div>
+
+                {/* Portuguese */}
+                <div>
+                  <label className="block text-sm font-medium text-slate-600 mb-1">🇧🇷 {t('crewMessagePtBR')}</label>
+                  <textarea value={crewMessagePtBR} onChange={(e) => { setCrewMessagePtBR(e.target.value); setCrewMessageSaved(false) }} placeholder={t('crewMessagePlaceholder')} className="w-full p-3 border border-slate-200 rounded-lg resize-none h-20 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                </div>
+
+                {/* French */}
+                <div>
+                  <label className="block text-sm font-medium text-slate-600 mb-1">🇫🇷 {t('crewMessageFr')}</label>
+                  <textarea value={crewMessageFr} onChange={(e) => { setCrewMessageFr(e.target.value); setCrewMessageSaved(false) }} placeholder={t('crewMessagePlaceholder')} className="w-full p-3 border border-slate-200 rounded-lg resize-none h-20 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                </div>
+
+                {/* German */}
+                <div>
+                  <label className="block text-sm font-medium text-slate-600 mb-1">🇩🇪 {t('crewMessageDe')}</label>
+                  <textarea value={crewMessageDe} onChange={(e) => { setCrewMessageDe(e.target.value); setCrewMessageSaved(false) }} placeholder={t('crewMessagePlaceholder')} className="w-full p-3 border border-slate-200 rounded-lg resize-none h-20 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                </div>
+
+                {/* Vietnamese */}
+                <div>
+                  <label className="block text-sm font-medium text-slate-600 mb-1">🇻🇳 {t('crewMessageVi')}</label>
+                  <textarea value={crewMessageVi} onChange={(e) => { setCrewMessageVi(e.target.value); setCrewMessageSaved(false) }} placeholder={t('crewMessagePlaceholder')} className="w-full p-3 border border-slate-200 rounded-lg resize-none h-20 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                </div>
+
+                {/* Indonesian */}
+                <div>
+                  <label className="block text-sm font-medium text-slate-600 mb-1">🇮🇩 {t('crewMessageId')}</label>
+                  <textarea value={crewMessageId} onChange={(e) => { setCrewMessageId(e.target.value); setCrewMessageSaved(false) }} placeholder={t('crewMessagePlaceholder')} className="w-full p-3 border border-slate-200 rounded-lg resize-none h-20 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                </div>
+
+                {/* Russian */}
+                <div>
+                  <label className="block text-sm font-medium text-slate-600 mb-1">🇷🇺 {t('crewMessageRu')}</label>
+                  <textarea value={crewMessageRu} onChange={(e) => { setCrewMessageRu(e.target.value); setCrewMessageSaved(false) }} placeholder={t('crewMessagePlaceholder')} className="w-full p-3 border border-slate-200 rounded-lg resize-none h-20 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                </div>
+
                 <div className="flex items-center justify-between">
                   <span className={`text-xs transition-opacity ${crewMessageSaved ? 'text-emerald-600 opacity-100' : 'opacity-0'}`}>
                     {t('crewMessageSaved')}
@@ -1322,7 +1412,7 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
                     <h3 className="text-lg font-semibold text-slate-800 mb-4">{t('emailLanguageSettings')}</h3>
                     <p className="text-slate-500 text-xs mb-3">{t('emailLanguageDescription')}</p>
                     <div className="flex gap-2">
-                      {(['ko', 'en', 'ja', 'ar'] as const).map((locale) => (
+                      {(['ko', 'en', 'ja', 'zh-CN', 'zh-TW', 'ar', 'es', 'hi', 'pt-BR', 'fr', 'de', 'vi', 'id', 'ru'] as const).map((locale) => (
                         <button
                           key={locale}
                           onClick={() => updateEmailLocale(selectedCustomer.id, locale)}

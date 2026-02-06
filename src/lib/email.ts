@@ -85,7 +85,17 @@ export function getStepUpdateEmailTemplate({
       pending: 'قيد الانتظار',
       in_progress: 'قيد التنفيذ',
       completed: 'مكتمل'
-    }
+    },
+    'zh-CN': { pending: '待处理', in_progress: '进行中', completed: '已完成' },
+    'zh-TW': { pending: '待處理', in_progress: '進行中', completed: '已完成' },
+    es: { pending: 'Pendiente', in_progress: 'En progreso', completed: 'Completado' },
+    hi: { pending: 'लंबित', in_progress: 'प्रगति में', completed: 'पूर्ण' },
+    'pt-BR': { pending: 'Pendente', in_progress: 'Em andamento', completed: 'Concluído' },
+    fr: { pending: 'En attente', in_progress: 'En cours', completed: 'Terminé' },
+    de: { pending: 'Ausstehend', in_progress: 'In Bearbeitung', completed: 'Abgeschlossen' },
+    vi: { pending: 'Đang chờ', in_progress: 'Đang tiến hành', completed: 'Hoàn thành' },
+    id: { pending: 'Menunggu', in_progress: 'Sedang Berjalan', completed: 'Selesai' },
+    ru: { pending: 'Ожидание', in_progress: 'В процессе', completed: 'Завершено' },
   }
 
   const stepLabels: Record<string, Record<string, string>> = {
@@ -112,7 +122,17 @@ export function getStepUpdateEmailTemplate({
       llc: 'تأسيس LLC',
       ein: 'طلب EIN',
       bank: 'حساب بنكي'
-    }
+    },
+    'zh-CN': { documents: '文件准备', llc: 'LLC注册', ein: 'EIN申请', bank: '银行开户' },
+    'zh-TW': { documents: '文件準備', llc: 'LLC註冊', ein: 'EIN申請', bank: '銀行開戶' },
+    es: { documents: 'Preparación de documentos', llc: 'Formación de LLC', ein: 'Solicitud de EIN', bank: 'Cuenta bancaria' },
+    hi: { documents: 'दस्तावेज़ तैयारी', llc: 'LLC गठन', ein: 'EIN आवेदन', bank: 'बैंक खाता' },
+    'pt-BR': { documents: 'Preparação de documentos', llc: 'Abertura de LLC', ein: 'Solicitação de EIN', bank: 'Conta bancária' },
+    fr: { documents: 'Préparation des documents', llc: 'Formation de LLC', ein: 'Demande EIN', bank: 'Compte bancaire' },
+    de: { documents: 'Dokumentenvorbereitung', llc: 'LLC-Gründung', ein: 'EIN-Antrag', bank: 'Bankkonto' },
+    vi: { documents: 'Chuẩn bị tài liệu', llc: 'Thành lập LLC', ein: 'Đăng ký EIN', bank: 'Tài khoản ngân hàng' },
+    id: { documents: 'Persiapan Dokumen', llc: 'Pembentukan LLC', ein: 'Pengajuan EIN', bank: 'Rekening Bank' },
+    ru: { documents: 'Подготовка документов', llc: 'Регистрация LLC', ein: 'Заявка на EIN', bank: 'Банковский счёт' },
   }
 
   const messages: Record<string, { subject: string; greeting: string; body: string; footer: string }> = {
@@ -139,7 +159,17 @@ export function getStepUpdateEmailTemplate({
       greeting: `مرحباً ${customerName}`,
       body: `تم تحديث تقدم تأسيس شركة LLC الخاصة بك.`,
       footer: 'إذا كان لديك أي أسئلة، لا تتردد في التواصل معنا.'
-    }
+    },
+    'zh-CN': { subject: `[JetPrimer] ${stepLabels['zh-CN']?.[stepName] || stepName}的状态已更新`, greeting: `您好，${customerName}`, body: '您的LLC注册进度已更新。', footer: '如有任何问题，请随时联系我们。' },
+    'zh-TW': { subject: `[JetPrimer] ${stepLabels['zh-TW']?.[stepName] || stepName}的狀態已更新`, greeting: `您好，${customerName}`, body: '您的LLC註冊進度已更新。', footer: '如有任何問題，請隨時聯繫我們。' },
+    es: { subject: `[JetPrimer] El estado de ${stepLabels.es?.[stepName] || stepName} ha sido actualizado`, greeting: `Hola, ${customerName}`, body: 'El progreso de formación de su LLC ha sido actualizado.', footer: 'Si tiene alguna pregunta, no dude en contactarnos.' },
+    hi: { subject: `[JetPrimer] ${stepLabels.hi?.[stepName] || stepName} की स्थिति अपडेट हुई`, greeting: `नमस्ते, ${customerName}`, body: 'आपकी LLC गठन प्रगति अपडेट हो गई है।', footer: 'कोई प्रश्न हो तो कृपया हमसे संपर्क करें।' },
+    'pt-BR': { subject: `[JetPrimer] O status de ${stepLabels['pt-BR']?.[stepName] || stepName} foi atualizado`, greeting: `Olá, ${customerName}`, body: 'O progresso da abertura da sua LLC foi atualizado.', footer: 'Se tiver alguma dúvida, entre em contato conosco.' },
+    fr: { subject: `[JetPrimer] Le statut de ${stepLabels.fr?.[stepName] || stepName} a été mis à jour`, greeting: `Bonjour, ${customerName}`, body: 'L\'avancement de la création de votre LLC a été mis à jour.', footer: 'Si vous avez des questions, n\'hésitez pas à nous contacter.' },
+    de: { subject: `[JetPrimer] Status von ${stepLabels.de?.[stepName] || stepName} wurde aktualisiert`, greeting: `Hallo, ${customerName}`, body: 'Der Fortschritt Ihrer LLC-Gründung wurde aktualisiert.', footer: 'Bei Fragen stehen wir Ihnen gerne zur Verfügung.' },
+    vi: { subject: `[JetPrimer] Trạng thái ${stepLabels.vi?.[stepName] || stepName} đã được cập nhật`, greeting: `Xin chào, ${customerName}`, body: 'Tiến độ thành lập LLC của bạn đã được cập nhật.', footer: 'Nếu có thắc mắc, vui lòng liên hệ với chúng tôi.' },
+    id: { subject: `[JetPrimer] Status ${stepLabels.id?.[stepName] || stepName} telah diperbarui`, greeting: `Halo, ${customerName}`, body: 'Progres pembentukan LLC Anda telah diperbarui.', footer: 'Jika ada pertanyaan, jangan ragu untuk menghubungi kami.' },
+    ru: { subject: `[JetPrimer] Статус ${stepLabels.ru?.[stepName] || stepName} обновлён`, greeting: `Здравствуйте, ${customerName}`, body: 'Прогресс регистрации вашей LLC обновлён.', footer: 'Если у вас есть вопросы, свяжитесь с нами.' },
   }
 
   const lang = messages[locale] || messages.ko
@@ -194,7 +224,12 @@ export function getStepUpdateEmailTemplate({
 
           <!-- CTA Button -->
           <a href="${DASHBOARD_URL}/dashboard" style="display: block; text-align: center; background: linear-gradient(135deg, #38bdf8 0%, #3b82f6 100%); color: white; text-decoration: none; padding: 14px 24px; border-radius: 10px; font-weight: 600; font-size: 16px;">
-            ${locale === 'en' ? 'View Dashboard' : locale === 'ja' ? 'ダッシュボードを見る' : locale === 'ar' ? 'عرض لوحة التحكم' : '대시보드 확인하기'}
+            ${{
+              ko: '대시보드 확인하기', en: 'View Dashboard', ja: 'ダッシュボードを見る', ar: 'عرض لوحة التحكم',
+              'zh-CN': '查看控制台', 'zh-TW': '查看控制台', es: 'Ver panel', hi: 'डैशबोर्ड देखें',
+              'pt-BR': 'Ver painel', fr: 'Voir le tableau de bord', de: 'Dashboard ansehen',
+              vi: 'Xem bảng điều khiển', id: 'Lihat dasbor', ru: 'Перейти в панель'
+            }[locale] || '대시보드 확인하기'}
           </a>
         </div>
 
@@ -268,7 +303,17 @@ export function getWelcomeEmailTemplate({
       nextStep: 'قم بشراء تذكرتك من لوحة التحكم لبدء إجراءات تأسيس LLC. من تجهيز المستندات إلى فتح الحساب البنكي، فريق JetPrimer معك في كل خطوة.',
       ctaButton: 'الذهاب إلى لوحة التحكم',
       footer: 'إذا كان لديك أي أسئلة، لا تتردد في التواصل معنا.'
-    }
+    },
+    'zh-CN': { subject: '[JetPrimer] 欢迎！开始您的美国LLC注册之旅', greeting: `${customerName}，欢迎！ ✈️`, body: '感谢您加入JetPrimer。我们的美国LLC注册服务已为您准备就绪。', flightCodeLabel: '客户编号（航班代码）', nextStep: '在控制台购买票据即可开始LLC注册流程。从文件准备到银行开户，JetPrimer团队将全程陪伴。', ctaButton: '前往控制台', footer: '如有任何问题，请随时联系我们。' },
+    'zh-TW': { subject: '[JetPrimer] 歡迎！開始您的美國LLC註冊之旅', greeting: `${customerName}，歡迎！ ✈️`, body: '感謝您加入JetPrimer。我們的美國LLC註冊服務已為您準備就緒。', flightCodeLabel: '客戶編號（航班代碼）', nextStep: '在控制台購買票據即可開始LLC註冊流程。從文件準備到銀行開戶，JetPrimer團隊將全程陪伴。', ctaButton: '前往控制台', footer: '如有任何問題，請隨時聯繫我們。' },
+    es: { subject: '[JetPrimer] ¡Bienvenido! Comience su viaje de formación de LLC en EE.UU.', greeting: `¡Bienvenido, ${customerName}! ✈️`, body: 'Gracias por unirse a JetPrimer. Nuestro servicio premium de formación de LLC en EE.UU. está listo para usted.', flightCodeLabel: 'ID de Cliente (Código de Vuelo)', nextStep: 'Compre su boleto en el panel para iniciar el proceso de formación de LLC. Desde la preparación de documentos hasta la apertura de cuenta bancaria, el equipo JetPrimer lo acompaña.', ctaButton: 'Ir al panel', footer: 'Si tiene alguna pregunta, no dude en contactarnos.' },
+    hi: { subject: '[JetPrimer] स्वागत है! अपनी US LLC गठन यात्रा शुरू करें', greeting: `स्वागत है, ${customerName}! ✈️`, body: 'JetPrimer से जुड़ने के लिए धन्यवाद। हमारी प्रीमियम US LLC गठन सेवा आपके लिए तैयार है।', flightCodeLabel: 'ग्राहक ID (फ्लाइट कोड)', nextStep: 'डैशबोर्ड पर टिकट खरीदें और LLC गठन प्रक्रिया शुरू करें। दस्तावेज़ तैयारी से लेकर बैंक खाता खोलने तक, JetPrimer टीम आपके साथ है।', ctaButton: 'डैशबोर्ड पर जाएं', footer: 'कोई प्रश्न हो तो कृपया हमसे संपर्क करें।' },
+    'pt-BR': { subject: '[JetPrimer] Bem-vindo! Comece sua jornada de abertura de LLC nos EUA', greeting: `Bem-vindo, ${customerName}! ✈️`, body: 'Obrigado por se juntar ao JetPrimer. Nosso serviço premium de abertura de LLC nos EUA está pronto para você.', flightCodeLabel: 'ID do Cliente (Código de Voo)', nextStep: 'Compre seu bilhete no painel para iniciar o processo de abertura de LLC. Da preparação de documentos à abertura de conta bancária, a equipe JetPrimer acompanha você.', ctaButton: 'Ir ao painel', footer: 'Se tiver alguma dúvida, entre em contato conosco.' },
+    fr: { subject: '[JetPrimer] Bienvenue ! Commencez votre parcours de création de LLC aux États-Unis', greeting: `Bienvenue, ${customerName} ! ✈️`, body: 'Merci d\'avoir rejoint JetPrimer. Notre service premium de création de LLC aux États-Unis est prêt pour vous.', flightCodeLabel: 'ID Client (Code de vol)', nextStep: 'Achetez votre billet sur le tableau de bord pour démarrer le processus de création de LLC. De la préparation des documents à l\'ouverture du compte bancaire, l\'équipe JetPrimer vous accompagne.', ctaButton: 'Accéder au tableau de bord', footer: 'Si vous avez des questions, n\'hésitez pas à nous contacter.' },
+    de: { subject: '[JetPrimer] Willkommen! Starten Sie Ihre US-LLC-Gründung', greeting: `Willkommen, ${customerName}! ✈️`, body: 'Vielen Dank für Ihre Anmeldung bei JetPrimer. Unser Premium-Service zur US-LLC-Gründung steht für Sie bereit.', flightCodeLabel: 'Kunden-ID (Flugcode)', nextStep: 'Kaufen Sie Ihr Ticket im Dashboard, um den LLC-Gründungsprozess zu starten. Von der Dokumentenvorbereitung bis zur Kontoeröffnung – das JetPrimer-Team begleitet Sie.', ctaButton: 'Zum Dashboard', footer: 'Bei Fragen stehen wir Ihnen gerne zur Verfügung.' },
+    vi: { subject: '[JetPrimer] Chào mừng! Bắt đầu hành trình thành lập LLC tại Mỹ', greeting: `Chào mừng, ${customerName}! ✈️`, body: 'Cảm ơn bạn đã tham gia JetPrimer. Dịch vụ thành lập LLC tại Mỹ cao cấp đã sẵn sàng cho bạn.', flightCodeLabel: 'Mã khách hàng (Mã chuyến bay)', nextStep: 'Mua vé trên bảng điều khiển để bắt đầu quy trình thành lập LLC. Từ chuẩn bị tài liệu đến mở tài khoản ngân hàng, đội ngũ JetPrimer đồng hành cùng bạn.', ctaButton: 'Đi tới bảng điều khiển', footer: 'Nếu có thắc mắc, vui lòng liên hệ với chúng tôi.' },
+    id: { subject: '[JetPrimer] Selamat datang! Mulai perjalanan pembentukan LLC AS Anda', greeting: `Selamat datang, ${customerName}! ✈️`, body: 'Terima kasih telah bergabung dengan JetPrimer. Layanan premium pembentukan LLC AS kami siap untuk Anda.', flightCodeLabel: 'ID Pelanggan (Kode Penerbangan)', nextStep: 'Beli tiket Anda di dasbor untuk memulai proses pembentukan LLC. Dari persiapan dokumen hingga pembukaan rekening bank, tim JetPrimer mendampingi Anda.', ctaButton: 'Buka dasbor', footer: 'Jika ada pertanyaan, jangan ragu untuk menghubungi kami.' },
+    ru: { subject: '[JetPrimer] Добро пожаловать! Начните регистрацию LLC в США', greeting: `Добро пожаловать, ${customerName}! ✈️`, body: 'Спасибо за регистрацию в JetPrimer. Наш премиальный сервис по регистрации LLC в США готов к работе.', flightCodeLabel: 'ID клиента (код рейса)', nextStep: 'Приобретите билет на панели управления, чтобы начать процесс регистрации LLC. От подготовки документов до открытия банковского счёта — команда JetPrimer с вами на каждом шагу.', ctaButton: 'Перейти в панель', footer: 'Если у вас есть вопросы, свяжитесь с нами.' },
   }
 
   const lang = messages[locale] || messages.ko

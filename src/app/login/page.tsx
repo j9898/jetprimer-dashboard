@@ -5,6 +5,7 @@ import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
+import LanguageDetectionPrompt from '@/components/LanguageDetectionPrompt'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
@@ -71,6 +72,9 @@ export default function LoginPage() {
       <div className="absolute top-4 right-4">
         <LanguageSwitcher variant="compact" />
       </div>
+
+      {/* Language Detection Prompt */}
+      <LanguageDetectionPrompt />
 
       <div className="w-full max-w-md">
         {/* Logo */}

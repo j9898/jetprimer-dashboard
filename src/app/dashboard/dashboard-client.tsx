@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import type { User } from '@supabase/supabase-js'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
+import LanguageDetectionPrompt from '@/components/LanguageDetectionPrompt'
 import TodoList from '@/components/TodoList'
 
 // Icons
@@ -172,6 +173,9 @@ export default function DashboardClient({ user, company, waypoints, locale, isPa
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-blue-200/20 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-sky-300/20 to-transparent" />
       </div>
+
+      {/* Language Detection Prompt */}
+      <LanguageDetectionPrompt currentLocale={locale} />
 
       {/* CSS Keyframes */}
       <style jsx>{`

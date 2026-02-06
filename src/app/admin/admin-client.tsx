@@ -43,6 +43,12 @@ const MailIcon = () => (
   </svg>
 )
 
+const GlobeIcon = () => (
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+  </svg>
+)
+
 interface Step {
   id: number
   customer_id: number
@@ -88,9 +94,11 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
   const [isUpdating, setIsUpdating] = useState(false)
   const [isSendingEmail, setIsSendingEmail] = useState<number | null>(null)
   const [activeTab, setActiveTab] = useState<'customers' | 'emails'>('customers')
+  const [isUpdatingLocale, setIsUpdatingLocale] = useState(false)
   const t = useTranslations('admin')
   const tCommon = useTranslations('common')
   const tDashboard = useTranslations('dashboard')
+  const tLanguage = useTranslations('language')
 
   const handleLogout = async () => {
     setIsLoggingOut(true)
@@ -123,6 +131,29 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
       router.refresh()
     }
     setIsUpdating(false)
+  }
+
+  // 고객 언어 설정 업데이트
+  const updateCustomerLocale = async (customerId: number, newLocale: string) => {
+    setIsUpdatingLocale(true)
+    const supabase = createClient()
+
+    const { error } = await supabase
+      .from('customers')
+      .update({ locale: newLocale })
+      .eq('id', customerId)
+
+    if (error) {
+      console.error('Locale update error:', error)
+      alert(t('localeUpdateFailed'))
+    } else {
+      // 선택된 고객 정보 업데이트
+      if (selectedCustomer && selectedCustomer.id === customerId) {
+        setSelectedCustomer({ ...selectedCustomer, locale: newLocale })
+      }
+      router.refresh()
+    }
+    setIsUpdatingLocale(false)
   }
 
   // 이메일 발송
@@ -343,6 +374,28 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
                         <p className="text-slate-700">
                           {new Date(selectedCustomer.created_at).toLocaleDateString()}
                         </p>
+                      </div>
+                      <div>
+                        <p className="text-slate-400 text-xs flex items-center gap-1">
+                          <GlobeIcon />
+                          {t('language')}
+                        </p>
+                        <div className="flex gap-1 mt-1">
+                          {(['ko', 'en', 'ja'] as const).map((locale) => (
+                            <button
+                              key={locale}
+                              onClick={() => updateCustomerLocale(selectedCustomer.id, locale)}
+                              disabled={isUpdatingLocale}
+                              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                                (selectedCustomer.locale || 'ko') === locale
+                                  ? 'bg-slate-700 text-white'
+                                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                              } disabled:opacity-50`}
+                            >
+                              {tLanguage(locale)}
+                            </button>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </div>

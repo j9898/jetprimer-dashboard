@@ -141,6 +141,8 @@
     "sentBy": "Sent By",
     "noEmailLogs": "No emails sent yet.",
     "emailSentStatus": "Sent",
-    "emailFailedStatus": "Failed"
+    "emailFailedStatus": "Failed",
+    "language": "Email Language",
+    "localeUpdateFailed": "Failed to update language setting."
   }
 }

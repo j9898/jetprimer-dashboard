@@ -141,6 +141,8 @@
     "sentBy": "送信者",
     "noEmailLogs": "送信されたメールはありません。",
     "emailSentStatus": "送信済み",
-    "emailFailedStatus": "失敗"
+    "emailFailedStatus": "失敗",
+    "language": "メール言語",
+    "localeUpdateFailed": "言語設定の変更に失敗しました。"
   }
 }

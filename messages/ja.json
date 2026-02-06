@@ -146,6 +146,13 @@
     "customerLanguage": "顧客設定言語",
     "emailLanguageSettings": "メール送信言語",
     "emailLanguageDescription": "この顧客に送信するメールの言語を選択してください。",
-    "localeUpdateFailed": "言語設定の変更に失敗しました。"
+    "localeUpdateFailed": "言語設定の変更に失敗しました。",
+    "adminNotes": "管理者メモ",
+    "adminNotesDescription": "顧客に関するメモを記録してください。この内容は顧客には表示されません。",
+    "adminNotesPlaceholder": "顧客に関するメモを入力してください...",
+    "saveNotes": "保存",
+    "saving": "保存中...",
+    "notesSaved": "保存しました",
+    "notesSaveFailed": "メモの保存に失敗しました。"
   }
 }

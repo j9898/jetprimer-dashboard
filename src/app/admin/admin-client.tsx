@@ -49,6 +49,18 @@ const GlobeIcon = () => (
   </svg>
 )
 
+const NoteIcon = () => (
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+  </svg>
+)
+
+const SaveIcon = () => (
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+  </svg>
+)
+
 interface Step {
   id: number
   customer_id: number
@@ -66,6 +78,7 @@ interface Customer {
   email: string
   locale?: string
   email_locale?: string
+  admin_notes?: string
   flight_code: string
   created_at: string
   steps: Step[]
@@ -96,6 +109,9 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
   const [isSendingEmail, setIsSendingEmail] = useState<number | null>(null)
   const [activeTab, setActiveTab] = useState<'customers' | 'emails'>('customers')
   const [isUpdatingLocale, setIsUpdatingLocale] = useState(false)
+  const [adminNotes, setAdminNotes] = useState('')
+  const [isSavingNotes, setIsSavingNotes] = useState(false)
+  const [notesSaved, setNotesSaved] = useState(false)
   const t = useTranslations('admin')
   const tCommon = useTranslations('common')
   const tDashboard = useTranslations('dashboard')
@@ -155,6 +171,38 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
       router.refresh()
     }
     setIsUpdatingLocale(false)
+  }
+
+  // 관리자 메모 저장
+  const saveAdminNotes = async (customerId: number) => {
+    setIsSavingNotes(true)
+    const supabase = createClient()
+
+    const { error } = await supabase
+      .from('customers')
+      .update({ admin_notes: adminNotes })
+      .eq('id', customerId)
+
+    if (error) {
+      console.error('Admin notes save error:', error)
+      alert(t('notesSaveFailed'))
+    } else {
+      // 선택된 고객 정보 업데이트
+      if (selectedCustomer && selectedCustomer.id === customerId) {
+        setSelectedCustomer({ ...selectedCustomer, admin_notes: adminNotes })
+      }
+      setNotesSaved(true)
+      setTimeout(() => setNotesSaved(false), 2000)
+      router.refresh()
+    }
+    setIsSavingNotes(false)
+  }
+
+  // 고객 선택 시 메모 로드
+  const handleSelectCustomer = (customer: Customer) => {
+    setSelectedCustomer(customer)
+    setAdminNotes(customer.admin_notes || '')
+    setNotesSaved(false)
   }
 
   // 이메일 발송
@@ -301,7 +349,7 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
                 customers.map((customer) => (
                   <div
                     key={customer.id}
-                    onClick={() => setSelectedCustomer(customer)}
+                    onClick={() => handleSelectCustomer(customer)}
                     className={`bg-white/70 backdrop-blur-xl border shadow-lg shadow-slate-200/30 rounded-2xl p-6 cursor-pointer transition-all hover:shadow-xl ${
                       selectedCustomer?.id === customer.id
                         ? 'border-slate-400 ring-2 ring-slate-400/20'
@@ -407,6 +455,37 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
                           {tLanguage(locale)}
                         </button>
                       ))}
+                    </div>
+                  </div>
+
+                  {/* Admin Notes Card */}
+                  <div className="bg-white/70 backdrop-blur-xl border border-white/50 shadow-lg shadow-slate-200/30 rounded-2xl p-6">
+                    <h3 className="text-lg font-semibold text-slate-800 mb-2 flex items-center gap-2">
+                      <NoteIcon />
+                      {t('adminNotes')}
+                    </h3>
+                    <p className="text-slate-500 text-xs mb-3">{t('adminNotesDescription')}</p>
+                    <textarea
+                      value={adminNotes}
+                      onChange={(e) => {
+                        setAdminNotes(e.target.value)
+                        setNotesSaved(false)
+                      }}
+                      placeholder={t('adminNotesPlaceholder')}
+                      className="w-full h-32 p-3 text-sm text-slate-700 bg-slate-50 border border-slate-200 rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-slate-400/50 focus:border-slate-400 transition-all"
+                    />
+                    <div className="flex items-center justify-between mt-3">
+                      <span className={`text-xs transition-opacity ${notesSaved ? 'text-emerald-600 opacity-100' : 'opacity-0'}`}>
+                        {t('notesSaved')}
+                      </span>
+                      <button
+                        onClick={() => saveAdminNotes(selectedCustomer.id)}
+                        disabled={isSavingNotes}
+                        className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-slate-700 hover:bg-slate-800 rounded-lg transition-all disabled:opacity-50"
+                      >
+                        <SaveIcon />
+                        {isSavingNotes ? t('saving') : t('saveNotes')}
+                      </button>
                     </div>
                   </div>
 

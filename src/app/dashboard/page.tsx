@@ -13,10 +13,10 @@ export default async function DashboardPage() {
     redirect('/login')
   }
 
-  // 고객 데이터 조회
+  // 고객 데이터 조회 (admin_notes 제외 - 고객에게 보이면 안 됨)
   const { data: customer } = await supabase
     .from('customers')
-    .select('*')
+    .select('id, user_id, name, email, locale, flight_code, created_at')
     .eq('user_id', user.id)
     .single()
 

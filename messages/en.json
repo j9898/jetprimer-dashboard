@@ -146,6 +146,13 @@
     "customerLanguage": "Customer's Language",
     "emailLanguageSettings": "Email Language Settings",
     "emailLanguageDescription": "Select the language for emails sent to this customer.",
-    "localeUpdateFailed": "Failed to update language setting."
+    "localeUpdateFailed": "Failed to update language setting.",
+    "adminNotes": "Admin Notes",
+    "adminNotesDescription": "Record notes about the customer. This content is not visible to customers.",
+    "adminNotesPlaceholder": "Enter notes about the customer...",
+    "saveNotes": "Save",
+    "saving": "Saving...",
+    "notesSaved": "Saved",
+    "notesSaveFailed": "Failed to save notes."
   }
 }

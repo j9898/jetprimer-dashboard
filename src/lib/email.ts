@@ -14,8 +14,8 @@ function getResendClient(): Resend {
   return resendClient
 }
 
-// 발신자 이메일 (Resend에서 도메인 인증 후 변경)
-const FROM_EMAIL = process.env.FROM_EMAIL || 'JetPrimer <onboarding@resend.dev>'
+// 발신자 이메일 (Resend에서 도메인 인증 완료)
+const FROM_EMAIL = process.env.FROM_EMAIL || 'JetPrimer <support@jetprimer.com>'
 
 // BCC 이메일 (모든 고객 이메일 복사본 수신)
 const BCC_EMAIL = process.env.BCC_EMAIL || 'inbox@jetprimer.com'

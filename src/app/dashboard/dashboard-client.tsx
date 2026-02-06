@@ -335,7 +335,7 @@ export default function DashboardClient({ user, company, waypoints, locale, isPa
                   </div>
                   <div>
                     <p className="text-[10px] text-slate-400 tracking-wider">{t('gate')}</p>
-                    <p className="text-slate-700 font-mono font-bold text-sm">JP</p>
+                    <p className="text-slate-700 font-mono font-bold text-sm">{locale === 'ko' ? 'KR' : locale === 'ja' ? 'JP' : 'US'}</p>
                   </div>
                 </div>
               </div>

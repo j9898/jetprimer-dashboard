@@ -118,9 +118,17 @@ export default function LanguageSwitcher({ currentLocale: propLocale, variant = 
   const moreToggleBtn = (isCompact: boolean) => (
     <button
       onClick={() => setShowMore(!showMore)}
-      className={`${isCompact ? 'px-2 py-1 text-xs bg-slate-700 text-slate-300 hover:bg-slate-600' : 'px-3 py-2 text-sm bg-[#1a3a5c] text-blue-100 hover:bg-[#234b73] border border-blue-500/20'} rounded-lg transition-all`}
+      className={`${
+        showMore
+          ? isCompact
+            ? 'px-1.5 py-1 text-xs bg-rose-500/80 text-white hover:bg-rose-500'
+            : 'px-2.5 py-2 text-sm bg-rose-500/80 text-white hover:bg-rose-500'
+          : isCompact
+            ? 'px-2 py-1 text-xs bg-slate-700 text-slate-300 hover:bg-slate-600'
+            : 'px-3 py-2 text-sm bg-[#1a3a5c] text-blue-100 hover:bg-[#234b73] border border-blue-500/20'
+      } rounded-lg transition-all`}
     >
-      {showMore ? '▲' : `+${moreLanguages.length}`}
+      {showMore ? '✕' : `+${moreLanguages.length}`}
     </button>
   )
 

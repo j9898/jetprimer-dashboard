@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import type { User } from '@supabase/supabase-js'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
+import TodoList from '@/components/TodoList'
 
 // Icons
 const PlaneIcon = () => (
@@ -316,6 +317,9 @@ export default function DashboardClient({ user, company, waypoints, locale, isPa
               ))}
             </div>
           </div>
+
+          {/* Todo List */}
+          <TodoList />
 
           {/* Crew Message */}
           <div className="bg-gradient-to-r from-sky-100/80 to-blue-50/50 border border-sky-200/50 rounded-2xl p-6 backdrop-blur-sm">

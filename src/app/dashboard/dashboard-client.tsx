@@ -273,30 +273,92 @@ export default function DashboardClient({ user, company, waypoints, locale, isPa
               </div>
             </div>
 
-            {/* Quick Stats */}
-            <div className="space-y-4">
-              {/* Payment Status Card */}
-              <div className={`backdrop-blur-xl border shadow-lg rounded-2xl p-6 text-center ${
-                isPaid
-                  ? 'bg-emerald-50/70 border-emerald-200/50 shadow-emerald-200/30'
-                  : 'bg-amber-50/70 border-amber-200/50 shadow-amber-200/30'
-              }`}>
-                <div className={`text-4xl mb-2 ${isPaid ? 'text-emerald-500' : 'text-amber-500'}`}>
-                  {isPaid ? '✓' : '⏳'}
+            {/* Boarding Pass Ticket */}
+            <div className="relative">
+              <div className={`rounded-2xl overflow-hidden shadow-lg ${isPaid ? 'shadow-sky-200/40' : 'shadow-amber-200/40'}`}>
+                {/* Ticket Header */}
+                <div className={`px-5 py-4 ${isPaid ? 'bg-gradient-to-r from-sky-500 to-blue-600' : 'bg-gradient-to-r from-amber-500 to-orange-500'}`}>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <PlaneIcon />
+                      <span className="text-white/90 text-xs font-semibold tracking-widest">{t('boardingPass')}</span>
+                    </div>
+                    <span className="text-white font-mono text-sm font-bold">{company.flightNumber}</span>
+                  </div>
                 </div>
-                <p className={`font-medium ${isPaid ? 'text-emerald-600' : 'text-amber-600'}`}>
-                  {t(isPaid ? 'paymentCompleted' : 'paymentPending')}
-                </p>
-                <p className="text-slate-500 text-sm mt-1">
-                  {t(isPaid ? 'serviceActive' : 'awaitingPayment')}
-                </p>
-              </div>
 
-              {/* System Status Card */}
-              <div className="bg-white/70 backdrop-blur-xl border border-white/50 shadow-lg shadow-sky-200/30 rounded-2xl p-6 text-center">
-                <div className="text-4xl font-bold text-emerald-500 mb-2">✓</div>
-                <p className="text-emerald-600 font-medium">{t('allSystemsNormal')}</p>
-                <p className="text-slate-500 text-sm mt-1">{t('noActionRequired')}</p>
+                {/* Ticket Body */}
+                <div className="bg-white p-5 relative">
+                  {/* Perforated line effect */}
+                  <div className="absolute left-0 right-0 top-0 flex justify-between px-0">
+                    <div className="w-4 h-4 bg-gradient-to-br from-sky-100 via-blue-50 to-indigo-100 rounded-full -mt-2 -ml-2" />
+                    <div className="flex-1 border-t-2 border-dashed border-slate-200 mt-0" />
+                    <div className="w-4 h-4 bg-gradient-to-br from-sky-100 via-blue-50 to-indigo-100 rounded-full -mt-2 -mr-2" />
+                  </div>
+
+                  {/* Passenger & Service */}
+                  <div className="mt-2 mb-4">
+                    <p className="text-[10px] text-slate-400 tracking-wider">{t('passenger')}</p>
+                    <p className="text-slate-800 font-bold text-lg">{company.captain}</p>
+                  </div>
+
+                  <div className="mb-4">
+                    <p className="text-[10px] text-slate-400 tracking-wider">{t('service')}</p>
+                    <p className="text-slate-700 font-medium text-sm">{t('serviceValue')}</p>
+                  </div>
+
+                  {/* Ticket Grid Info */}
+                  <div className="grid grid-cols-3 gap-3 mb-4 pb-4 border-b border-dashed border-slate-200">
+                    <div>
+                      <p className="text-[10px] text-slate-400 tracking-wider">{t('class')}</p>
+                      <p className="text-slate-700 font-mono font-bold text-sm">{t('classValue')}</p>
+                    </div>
+                    <div>
+                      <p className="text-[10px] text-slate-400 tracking-wider">{t('seat')}</p>
+                      <p className="text-slate-700 font-mono font-bold text-sm">1A</p>
+                    </div>
+                    <div>
+                      <p className="text-[10px] text-slate-400 tracking-wider">{t('gate')}</p>
+                      <p className="text-slate-700 font-mono font-bold text-sm">JP</p>
+                    </div>
+                  </div>
+
+                  {/* Payment Status */}
+                  <div className="flex items-center gap-3">
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${
+                      isPaid ? 'bg-emerald-100' : 'bg-amber-100'
+                    }`}>
+                      <span className="text-lg">{isPaid ? '✓' : '⏳'}</span>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className={`font-semibold text-sm ${isPaid ? 'text-emerald-600' : 'text-amber-600'}`}>
+                        {t(isPaid ? 'ticketConfirmed' : 'ticketPendingPayment')}
+                      </p>
+                      <p className="text-slate-400 text-xs leading-tight mt-0.5">
+                        {t(isPaid ? 'ticketConfirmedDesc' : 'ticketPendingDesc')}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Ticket Footer - Barcode style */}
+                <div className={`px-5 py-3 ${isPaid ? 'bg-sky-50' : 'bg-amber-50'}`}>
+                  <div className="flex items-center justify-center gap-[2px]">
+                    {Array.from({ length: 32 }, (_, i) => (
+                      <div
+                        key={i}
+                        className={`${isPaid ? 'bg-sky-300/60' : 'bg-amber-300/60'}`}
+                        style={{
+                          width: `${((i * 7 + 3) % 3) + 1.5}px`,
+                          height: `${((i * 13 + 5) % 9) + 16}px`,
+                        }}
+                      />
+                    ))}
+                  </div>
+                  <p className="text-center text-[10px] text-slate-400 font-mono mt-1 tracking-widest">
+                    {company.flightNumber}
+                  </p>
+                </div>
               </div>
             </div>
           </div>

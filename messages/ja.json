@@ -102,7 +102,22 @@
     "paymentCompleted": "決済完了",
     "paymentPending": "決済待ち",
     "serviceActive": "サービス利用可能",
-    "awaitingPayment": "カード決済完了後、決済確認がステータスに反映されるまで最大24時間かかる場合があります。"
+    "awaitingPayment": "カード決済完了後、決済確認がステータスに反映されるまで最大24時間かかる場合があります。",
+    "boardingPass": "搭乗券",
+    "myTicket": "チケットを見る",
+    "passenger": "搭乗者",
+    "class": "クラス",
+    "classValue": "BUSINESS",
+    "seat": "座席",
+    "gate": "ゲート",
+    "boardingTime": "搭乗時間",
+    "ticketStatus": "チケット状態",
+    "ticketConfirmed": "搭乗確認済み",
+    "ticketPendingPayment": "決済待ち",
+    "ticketPendingDesc": "お支払い完了後、搭乗が確定されます",
+    "ticketConfirmedDesc": "搭乗が確定されました。良い旅を！",
+    "service": "サービス",
+    "serviceValue": "米国法人設立フルパッケージ"
   },
   "language": {
     "select": "言語を選択",

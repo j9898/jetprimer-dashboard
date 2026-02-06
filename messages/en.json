@@ -102,7 +102,22 @@
     "paymentCompleted": "Payment Confirmed",
     "paymentPending": "Payment Pending",
     "serviceActive": "Service Active",
-    "awaitingPayment": "It may take up to 24 hours for payment confirmation to appear after completing card payment."
+    "awaitingPayment": "It may take up to 24 hours for payment confirmation to appear after completing card payment.",
+    "boardingPass": "BOARDING PASS",
+    "myTicket": "View My Ticket",
+    "passenger": "PASSENGER",
+    "class": "CLASS",
+    "classValue": "BUSINESS",
+    "seat": "SEAT",
+    "gate": "GATE",
+    "boardingTime": "BOARDING",
+    "ticketStatus": "TICKET STATUS",
+    "ticketConfirmed": "CONFIRMED",
+    "ticketPendingPayment": "AWAITING PAYMENT",
+    "ticketPendingDesc": "Your boarding will be confirmed after payment",
+    "ticketConfirmedDesc": "Your boarding is confirmed. Enjoy your journey!",
+    "service": "SERVICE",
+    "serviceValue": "US LLC Full Package"
   },
   "language": {
     "select": "Select Language",

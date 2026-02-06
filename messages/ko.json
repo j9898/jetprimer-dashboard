@@ -102,7 +102,22 @@
     "paymentCompleted": "결제 완료",
     "paymentPending": "결제 대기 중",
     "serviceActive": "서비스 이용 가능",
-    "awaitingPayment": "카드 결제 완료 후 상태창에 결제 확인이 뜨기까지 최대 24시간이 걸릴 수 있습니다."
+    "awaitingPayment": "카드 결제 완료 후 상태창에 결제 확인이 뜨기까지 최대 24시간이 걸릴 수 있습니다.",
+    "boardingPass": "보딩 패스",
+    "myTicket": "내가 구매한 티켓 보기",
+    "passenger": "탑승자",
+    "class": "클래스",
+    "classValue": "BUSINESS",
+    "seat": "좌석",
+    "gate": "게이트",
+    "boardingTime": "탑승 시간",
+    "ticketStatus": "티켓 상태",
+    "ticketConfirmed": "탑승 확인됨",
+    "ticketPendingPayment": "결제 대기 중",
+    "ticketPendingDesc": "결제 완료 후 탑승이 확정됩니다",
+    "ticketConfirmedDesc": "탑승이 확정되었습니다. 즐거운 여정 되세요!",
+    "service": "서비스",
+    "serviceValue": "미국 법인설립 풀패키지"
   },
   "language": {
     "select": "언어 선택",

@@ -98,7 +98,11 @@
     "inProgress": "In Progress",
     "waiting": "Waiting",
     "applying": "Applying",
-    "preparing": "Preparing"
+    "preparing": "Preparing",
+    "paymentCompleted": "Payment Confirmed",
+    "paymentPending": "Payment Pending",
+    "serviceActive": "Service Active",
+    "awaitingPayment": "It may take up to 24 hours for payment confirmation to appear after completing card payment."
   },
   "language": {
     "select": "Select Language",

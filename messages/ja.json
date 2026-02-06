@@ -98,7 +98,11 @@
     "inProgress": "進行中",
     "waiting": "待機中",
     "applying": "申請中",
-    "preparing": "準備中"
+    "preparing": "準備中",
+    "paymentCompleted": "決済完了",
+    "paymentPending": "決済待ち",
+    "serviceActive": "サービス利用可能",
+    "awaitingPayment": "カード決済完了後、決済確認がステータスに反映されるまで最大24時間かかる場合があります。"
   },
   "language": {
     "select": "言語を選択",

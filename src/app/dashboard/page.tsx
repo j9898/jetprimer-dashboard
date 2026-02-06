@@ -16,7 +16,7 @@ export default async function DashboardPage() {
   // 고객 데이터 조회 (admin_notes 제외 - 고객에게 보이면 안 됨)
   const { data: customer } = await supabase
     .from('customers')
-    .select('id, user_id, name, email, locale, flight_code, created_at')
+    .select('id, user_id, name, email, locale, flight_code, created_at, is_paid')
     .eq('user_id', user.id)
     .single()
 
@@ -91,6 +91,7 @@ export default async function DashboardPage() {
       company={company}
       waypoints={waypoints}
       locale={locale}
+      isPaid={customer?.is_paid || false}
     />
   )
 }

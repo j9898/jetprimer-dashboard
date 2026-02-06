@@ -63,6 +63,7 @@ interface Props {
   company: Company
   waypoints: Waypoint[]
   locale: string
+  isPaid: boolean
 }
 
 function StatusBadge({ status, t }: { status: string; t: (key: string) => string }) {
@@ -84,7 +85,7 @@ function StatusBadge({ status, t }: { status: string; t: (key: string) => string
   )
 }
 
-export default function DashboardClient({ user, company, waypoints, locale }: Props) {
+export default function DashboardClient({ user, company, waypoints, locale, isPaid }: Props) {
   const router = useRouter()
   const [isLoggingOut, setIsLoggingOut] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -249,6 +250,24 @@ export default function DashboardClient({ user, company, waypoints, locale }: Pr
 
             {/* Quick Stats */}
             <div className="space-y-4">
+              {/* Payment Status Card */}
+              <div className={`backdrop-blur-xl border shadow-lg rounded-2xl p-6 text-center ${
+                isPaid
+                  ? 'bg-emerald-50/70 border-emerald-200/50 shadow-emerald-200/30'
+                  : 'bg-amber-50/70 border-amber-200/50 shadow-amber-200/30'
+              }`}>
+                <div className={`text-4xl mb-2 ${isPaid ? 'text-emerald-500' : 'text-amber-500'}`}>
+                  {isPaid ? '✓' : '⏳'}
+                </div>
+                <p className={`font-medium ${isPaid ? 'text-emerald-600' : 'text-amber-600'}`}>
+                  {t(isPaid ? 'paymentCompleted' : 'paymentPending')}
+                </p>
+                <p className="text-slate-500 text-sm mt-1">
+                  {t(isPaid ? 'serviceActive' : 'awaitingPayment')}
+                </p>
+              </div>
+
+              {/* System Status Card */}
               <div className="bg-white/70 backdrop-blur-xl border border-white/50 shadow-lg shadow-sky-200/30 rounded-2xl p-6 text-center">
                 <div className="text-4xl font-bold text-emerald-500 mb-2">✓</div>
                 <p className="text-emerald-600 font-medium">{t('allSystemsNormal')}</p>

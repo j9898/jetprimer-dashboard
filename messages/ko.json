@@ -98,7 +98,11 @@
     "inProgress": "진행 중",
     "waiting": "대기",
     "applying": "신청 중",
-    "preparing": "준비 중"
+    "preparing": "준비 중",
+    "paymentCompleted": "결제 완료",
+    "paymentPending": "결제 대기 중",
+    "serviceActive": "서비스 이용 가능",
+    "awaitingPayment": "카드 결제 완료 후 상태창에 결제 확인이 뜨기까지 최대 24시간이 걸릴 수 있습니다."
   },
   "language": {
     "select": "언어 선택",

@@ -38,6 +38,13 @@ export default function Home() {
         <p className="text-slate-400 text-xs md:text-sm mt-8 md:mt-12">
           {t('copyright')}
         </p>
+
+        {/* Legal links */}
+        <div className="flex gap-3 justify-center mt-3">
+          <Link href="/terms" className="text-slate-400 hover:text-sky-500 text-xs transition-colors">Terms</Link>
+          <span className="text-slate-300">·</span>
+          <Link href="/privacy" className="text-slate-400 hover:text-sky-500 text-xs transition-colors">Privacy</Link>
+        </div>
       </div>
     </div>
   )

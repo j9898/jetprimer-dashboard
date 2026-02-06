@@ -294,5 +294,67 @@
     "allDone": "Semua tugas selesai!",
     "emptyList": "Belum ada tugas. Tambahkan tugas baru untuk memulai!",
     "emptyFiltered": "Tidak ada tugas ditemukan."
+  },
+  "documents": {
+    "title": "Dokumen",
+    "filesCount": "file",
+    "documentType": "Jenis Dokumen",
+    "types": {
+      "passport": "Paspor",
+      "id_card": "Kartu Identitas",
+      "address_proof": "Bukti Alamat",
+      "business": "Dokumen Bisnis",
+      "other": "Lainnya"
+    },
+    "dropOrClick": "Seret file ke sini atau klik untuk mengunggah",
+    "fileRequirements": "PDF, JPEG, PNG, WebP, HEIC • Maks. 10MB",
+    "uploading": "Mengunggah...",
+    "uploadFailed": "Gagal mengunggah. Silakan coba lagi.",
+    "fileTooLarge": "Ukuran file melebihi batas 10MB.",
+    "invalidFileType": "Jenis file tidak valid. Diizinkan: PDF, JPEG, PNG, WebP, HEIC",
+    "noDocuments": "Belum ada dokumen yang diunggah.",
+    "statusPending": "Menunggu",
+    "statusVerified": "Terverifikasi",
+    "statusRejected": "Ditolak",
+    "download": "Unduh",
+    "delete": "Hapus"
+  },
+  "legal": {
+    "terms": {
+      "title": "Ketentuan Layanan",
+      "lastUpdated": "Terakhir diperbarui: Februari 2026",
+      "s1Title": "1. Persetujuan terhadap Ketentuan",
+      "s1Content": "Dengan mengakses atau menggunakan layanan yang disediakan oleh JetPrimer LLC (\"JetPrimer\", \"JetPrimer Airways\", \"kami\"), Anda setuju untuk terikat oleh Ketentuan Layanan ini. Jika Anda tidak menyetujui ketentuan ini, mohon untuk tidak menggunakan layanan kami. Ketentuan ini berlaku untuk semua pengguna yang mengakses atau menggunakan layanan pembentukan LLC AS dan manajemen bisnis kami.",
+      "s2Title": "2. Layanan",
+      "s2Content": "JetPrimer menyediakan layanan pembentukan LLC AS, bantuan pengajuan EIN, dukungan pembukaan rekening bank bisnis, dan layanan manajemen bisnis terkait untuk pengusaha global. Layanan kami bersifat informatif dan administratif serta tidak merupakan nasihat hukum, pajak, atau keuangan. Kami menyarankan untuk berkonsultasi dengan profesional yang berkualifikasi untuk masalah hukum atau pajak spesifik yang terkait dengan bisnis Anda.",
+      "s3Title": "3. Tanggung Jawab Pengguna",
+      "s3Content": "Anda bertanggung jawab untuk memberikan informasi yang akurat, lengkap, dan terkini yang diperlukan untuk pembentukan LLC dan layanan terkait. Anda setuju untuk menjaga kerahasiaan kredensial akun Anda dan segera memberitahu kami tentang akses yang tidak sah. Anda harus mematuhi semua hukum dan peraturan yang berlaku di yurisdiksi Anda dan di Amerika Serikat.",
+      "s4Title": "4. Biaya dan Pembayaran",
+      "s4Content": "Biaya layanan ditampilkan pada saat pembelian dan ditagih dalam dolar AS. Semua pembayaran diproses secara aman melalui pemroses pembayaran resmi kami. Kelayakan pengembalian dana bergantung pada tahap penyediaan layanan. Setelah biaya pengajuan pemerintah telah diajukan atas nama Anda, bagian tersebut tidak dapat dikembalikan. Silakan merujuk pada kebijakan pengembalian dana kami atau hubungi tim dukungan kami untuk pertanyaan spesifik.",
+      "s5Title": "5. Batasan Tanggung Jawab",
+      "s5Content": "JetPrimer tidak bertanggung jawab atas kerusakan tidak langsung, insidental, khusus, konsekuensial, atau punitif yang timbul dari atau terkait dengan penggunaan layanan kami. Total tanggung jawab kami tidak akan melebihi jumlah yang Anda bayarkan untuk layanan spesifik yang menimbulkan klaim. Kami tidak bertanggung jawab atas keterlambatan yang disebabkan oleh lembaga pemerintah, penyedia layanan pihak ketiga, atau keadaan di luar kendali wajar kami.",
+      "s6Title": "6. Kontak",
+      "s6Content": "Jika Anda memiliki pertanyaan tentang Ketentuan Layanan ini, silakan hubungi kami di support@jetprimer.com. Kami berkomitmen untuk menyelesaikan setiap masalah dengan cepat dan transparan.",
+      "privacyLink": "Kebijakan Privasi",
+      "homeLink": "Beranda"
+    },
+    "privacy": {
+      "title": "Kebijakan Privasi",
+      "lastUpdated": "Terakhir diperbarui: Februari 2026",
+      "s1Title": "1. Informasi yang Kami Kumpulkan",
+      "s1Content": "Kami mengumpulkan informasi pribadi yang Anda berikan saat menggunakan layanan kami, termasuk nama, alamat email, nomor telepon, kewarganegaraan, detail bisnis, dan dokumen identifikasi yang diperlukan untuk pembentukan LLC. Kami juga secara otomatis mengumpulkan data teknis seperti alamat IP, jenis browser, informasi perangkat, dan pola penggunaan melalui cookie dan teknologi serupa.",
+      "s2Title": "2. Cara Kami Menggunakan Informasi",
+      "s2Content": "Kami menggunakan informasi yang dikumpulkan untuk memproses permintaan pembentukan LLC dan layanan terkait Anda, berkomunikasi dengan Anda tentang akun dan layanan, memverifikasi identitas Anda sebagaimana diwajibkan oleh hukum, meningkatkan layanan dan pengalaman pengguna kami, mengirim pembaruan dan notifikasi layanan yang relevan, serta mematuhi kewajiban hukum dan peraturan.",
+      "s3Title": "3. Berbagi Data",
+      "s3Content": "Kami tidak menjual informasi pribadi Anda. Kami dapat membagikan informasi Anda kepada lembaga pemerintah AS sebagaimana diperlukan untuk pembentukan LLC dan pengajuan EIN, penyedia layanan resmi yang membantu dalam menyediakan layanan kami, lembaga keuangan untuk pengaturan rekening bank bisnis, dan sebagaimana diwajibkan oleh hukum atau untuk melindungi hak hukum kami. Semua penyedia layanan pihak ketiga terikat secara kontraktual untuk melindungi data Anda.",
+      "s4Title": "4. Keamanan Data",
+      "s4Content": "Kami menerapkan langkah-langkah keamanan standar industri termasuk enkripsi, server yang aman, dan kontrol akses untuk melindungi informasi pribadi Anda. Meskipun kami berusaha menggunakan cara yang dapat diterima secara komersial untuk melindungi data Anda, tidak ada metode transmisi elektronik atau penyimpanan yang 100% aman. Kami terus meninjau dan memperbarui praktik keamanan kami.",
+      "s5Title": "5. Hak Anda",
+      "s5Content": "Anda memiliki hak untuk mengakses, memperbaiki, atau menghapus informasi pribadi Anda. Anda dapat meminta salinan data yang kami simpan tentang Anda, berhenti berlangganan komunikasi promosi kapan saja, dan meminta penghapusan akun sesuai dengan persyaratan penyimpanan hukum. Untuk menggunakan hak-hak ini, silakan hubungi kami di support@jetprimer.com.",
+      "s6Title": "6. Kontak",
+      "s6Content": "Jika Anda memiliki pertanyaan atau kekhawatiran tentang Kebijakan Privasi ini atau praktik data kami, silakan hubungi kami di support@jetprimer.com. Kami akan merespons pertanyaan Anda dalam jangka waktu yang wajar.",
+      "termsLink": "Ketentuan Layanan",
+      "homeLink": "Beranda"
+    }
   }
 }

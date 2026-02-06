@@ -294,5 +294,67 @@
     "allDone": "Alle Aufgaben erledigt!",
     "emptyList": "Noch keine Aufgaben. Fügen Sie eine neue Aufgabe hinzu, um zu beginnen!",
     "emptyFiltered": "Keine Aufgaben gefunden."
+  },
+  "documents": {
+    "title": "Dokumente",
+    "filesCount": "Dateien",
+    "documentType": "Dokumenttyp",
+    "types": {
+      "passport": "Reisepass",
+      "id_card": "Personalausweis",
+      "address_proof": "Adressnachweis",
+      "business": "Geschäftsdokument",
+      "other": "Sonstiges"
+    },
+    "dropOrClick": "Datei hierher ziehen oder klicken zum Hochladen",
+    "fileRequirements": "PDF, JPEG, PNG, WebP, HEIC • Max. 10 MB",
+    "uploading": "Wird hochgeladen...",
+    "uploadFailed": "Upload fehlgeschlagen. Bitte erneut versuchen.",
+    "fileTooLarge": "Die Dateigröße überschreitet das Limit von 10 MB.",
+    "invalidFileType": "Ungültiger Dateityp. Erlaubt: PDF, JPEG, PNG, WebP, HEIC",
+    "noDocuments": "Noch keine Dokumente hochgeladen.",
+    "statusPending": "Ausstehend",
+    "statusVerified": "Verifiziert",
+    "statusRejected": "Abgelehnt",
+    "download": "Herunterladen",
+    "delete": "Löschen"
+  },
+  "legal": {
+    "terms": {
+      "title": "Nutzungsbedingungen",
+      "lastUpdated": "Zuletzt aktualisiert: Februar 2026",
+      "s1Title": "1. Zustimmung zu den Bedingungen",
+      "s1Content": "Durch den Zugriff auf oder die Nutzung der von JetPrimer LLC (\"JetPrimer\", \"JetPrimer Airways\", \"wir\") bereitgestellten Dienste erklären Sie sich mit diesen Nutzungsbedingungen einverstanden. Wenn Sie diesen Bedingungen nicht zustimmen, nutzen Sie unsere Dienste bitte nicht. Diese Bedingungen gelten für alle Nutzer, die auf unsere US-LLC-Gründungs- und Geschäftsverwaltungsdienste zugreifen oder diese nutzen.",
+      "s2Title": "2. Dienstleistungen",
+      "s2Content": "JetPrimer bietet US-LLC-Gründung, Unterstützung bei der EIN-Beantragung, Hilfe bei der Eröffnung von Geschäftsbankkonten und damit verbundene Geschäftsverwaltungsdienste für globale Unternehmer. Unsere Dienstleistungen sind informativer und administrativer Natur und stellen keine Rechts-, Steuer- oder Finanzberatung dar. Wir empfehlen, für spezifische rechtliche oder steuerliche Angelegenheiten Ihres Unternehmens qualifizierte Fachleute zu konsultieren.",
+      "s3Title": "3. Pflichten des Nutzers",
+      "s3Content": "Sie sind dafür verantwortlich, genaue, vollständige und aktuelle Informationen bereitzustellen, die für die LLC-Gründung und damit verbundene Dienste erforderlich sind. Sie verpflichten sich, die Vertraulichkeit Ihrer Kontodaten zu wahren und uns unverzüglich über unbefugten Zugriff zu informieren. Sie müssen alle geltenden Gesetze und Vorschriften in Ihrer Gerichtsbarkeit und in den Vereinigten Staaten einhalten.",
+      "s4Title": "4. Gebühren und Zahlung",
+      "s4Content": "Die Servicegebühren werden zum Zeitpunkt des Kaufs angezeigt und in US-Dollar berechnet. Alle Zahlungen werden sicher über unsere autorisierten Zahlungsdienstleister verarbeitet. Die Erstattungsberechtigung hängt vom Stadium der Dienstleistungserbringung ab. Sobald staatliche Anmeldegebühren in Ihrem Namen eingereicht wurden, sind diese Teile nicht erstattungsfähig. Bitte beachten Sie unsere Erstattungsrichtlinie oder kontaktieren Sie unser Support-Team für spezifische Anfragen.",
+      "s5Title": "5. Haftungsbeschränkung",
+      "s5Content": "JetPrimer haftet nicht für indirekte, zufällige, besondere, Folge- oder Strafschäden, die aus der Nutzung unserer Dienste entstehen oder damit zusammenhängen. Unsere Gesamthaftung übersteigt nicht den Betrag, den Sie für den spezifischen Dienst gezahlt haben, der den Anspruch begründet. Wir sind nicht verantwortlich für Verzögerungen durch Regierungsbehörden, Drittanbieter oder Umstände, die außerhalb unserer angemessenen Kontrolle liegen.",
+      "s6Title": "6. Kontakt",
+      "s6Content": "Wenn Sie Fragen zu diesen Nutzungsbedingungen haben, kontaktieren Sie uns bitte unter support@jetprimer.com. Wir sind bestrebt, alle Anliegen zeitnah und transparent zu klären.",
+      "privacyLink": "Datenschutzrichtlinie",
+      "homeLink": "Startseite"
+    },
+    "privacy": {
+      "title": "Datenschutzrichtlinie",
+      "lastUpdated": "Zuletzt aktualisiert: Februar 2026",
+      "s1Title": "1. Daten, die wir erheben",
+      "s1Content": "Wir erheben personenbezogene Daten, die Sie bei der Nutzung unserer Dienste angeben, einschließlich Ihres Namens, Ihrer E-Mail-Adresse, Telefonnummer, Staatsangehörigkeit, Geschäftsdaten und Identifikationsdokumente, die für die LLC-Gründung erforderlich sind. Wir erheben außerdem automatisch technische Daten wie IP-Adressen, Browsertyp, Geräteinformationen und Nutzungsmuster durch Cookies und ähnliche Technologien.",
+      "s2Title": "2. Verwendung der Informationen",
+      "s2Content": "Wir verwenden die erhobenen Informationen zur Bearbeitung Ihrer LLC-Gründungs- und damit verbundenen Serviceanfragen, zur Kommunikation mit Ihnen bezüglich Ihres Kontos und unserer Dienste, zur gesetzlich vorgeschriebenen Identitätsprüfung, zur Verbesserung unserer Dienste und Nutzererfahrung, zum Versand relevanter Service-Updates und Benachrichtigungen sowie zur Einhaltung gesetzlicher und regulatorischer Verpflichtungen.",
+      "s3Title": "3. Datenweitergabe",
+      "s3Content": "Wir verkaufen Ihre personenbezogenen Daten nicht. Wir können Ihre Informationen an US-Regierungsbehörden weitergeben, soweit dies für die LLC-Gründung und EIN-Anträge erforderlich ist, an autorisierte Dienstleister, die uns bei der Erbringung unserer Dienste unterstützen, an Finanzinstitute zur Einrichtung von Geschäftsbankkonten sowie bei gesetzlicher Verpflichtung oder zum Schutz unserer Rechte. Alle Drittanbieter sind vertraglich zum Schutz Ihrer Daten verpflichtet.",
+      "s4Title": "4. Datensicherheit",
+      "s4Content": "Wir setzen branchenübliche Sicherheitsmaßnahmen ein, darunter Verschlüsselung, sichere Server und Zugangskontrollen, um Ihre personenbezogenen Daten zu schützen. Obwohl wir uns bemühen, kommerziell akzeptable Mittel zum Schutz Ihrer Daten einzusetzen, ist keine Methode der elektronischen Übertragung oder Speicherung zu 100 % sicher. Wir überprüfen und aktualisieren unsere Sicherheitspraktiken kontinuierlich.",
+      "s5Title": "5. Ihre Rechte",
+      "s5Content": "Sie haben das Recht, auf Ihre personenbezogenen Daten zuzugreifen, diese zu berichtigen oder zu löschen. Sie können eine Kopie der von uns gespeicherten Daten anfordern, sich jederzeit von Werbekommunikation abmelden und vorbehaltlich gesetzlicher Aufbewahrungspflichten die Löschung Ihres Kontos beantragen. Um diese Rechte auszuüben, kontaktieren Sie uns bitte unter support@jetprimer.com.",
+      "s6Title": "6. Kontakt",
+      "s6Content": "Wenn Sie Fragen oder Bedenken bezüglich dieser Datenschutzrichtlinie oder unserer Datenpraktiken haben, kontaktieren Sie uns bitte unter support@jetprimer.com. Wir werden Ihre Anfrage innerhalb einer angemessenen Frist beantworten.",
+      "termsLink": "Nutzungsbedingungen",
+      "homeLink": "Startseite"
+    }
   }
 }

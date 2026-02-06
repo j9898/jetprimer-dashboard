@@ -294,5 +294,67 @@
     "allDone": "Toutes les tâches sont terminées !",
     "emptyList": "Aucune tâche pour le moment. Ajoutez une nouvelle tâche pour commencer !",
     "emptyFiltered": "Aucune tâche trouvée."
+  },
+  "documents": {
+    "title": "Documents",
+    "filesCount": "fichiers",
+    "documentType": "Type de document",
+    "types": {
+      "passport": "Passeport",
+      "id_card": "Carte d'identité",
+      "address_proof": "Justificatif de domicile",
+      "business": "Document commercial",
+      "other": "Autre"
+    },
+    "dropOrClick": "Déposez le fichier ici ou cliquez pour télécharger",
+    "fileRequirements": "PDF, JPEG, PNG, WebP, HEIC • 10 Mo max",
+    "uploading": "Téléchargement en cours...",
+    "uploadFailed": "Échec du téléchargement. Veuillez réessayer.",
+    "fileTooLarge": "La taille du fichier dépasse la limite de 10 Mo.",
+    "invalidFileType": "Type de fichier non valide. Autorisés : PDF, JPEG, PNG, WebP, HEIC",
+    "noDocuments": "Aucun document téléchargé pour le moment.",
+    "statusPending": "En attente",
+    "statusVerified": "Vérifié",
+    "statusRejected": "Rejeté",
+    "download": "Télécharger",
+    "delete": "Supprimer"
+  },
+  "legal": {
+    "terms": {
+      "title": "Conditions d'Utilisation",
+      "lastUpdated": "Dernière mise à jour : février 2026",
+      "s1Title": "1. Acceptation des Conditions",
+      "s1Content": "En accédant aux services fournis par JetPrimer LLC (« JetPrimer », « JetPrimer Airways », « nous ») ou en les utilisant, vous acceptez d'être lié par les présentes Conditions d'Utilisation. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser nos services. Ces conditions s'appliquent à tous les utilisateurs qui accèdent à nos services de création de LLC américaine et de gestion d'entreprise ou qui les utilisent.",
+      "s2Title": "2. Services",
+      "s2Content": "JetPrimer fournit des services de création de LLC américaine, d'assistance à la demande d'EIN, d'aide à l'ouverture de comptes bancaires professionnels et des services connexes de gestion d'entreprise pour les entrepreneurs internationaux. Nos services sont de nature informative et administrative et ne constituent pas des conseils juridiques, fiscaux ou financiers. Nous recommandons de consulter des professionnels qualifiés pour les questions juridiques ou fiscales spécifiques liées à votre entreprise.",
+      "s3Title": "3. Responsabilités de l'Utilisateur",
+      "s3Content": "Vous êtes responsable de fournir des informations exactes, complètes et à jour requises pour la création de la LLC et les services associés. Vous acceptez de maintenir la confidentialité de vos identifiants de compte et de nous informer immédiatement de tout accès non autorisé. Vous devez respecter toutes les lois et réglementations applicables dans votre juridiction et aux États-Unis.",
+      "s4Title": "4. Tarifs et Paiement",
+      "s4Content": "Les frais de service sont affichés au moment de l'achat et facturés en dollars américains. Tous les paiements sont traités de manière sécurisée par nos prestataires de paiement autorisés. L'éligibilité au remboursement dépend de l'étape de prestation du service. Une fois les frais de dépôt gouvernementaux soumis en votre nom, ces portions ne sont pas remboursables. Veuillez consulter notre politique de remboursement ou contacter notre équipe de support pour des demandes spécifiques.",
+      "s5Title": "5. Limitation de Responsabilité",
+      "s5Content": "JetPrimer ne sera pas responsable de tout dommage indirect, accessoire, spécial, consécutif ou punitif découlant de ou lié à votre utilisation de nos services. Notre responsabilité totale ne dépassera pas le montant que vous avez payé pour le service spécifique ayant donné lieu à la réclamation. Nous ne sommes pas responsables des retards causés par les agences gouvernementales, les prestataires de services tiers ou des circonstances échappant à notre contrôle raisonnable.",
+      "s6Title": "6. Contact",
+      "s6Content": "Si vous avez des questions concernant les présentes Conditions d'Utilisation, veuillez nous contacter à support@jetprimer.com. Nous nous engageons à résoudre toute préoccupation de manière rapide et transparente.",
+      "privacyLink": "Politique de Confidentialité",
+      "homeLink": "Accueil"
+    },
+    "privacy": {
+      "title": "Politique de Confidentialité",
+      "lastUpdated": "Dernière mise à jour : février 2026",
+      "s1Title": "1. Informations que Nous Collectons",
+      "s1Content": "Nous collectons les informations personnelles que vous fournissez lors de l'utilisation de nos services, notamment votre nom, adresse e-mail, numéro de téléphone, nationalité, informations commerciales et documents d'identité requis pour la création de la LLC. Nous collectons également automatiquement des données techniques telles que les adresses IP, le type de navigateur, les informations sur l'appareil et les habitudes d'utilisation via des cookies et technologies similaires.",
+      "s2Title": "2. Comment Nous Utilisons les Informations",
+      "s2Content": "Nous utilisons les informations collectées pour traiter vos demandes de création de LLC et services associés, communiquer avec vous au sujet de votre compte et de vos services, vérifier votre identité conformément à la loi, améliorer nos services et l'expérience utilisateur, envoyer des mises à jour et notifications pertinentes, et respecter les obligations légales et réglementaires.",
+      "s3Title": "3. Partage des Données",
+      "s3Content": "Nous ne vendons pas vos informations personnelles. Nous pouvons partager vos informations avec les agences gouvernementales américaines selon les exigences de création de LLC et de demande d'EIN, les prestataires de services autorisés qui nous aident à fournir nos services, les institutions financières pour l'ouverture de comptes bancaires professionnels, et selon les exigences légales ou pour protéger nos droits juridiques. Tous les prestataires de services tiers sont contractuellement tenus de protéger vos données.",
+      "s4Title": "4. Sécurité des Données",
+      "s4Content": "Nous mettons en œuvre des mesures de sécurité conformes aux normes de l'industrie, incluant le chiffrement, des serveurs sécurisés et des contrôles d'accès pour protéger vos informations personnelles. Bien que nous nous efforcions d'utiliser des moyens commercialement acceptables pour protéger vos données, aucune méthode de transmission électronique ou de stockage n'est sécurisée à 100 %. Nous révisons et mettons à jour continuellement nos pratiques de sécurité.",
+      "s5Title": "5. Vos Droits",
+      "s5Content": "Vous avez le droit d'accéder à vos informations personnelles, de les corriger ou de les supprimer. Vous pouvez demander une copie des données que nous détenons vous concernant, vous désinscrire des communications promotionnelles à tout moment et demander la suppression de votre compte sous réserve des exigences légales de conservation. Pour exercer ces droits, veuillez nous contacter à support@jetprimer.com.",
+      "s6Title": "6. Contact",
+      "s6Content": "Si vous avez des questions ou des préoccupations concernant la présente Politique de Confidentialité ou nos pratiques en matière de données, veuillez nous contacter à support@jetprimer.com. Nous répondrons à votre demande dans un délai raisonnable.",
+      "termsLink": "Conditions d'Utilisation",
+      "homeLink": "Accueil"
+    }
   }
 }

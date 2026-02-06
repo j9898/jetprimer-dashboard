@@ -294,5 +294,67 @@
     "allDone": "All tasks completed!",
     "emptyList": "No tasks yet. Add a new task to get started!",
     "emptyFiltered": "No tasks found."
+  },
+  "documents": {
+    "title": "Documents",
+    "filesCount": "files",
+    "documentType": "Document Type",
+    "types": {
+      "passport": "Passport",
+      "id_card": "ID Card",
+      "address_proof": "Address Proof",
+      "business": "Business Document",
+      "other": "Other"
+    },
+    "dropOrClick": "Drop file here or click to upload",
+    "fileRequirements": "PDF, JPEG, PNG, WebP, HEIC • Max 10MB",
+    "uploading": "Uploading...",
+    "uploadFailed": "Upload failed. Please try again.",
+    "fileTooLarge": "File size exceeds 10MB limit.",
+    "invalidFileType": "Invalid file type. Allowed: PDF, JPEG, PNG, WebP, HEIC",
+    "noDocuments": "No documents uploaded yet.",
+    "statusPending": "Pending",
+    "statusVerified": "Verified",
+    "statusRejected": "Rejected",
+    "download": "Download",
+    "delete": "Delete"
+  },
+  "legal": {
+    "terms": {
+      "title": "Terms of Service",
+      "lastUpdated": "Last updated: February 2026",
+      "s1Title": "1. Agreement to Terms",
+      "s1Content": "By accessing or using the services provided by JetPrimer LLC (\"JetPrimer,\" \"JetPrimer Airways,\" \"we,\" \"us,\" or \"our\"), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services. These terms apply to all users who access or use our US LLC formation and business management services.",
+      "s2Title": "2. Services",
+      "s2Content": "JetPrimer provides US LLC formation, EIN application assistance, business bank account opening support, and related business management services for global entrepreneurs. Our services are informational and administrative in nature and do not constitute legal, tax, or financial advice. We recommend consulting qualified professionals for specific legal or tax matters related to your business.",
+      "s3Title": "3. User Responsibilities",
+      "s3Content": "You are responsible for providing accurate, complete, and up-to-date information required for LLC formation and related services. You agree to maintain the confidentiality of your account credentials and to notify us immediately of any unauthorized access. You must comply with all applicable laws and regulations in your jurisdiction and in the United States.",
+      "s4Title": "4. Fees & Payment",
+      "s4Content": "Service fees are displayed at the time of purchase and are charged in US dollars. All payments are processed securely through our authorized payment processors. Refund eligibility depends on the stage of service delivery. Once government filing fees have been submitted on your behalf, those portions are non-refundable. Please refer to our refund policy or contact our support team for specific inquiries.",
+      "s5Title": "5. Limitation of Liability",
+      "s5Content": "JetPrimer shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from or related to your use of our services. Our total liability shall not exceed the amount paid by you for the specific service giving rise to the claim. We are not responsible for delays caused by government agencies, third-party service providers, or circumstances beyond our reasonable control.",
+      "s6Title": "6. Contact",
+      "s6Content": "If you have questions about these Terms of Service, please contact us at support@jetprimer.com. We are committed to resolving any concerns promptly and transparently.",
+      "privacyLink": "Privacy Policy",
+      "homeLink": "Home"
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "lastUpdated": "Last updated: February 2026",
+      "s1Title": "1. Information We Collect",
+      "s1Content": "We collect personal information you provide when using our services, including your name, email address, phone number, nationality, business details, and identification documents required for LLC formation. We also automatically collect technical data such as IP addresses, browser type, device information, and usage patterns through cookies and similar technologies.",
+      "s2Title": "2. How We Use Information",
+      "s2Content": "We use the information we collect to process your LLC formation and related service requests, communicate with you about your account and services, verify your identity as required by law, improve our services and user experience, send relevant service updates and notifications, and comply with legal and regulatory obligations.",
+      "s3Title": "3. Data Sharing",
+      "s3Content": "We do not sell your personal information. We may share your information with US government agencies as required for LLC formation and EIN applications, authorized service providers who assist in delivering our services, financial institutions for business bank account setup, and as required by law or to protect our legal rights. All third-party service providers are contractually obligated to protect your data.",
+      "s4Title": "4. Data Security",
+      "s4Content": "We implement industry-standard security measures including encryption, secure servers, and access controls to protect your personal information. While we strive to use commercially acceptable means to protect your data, no method of electronic transmission or storage is 100% secure. We continuously review and update our security practices.",
+      "s5Title": "5. Your Rights",
+      "s5Content": "You have the right to access, correct, or delete your personal information. You may request a copy of the data we hold about you, opt out of promotional communications at any time, and request account deletion subject to legal retention requirements. To exercise these rights, please contact us at support@jetprimer.com.",
+      "s6Title": "6. Contact",
+      "s6Content": "If you have questions or concerns about this Privacy Policy or our data practices, please contact us at support@jetprimer.com. We will respond to your inquiry within a reasonable timeframe.",
+      "termsLink": "Terms of Service",
+      "homeLink": "Home"
+    }
   }
 }

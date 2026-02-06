@@ -294,5 +294,67 @@
     "allDone": "Tất cả công việc đã hoàn tất!",
     "emptyList": "Chưa có công việc nào. Thêm công việc mới để bắt đầu!",
     "emptyFiltered": "Không tìm thấy công việc."
+  },
+  "documents": {
+    "title": "Tài liệu",
+    "filesCount": "tệp",
+    "documentType": "Loại tài liệu",
+    "types": {
+      "passport": "Hộ chiếu",
+      "id_card": "Chứng minh nhân dân",
+      "address_proof": "Giấy xác nhận địa chỉ",
+      "business": "Tài liệu kinh doanh",
+      "other": "Khác"
+    },
+    "dropOrClick": "Kéo thả tệp vào đây hoặc nhấp để tải lên",
+    "fileRequirements": "PDF, JPEG, PNG, WebP, HEIC • Tối đa 10MB",
+    "uploading": "Đang tải lên...",
+    "uploadFailed": "Tải lên thất bại. Vui lòng thử lại.",
+    "fileTooLarge": "Kích thước tệp vượt quá giới hạn 10MB.",
+    "invalidFileType": "Định dạng tệp không hợp lệ. Cho phép: PDF, JPEG, PNG, WebP, HEIC",
+    "noDocuments": "Chưa có tài liệu nào được tải lên.",
+    "statusPending": "Đang chờ",
+    "statusVerified": "Đã xác minh",
+    "statusRejected": "Bị từ chối",
+    "download": "Tải xuống",
+    "delete": "Xóa"
+  },
+  "legal": {
+    "terms": {
+      "title": "Điều khoản Dịch vụ",
+      "lastUpdated": "Cập nhật lần cuối: Tháng 2 năm 2026",
+      "s1Title": "1. Đồng ý với Điều khoản",
+      "s1Content": "Bằng việc truy cập hoặc sử dụng các dịch vụ do JetPrimer LLC (\"JetPrimer\", \"JetPrimer Airways\", \"chúng tôi\") cung cấp, bạn đồng ý bị ràng buộc bởi các Điều khoản Dịch vụ này. Nếu bạn không đồng ý với các điều khoản này, vui lòng không sử dụng dịch vụ của chúng tôi. Các điều khoản này áp dụng cho tất cả người dùng truy cập hoặc sử dụng dịch vụ thành lập LLC Hoa Kỳ và quản lý doanh nghiệp của chúng tôi.",
+      "s2Title": "2. Dịch vụ",
+      "s2Content": "JetPrimer cung cấp dịch vụ thành lập LLC Hoa Kỳ, hỗ trợ đăng ký EIN, hỗ trợ mở tài khoản ngân hàng doanh nghiệp và các dịch vụ quản lý doanh nghiệp liên quan cho các doanh nhân toàn cầu. Dịch vụ của chúng tôi mang tính chất thông tin và hành chính, không phải là tư vấn pháp lý, thuế hoặc tài chính. Chúng tôi khuyến nghị bạn tham khảo ý kiến chuyên gia có trình độ cho các vấn đề pháp lý hoặc thuế cụ thể liên quan đến doanh nghiệp của bạn.",
+      "s3Title": "3. Trách nhiệm của Người dùng",
+      "s3Content": "Bạn chịu trách nhiệm cung cấp thông tin chính xác, đầy đủ và cập nhật cần thiết cho việc thành lập LLC và các dịch vụ liên quan. Bạn đồng ý duy trì tính bảo mật của thông tin đăng nhập tài khoản và thông báo ngay cho chúng tôi về bất kỳ truy cập trái phép nào. Bạn phải tuân thủ tất cả các luật và quy định hiện hành tại quốc gia của bạn và tại Hoa Kỳ.",
+      "s4Title": "4. Phí và Thanh toán",
+      "s4Content": "Phí dịch vụ được hiển thị tại thời điểm mua và tính bằng đô la Mỹ. Tất cả thanh toán được xử lý an toàn thông qua các nhà xử lý thanh toán được ủy quyền của chúng tôi. Điều kiện hoàn tiền phụ thuộc vào giai đoạn cung cấp dịch vụ. Khi phí đăng ký với cơ quan nhà nước đã được nộp thay mặt bạn, các khoản đó không được hoàn lại. Vui lòng tham khảo chính sách hoàn tiền hoặc liên hệ đội ngũ hỗ trợ để được tư vấn cụ thể.",
+      "s5Title": "5. Giới hạn Trách nhiệm",
+      "s5Content": "JetPrimer không chịu trách nhiệm cho bất kỳ thiệt hại gián tiếp, ngẫu nhiên, đặc biệt, hậu quả hoặc mang tính trừng phạt nào phát sinh từ hoặc liên quan đến việc bạn sử dụng dịch vụ của chúng tôi. Tổng trách nhiệm của chúng tôi không vượt quá số tiền bạn đã thanh toán cho dịch vụ cụ thể gây ra khiếu nại. Chúng tôi không chịu trách nhiệm cho sự chậm trễ do cơ quan chính phủ, nhà cung cấp dịch vụ bên thứ ba hoặc các tình huống nằm ngoài tầm kiểm soát hợp lý của chúng tôi.",
+      "s6Title": "6. Liên hệ",
+      "s6Content": "Nếu bạn có câu hỏi về các Điều khoản Dịch vụ này, vui lòng liên hệ chúng tôi tại support@jetprimer.com. Chúng tôi cam kết giải quyết mọi thắc mắc một cách nhanh chóng và minh bạch.",
+      "privacyLink": "Chính sách Bảo mật",
+      "homeLink": "Trang chủ"
+    },
+    "privacy": {
+      "title": "Chính sách Bảo mật",
+      "lastUpdated": "Cập nhật lần cuối: Tháng 2 năm 2026",
+      "s1Title": "1. Thông tin Chúng tôi Thu thập",
+      "s1Content": "Chúng tôi thu thập thông tin cá nhân bạn cung cấp khi sử dụng dịch vụ, bao gồm tên, địa chỉ email, số điện thoại, quốc tịch, thông tin doanh nghiệp và các giấy tờ tùy thân cần thiết cho việc thành lập LLC. Chúng tôi cũng tự động thu thập dữ liệu kỹ thuật như địa chỉ IP, loại trình duyệt, thông tin thiết bị và mô hình sử dụng thông qua cookie và các công nghệ tương tự.",
+      "s2Title": "2. Cách Chúng tôi Sử dụng Thông tin",
+      "s2Content": "Chúng tôi sử dụng thông tin thu thập được để xử lý yêu cầu thành lập LLC và các dịch vụ liên quan, liên lạc với bạn về tài khoản và dịch vụ, xác minh danh tính theo yêu cầu pháp luật, cải thiện dịch vụ và trải nghiệm người dùng, gửi các cập nhật và thông báo dịch vụ liên quan, và tuân thủ các nghĩa vụ pháp lý và quy định.",
+      "s3Title": "3. Chia sẻ Dữ liệu",
+      "s3Content": "Chúng tôi không bán thông tin cá nhân của bạn. Chúng tôi có thể chia sẻ thông tin của bạn với các cơ quan chính phủ Hoa Kỳ theo yêu cầu cho việc thành lập LLC và đăng ký EIN, các nhà cung cấp dịch vụ được ủy quyền hỗ trợ cung cấp dịch vụ, các tổ chức tài chính để mở tài khoản ngân hàng doanh nghiệp, và theo yêu cầu pháp luật hoặc để bảo vệ quyền lợi hợp pháp của chúng tôi. Tất cả nhà cung cấp dịch vụ bên thứ ba đều có nghĩa vụ hợp đồng bảo vệ dữ liệu của bạn.",
+      "s4Title": "4. Bảo mật Dữ liệu",
+      "s4Content": "Chúng tôi áp dụng các biện pháp bảo mật theo tiêu chuẩn ngành bao gồm mã hóa, máy chủ an toàn và kiểm soát truy cập để bảo vệ thông tin cá nhân của bạn. Mặc dù chúng tôi nỗ lực sử dụng các phương tiện thương mại chấp nhận được để bảo vệ dữ liệu của bạn, không có phương pháp truyền tải hoặc lưu trữ điện tử nào an toàn 100%. Chúng tôi liên tục xem xét và cập nhật các biện pháp bảo mật.",
+      "s5Title": "5. Quyền của Bạn",
+      "s5Content": "Bạn có quyền truy cập, chỉnh sửa hoặc xóa thông tin cá nhân của mình. Bạn có thể yêu cầu bản sao dữ liệu chúng tôi lưu trữ về bạn, từ chối nhận thông tin quảng cáo bất kỳ lúc nào, và yêu cầu xóa tài khoản theo các yêu cầu lưu giữ pháp lý. Để thực hiện các quyền này, vui lòng liên hệ chúng tôi tại support@jetprimer.com.",
+      "s6Title": "6. Liên hệ",
+      "s6Content": "Nếu bạn có câu hỏi hoặc thắc mắc về Chính sách Bảo mật này hoặc các hoạt động xử lý dữ liệu của chúng tôi, vui lòng liên hệ chúng tôi tại support@jetprimer.com. Chúng tôi sẽ phản hồi yêu cầu của bạn trong thời gian hợp lý.",
+      "termsLink": "Điều khoản Dịch vụ",
+      "homeLink": "Trang chủ"
+    }
   }
 }

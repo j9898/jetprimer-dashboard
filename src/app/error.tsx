@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react'
 import { useTranslations } from 'next-intl'
+import * as Sentry from "@sentry/nextjs"
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 
 export default function Error({
@@ -15,6 +16,7 @@ export default function Error({
 
   useEffect(() => {
     console.error('Application error:', error)
+    Sentry.captureException(error)
   }, [error])
 
   return (

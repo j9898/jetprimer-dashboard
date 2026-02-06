@@ -46,6 +46,18 @@ export async function GET(request: Request) {
           .eq('user_id', user.id)
           .single()
 
+        // 기존 고객인 경우: Google 프로필 이름이 있으면 자동 업데이트
+        if (existingCustomer) {
+          const googleName = user.user_metadata?.full_name ||
+                            user.user_metadata?.name
+          if (googleName) {
+            await supabase
+              .from('customers')
+              .update({ name: googleName })
+              .eq('user_id', user.id)
+          }
+        }
+
         // 등록되어 있지 않으면 새로 추가
         if (!existingCustomer) {
           const flightCode = generateFlightCode()

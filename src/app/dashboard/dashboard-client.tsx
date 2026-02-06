@@ -79,9 +79,9 @@ function StatusBadge({ status, t }: { status: string; t: (key: string) => string
   const config = statusConfig[status] || statusConfig.clear
 
   return (
-    <div className={`flex items-center gap-2 px-3 py-1 rounded-full ${config.bgColor}`}>
-      <div className={`w-2 h-2 rounded-full ${config.dotColor} ${status === 'cruising' ? 'animate-pulse' : ''}`}></div>
-      <span className={`text-xs font-semibold ${config.textColor}`}>{t(config.labelKey)}</span>
+    <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full ${config.bgColor}`}>
+      <div className={`w-1.5 h-1.5 rounded-full ${config.dotColor} ${status === 'cruising' ? 'animate-pulse' : ''}`}></div>
+      <span className={`text-[11px] font-semibold ${config.textColor}`}>{t(config.labelKey)}</span>
     </div>
   )
 }
@@ -133,17 +133,19 @@ export default function DashboardClient({ user, company, waypoints, locale, isPa
   return (
     <div className="min-h-screen bg-gradient-to-br from-sky-100 via-blue-50 to-indigo-100">
       {/* Mobile Header */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 z-40 bg-white/80 backdrop-blur-xl border-b border-sky-200/50 px-4 py-3">
+      <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-sky-200/50 px-4 py-3">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 bg-gradient-to-br from-sky-400 to-blue-500 rounded-lg flex items-center justify-center text-white shadow-lg shadow-sky-400/30">
-              <PlaneIcon />
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 bg-gradient-to-br from-sky-400 to-blue-500 rounded-lg flex items-center justify-center text-white shadow-md shadow-sky-400/30">
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+              </svg>
             </div>
-            <h1 className="text-lg font-bold text-slate-800">JetPrimer</h1>
+            <h1 className="text-base font-bold text-slate-800">JetPrimer</h1>
           </div>
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 rounded-lg hover:bg-sky-100 text-slate-700"
+            className="p-2 -mr-2 rounded-lg hover:bg-sky-100 text-slate-700"
           >
             {isMobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
           </button>
@@ -222,181 +224,170 @@ export default function DashboardClient({ user, company, waypoints, locale, isPa
       </div>
 
       {/* Main Content */}
-      <main className="lg:ml-64 p-4 md:p-8 pt-20 lg:pt-8">
-        <div className="max-w-5xl space-y-6 md:space-y-8">
-          {/* Header */}
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <main className="lg:ml-64 px-4 pb-8 pt-[72px] lg:pt-6 lg:px-8">
+        <div className="max-w-5xl mx-auto space-y-5 lg:space-y-8">
+
+          {/* Header - compact on mobile */}
+          <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl md:text-3xl font-bold text-slate-800 mb-1 md:mb-2">{t('title')}</h1>
-              <p className="text-slate-500 text-sm md:text-base">{t('welcome', { captain: company.captain })}</p>
+              <h1 className="text-xl lg:text-3xl font-bold text-slate-800">{t('title')}</h1>
+              <p className="text-slate-500 text-xs lg:text-base mt-0.5">{t('welcome', { captain: company.captain })}</p>
             </div>
-            <div className="text-left sm:text-right">
+            <div className="text-right hidden sm:block">
               <p className="text-slate-400 text-sm">{tCommon('localTime')}</p>
-              <p className="text-xl md:text-2xl font-mono text-slate-700">{currentTime}</p>
+              <p className="text-2xl font-mono text-slate-700">{currentTime}</p>
             </div>
           </div>
 
-          {/* Main Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
-            {/* Flight Status Card */}
-            <div className="lg:col-span-2 bg-white/70 backdrop-blur-xl border border-white/50 shadow-lg shadow-sky-200/30 rounded-2xl p-4 md:p-6">
-              <div className="flex items-start justify-between mb-6">
-                <div>
-                  <p className="text-slate-500 text-sm mb-1">{t('flight')}</p>
-                  <p className="text-sky-600 font-mono text-lg font-semibold">{company.flightNumber}</p>
+          {/* Boarding Pass Ticket - Full width, mobile first */}
+          <div className={`rounded-2xl overflow-hidden shadow-lg ${isPaid ? 'shadow-sky-200/40' : 'shadow-amber-200/40'}`}>
+            {/* Ticket Header */}
+            <div className={`px-4 py-3 lg:px-5 lg:py-4 ${isPaid ? 'bg-gradient-to-r from-sky-500 to-blue-600' : 'bg-gradient-to-r from-amber-500 to-orange-500'}`}>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <PlaneIcon />
+                  <span className="text-white/90 text-[11px] lg:text-xs font-semibold tracking-widest">{t('boardingPass')}</span>
                 </div>
-                <StatusBadge status={company.status} t={t} />
+                <span className="text-white font-mono text-xs lg:text-sm font-bold">{company.flightNumber}</span>
+              </div>
+            </div>
+
+            {/* Ticket Body */}
+            <div className="bg-white px-4 py-4 lg:px-6 lg:py-5 relative">
+              {/* Perforated line effect */}
+              <div className="absolute left-0 right-0 top-0 flex justify-between">
+                <div className="w-4 h-4 bg-gradient-to-br from-sky-100 via-blue-50 to-indigo-100 rounded-full -mt-2 -ml-2" />
+                <div className="flex-1 border-t-2 border-dashed border-slate-200 mt-0" />
+                <div className="w-4 h-4 bg-gradient-to-br from-sky-100 via-blue-50 to-indigo-100 rounded-full -mt-2 -mr-2" />
               </div>
 
-              <div className="mb-6">
-                <h2 className="text-2xl font-bold text-slate-800 mb-1">{company.name}</h2>
-                <p className="text-slate-500">Captain {company.captain}</p>
+              {/* Main ticket content - responsive */}
+              <div className="mt-2 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+                {/* Left: Passenger & Service */}
+                <div className="flex-1 min-w-0">
+                  <p className="text-[10px] text-slate-400 tracking-wider">{t('passenger')}</p>
+                  <p className="text-slate-800 font-bold text-base lg:text-lg truncate">{company.captain}</p>
+                  <div className="mt-2">
+                    <p className="text-[10px] text-slate-400 tracking-wider">{t('service')}</p>
+                    <p className="text-slate-700 font-medium text-sm">{t('serviceValue')}</p>
+                  </div>
+                </div>
+
+                {/* Right: Grid info */}
+                <div className="grid grid-cols-3 gap-x-6 gap-y-2 sm:gap-x-8">
+                  <div>
+                    <p className="text-[10px] text-slate-400 tracking-wider">{t('class')}</p>
+                    <p className="text-slate-700 font-mono font-bold text-sm">{t('classValue')}</p>
+                  </div>
+                  <div>
+                    <p className="text-[10px] text-slate-400 tracking-wider">{t('seat')}</p>
+                    <p className="text-slate-700 font-mono font-bold text-sm">1A</p>
+                  </div>
+                  <div>
+                    <p className="text-[10px] text-slate-400 tracking-wider">{t('gate')}</p>
+                    <p className="text-slate-700 font-mono font-bold text-sm">JP</p>
+                  </div>
+                </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4 pt-4 border-t border-sky-200/50">
-                <div>
-                  <p className="text-slate-400 text-xs mb-1">{t('destination')}</p>
-                  <p className="text-slate-700 font-medium">{company.state}, USA 🇺🇸</p>
+              {/* Payment Status */}
+              <div className="mt-4 pt-4 border-t border-dashed border-slate-200 flex items-center gap-3">
+                <div className={`w-9 h-9 lg:w-10 lg:h-10 rounded-full flex items-center justify-center flex-shrink-0 ${
+                  isPaid ? 'bg-emerald-100' : 'bg-amber-100'
+                }`}>
+                  <span className="text-base lg:text-lg">{isPaid ? '✓' : '⏳'}</span>
                 </div>
-                <div>
-                  <p className="text-slate-400 text-xs mb-1">{t('formed')}</p>
-                  <p className="text-slate-700 font-medium">{company.formed}</p>
-                </div>
-                <div>
-                  <p className="text-slate-400 text-xs mb-1">{t('ein')}</p>
-                  <p className="text-slate-700 font-mono">{company.ein}</p>
-                </div>
-                <div>
-                  <p className="text-slate-400 text-xs mb-1">{t('bank')}</p>
-                  <p className="text-emerald-600 font-medium">{company.bank}</p>
+                <div className="flex-1 min-w-0">
+                  <p className={`font-semibold text-sm ${isPaid ? 'text-emerald-600' : 'text-amber-600'}`}>
+                    {t(isPaid ? 'ticketConfirmed' : 'ticketPendingPayment')}
+                  </p>
+                  <p className="text-slate-400 text-xs leading-tight mt-0.5">
+                    {t(isPaid ? 'ticketConfirmedDesc' : 'ticketPendingDesc')}
+                  </p>
                 </div>
               </div>
             </div>
 
-            {/* Boarding Pass Ticket */}
-            <div className="relative">
-              <div className={`rounded-2xl overflow-hidden shadow-lg ${isPaid ? 'shadow-sky-200/40' : 'shadow-amber-200/40'}`}>
-                {/* Ticket Header */}
-                <div className={`px-5 py-4 ${isPaid ? 'bg-gradient-to-r from-sky-500 to-blue-600' : 'bg-gradient-to-r from-amber-500 to-orange-500'}`}>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <PlaneIcon />
-                      <span className="text-white/90 text-xs font-semibold tracking-widest">{t('boardingPass')}</span>
-                    </div>
-                    <span className="text-white font-mono text-sm font-bold">{company.flightNumber}</span>
-                  </div>
-                </div>
+            {/* Ticket Footer - Barcode style */}
+            <div className={`px-4 py-2.5 lg:px-5 lg:py-3 ${isPaid ? 'bg-sky-50' : 'bg-amber-50'}`}>
+              <div className="flex items-center justify-center gap-[2px]">
+                {Array.from({ length: 40 }, (_, i) => (
+                  <div
+                    key={i}
+                    className={`${isPaid ? 'bg-sky-300/60' : 'bg-amber-300/60'}`}
+                    style={{
+                      width: `${((i * 7 + 3) % 3) + 1.5}px`,
+                      height: `${((i * 13 + 5) % 9) + 14}px`,
+                    }}
+                  />
+                ))}
+              </div>
+              <p className="text-center text-[10px] text-slate-400 font-mono mt-1 tracking-widest">
+                {company.flightNumber}
+              </p>
+            </div>
+          </div>
 
-                {/* Ticket Body */}
-                <div className="bg-white p-5 relative">
-                  {/* Perforated line effect */}
-                  <div className="absolute left-0 right-0 top-0 flex justify-between px-0">
-                    <div className="w-4 h-4 bg-gradient-to-br from-sky-100 via-blue-50 to-indigo-100 rounded-full -mt-2 -ml-2" />
-                    <div className="flex-1 border-t-2 border-dashed border-slate-200 mt-0" />
-                    <div className="w-4 h-4 bg-gradient-to-br from-sky-100 via-blue-50 to-indigo-100 rounded-full -mt-2 -mr-2" />
-                  </div>
+          {/* Flight Info Card */}
+          <div className="bg-white/70 backdrop-blur-xl border border-white/50 shadow-lg shadow-sky-200/30 rounded-2xl p-4 lg:p-6">
+            <div className="flex items-start justify-between mb-4 lg:mb-6">
+              <div>
+                <p className="text-slate-500 text-xs lg:text-sm mb-0.5">{t('flight')}</p>
+                <p className="text-sky-600 font-mono text-base lg:text-lg font-semibold">{company.flightNumber}</p>
+              </div>
+              <StatusBadge status={company.status} t={t} />
+            </div>
 
-                  {/* Passenger & Service */}
-                  <div className="mt-2 mb-4">
-                    <p className="text-[10px] text-slate-400 tracking-wider">{t('passenger')}</p>
-                    <p className="text-slate-800 font-bold text-lg">{company.captain}</p>
-                  </div>
+            <div className="mb-4 lg:mb-6">
+              <h2 className="text-lg lg:text-2xl font-bold text-slate-800 mb-0.5">{company.name}</h2>
+              <p className="text-slate-500 text-sm">Captain {company.captain}</p>
+            </div>
 
-                  <div className="mb-4">
-                    <p className="text-[10px] text-slate-400 tracking-wider">{t('service')}</p>
-                    <p className="text-slate-700 font-medium text-sm">{t('serviceValue')}</p>
-                  </div>
-
-                  {/* Ticket Grid Info */}
-                  <div className="grid grid-cols-3 gap-3 mb-4 pb-4 border-b border-dashed border-slate-200">
-                    <div>
-                      <p className="text-[10px] text-slate-400 tracking-wider">{t('class')}</p>
-                      <p className="text-slate-700 font-mono font-bold text-sm">{t('classValue')}</p>
-                    </div>
-                    <div>
-                      <p className="text-[10px] text-slate-400 tracking-wider">{t('seat')}</p>
-                      <p className="text-slate-700 font-mono font-bold text-sm">1A</p>
-                    </div>
-                    <div>
-                      <p className="text-[10px] text-slate-400 tracking-wider">{t('gate')}</p>
-                      <p className="text-slate-700 font-mono font-bold text-sm">JP</p>
-                    </div>
-                  </div>
-
-                  {/* Payment Status */}
-                  <div className="flex items-center gap-3">
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${
-                      isPaid ? 'bg-emerald-100' : 'bg-amber-100'
-                    }`}>
-                      <span className="text-lg">{isPaid ? '✓' : '⏳'}</span>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className={`font-semibold text-sm ${isPaid ? 'text-emerald-600' : 'text-amber-600'}`}>
-                        {t(isPaid ? 'ticketConfirmed' : 'ticketPendingPayment')}
-                      </p>
-                      <p className="text-slate-400 text-xs leading-tight mt-0.5">
-                        {t(isPaid ? 'ticketConfirmedDesc' : 'ticketPendingDesc')}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Ticket Footer - Barcode style */}
-                <div className={`px-5 py-3 ${isPaid ? 'bg-sky-50' : 'bg-amber-50'}`}>
-                  <div className="flex items-center justify-center gap-[2px]">
-                    {Array.from({ length: 32 }, (_, i) => (
-                      <div
-                        key={i}
-                        className={`${isPaid ? 'bg-sky-300/60' : 'bg-amber-300/60'}`}
-                        style={{
-                          width: `${((i * 7 + 3) % 3) + 1.5}px`,
-                          height: `${((i * 13 + 5) % 9) + 16}px`,
-                        }}
-                      />
-                    ))}
-                  </div>
-                  <p className="text-center text-[10px] text-slate-400 font-mono mt-1 tracking-widest">
-                    {company.flightNumber}
-                  </p>
-                </div>
+            <div className="grid grid-cols-2 gap-3 lg:gap-4 pt-3 lg:pt-4 border-t border-sky-200/50">
+              <div>
+                <p className="text-slate-400 text-[11px] lg:text-xs mb-0.5">{t('destination')}</p>
+                <p className="text-slate-700 font-medium text-sm lg:text-base">{company.state}, USA 🇺🇸</p>
+              </div>
+              <div>
+                <p className="text-slate-400 text-[11px] lg:text-xs mb-0.5">{t('formed')}</p>
+                <p className="text-slate-700 font-medium text-sm lg:text-base">{company.formed}</p>
+              </div>
+              <div>
+                <p className="text-slate-400 text-[11px] lg:text-xs mb-0.5">{t('ein')}</p>
+                <p className="text-slate-700 font-mono text-sm lg:text-base">{company.ein}</p>
+              </div>
+              <div>
+                <p className="text-slate-400 text-[11px] lg:text-xs mb-0.5">{t('bank')}</p>
+                <p className="text-emerald-600 font-medium text-sm lg:text-base">{company.bank}</p>
               </div>
             </div>
           </div>
 
           {/* Upcoming Waypoints */}
           <div>
-            <h2 className="text-xl font-bold text-slate-800 mb-4">{t('upcomingWaypoints')}</h2>
-            <div className="space-y-3">
+            <h2 className="text-lg lg:text-xl font-bold text-slate-800 mb-3 lg:mb-4">{t('upcomingWaypoints')}</h2>
+            <div className="space-y-2.5 lg:space-y-3">
               {waypoints.map((wp) => (
                 <div
                   key={wp.id}
-                  className={`flex items-center justify-between p-4 rounded-xl backdrop-blur-sm ${
+                  className={`flex items-center justify-between p-3 lg:p-4 rounded-xl backdrop-blur-sm ${
                     wp.status === 'prepare'
                       ? 'bg-amber-50/80 border border-amber-200/50'
                       : 'bg-white/50 border border-white/50'
                   }`}
                 >
-                  <div className="flex items-center gap-4">
-                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                  <div className="flex items-center gap-3 min-w-0 flex-1">
+                    <div className={`w-9 h-9 lg:w-10 lg:h-10 rounded-lg flex items-center justify-center flex-shrink-0 ${
                       wp.status === 'prepare' ? 'bg-amber-100' : 'bg-sky-100'
                     }`}>
-                      <span className="text-lg">📍</span>
+                      <span className="text-base lg:text-lg">📍</span>
                     </div>
-                    <div>
-                      <p className="text-slate-800 font-medium">{t(`steps.${wp.stepKey}`)}</p>
-                      <p className="text-slate-500 text-sm">{wp.dueDate || t(`status.${wp.status}`)}</p>
+                    <div className="min-w-0">
+                      <p className="text-slate-800 font-medium text-sm lg:text-base truncate">{t(`steps.${wp.stepKey}`)}</p>
+                      <p className="text-slate-500 text-xs lg:text-sm">{wp.dueDate || t(`status.${wp.status}`)}</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-4">
-                    <div className={`px-3 py-1 rounded-full text-sm font-mono ${
-                      wp.daysLeft <= 30
-                        ? 'bg-rose-100 text-rose-600'
-                        : wp.status === 'prepare'
-                          ? 'bg-amber-100 text-amber-600'
-                          : 'bg-slate-100 text-slate-500'
-                    }`}>
-                      D-{wp.daysLeft}
-                    </div>
+                  <div className="flex items-center gap-2 lg:gap-4 flex-shrink-0 ml-2">
                     <StatusBadge status={wp.status} t={t} />
                   </div>
                 </div>
@@ -408,15 +399,15 @@ export default function DashboardClient({ user, company, waypoints, locale, isPa
           <TodoList />
 
           {/* Crew Message */}
-          <div className="bg-gradient-to-r from-sky-100/80 to-blue-50/50 border border-sky-200/50 rounded-2xl p-6 backdrop-blur-sm">
-            <div className="flex items-start gap-4">
-              <div className="w-10 h-10 bg-sky-200 rounded-full flex items-center justify-center flex-shrink-0">
-                <span className="text-lg">💬</span>
+          <div className="bg-gradient-to-r from-sky-100/80 to-blue-50/50 border border-sky-200/50 rounded-2xl p-4 lg:p-6 backdrop-blur-sm">
+            <div className="flex items-start gap-3 lg:gap-4">
+              <div className="w-9 h-9 lg:w-10 lg:h-10 bg-sky-200 rounded-full flex items-center justify-center flex-shrink-0">
+                <span className="text-base lg:text-lg">💬</span>
               </div>
-              <div>
-                <p className="text-sky-700 font-medium mb-1">{t('crewMessage')}</p>
-                <p className="text-slate-600">&quot;{crewMessage || t('crewMessageContent', { days: 71 })}&quot;</p>
-                <p className="text-slate-400 text-sm mt-2">
+              <div className="min-w-0">
+                <p className="text-sky-700 font-medium text-sm lg:text-base mb-1">{t('crewMessage')}</p>
+                <p className="text-slate-600 text-sm lg:text-base">&quot;{crewMessage || t('crewMessageContent', { days: 71 })}&quot;</p>
+                <p className="text-slate-400 text-xs lg:text-sm mt-1.5 lg:mt-2">
                   {crewMessageTime
                     ? t('crewSignature', { time: new Date(crewMessageTime).toLocaleDateString() })
                     : t('crewSignature', { time: t('hoursAgo', { hours: 2 }) })}

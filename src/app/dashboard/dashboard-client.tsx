@@ -390,7 +390,7 @@ export default function DashboardClient({ user, company, waypoints, locale, isPa
 
             <div className="mb-4 lg:mb-6">
               <h2 className="text-lg lg:text-2xl font-bold text-slate-800 mb-0.5">{company.name}</h2>
-              <p className="text-slate-500 text-sm">Captain {company.captain}</p>
+              <p className="text-slate-500 text-sm">CEO {company.captain}</p>
             </div>
 
             <div className="grid grid-cols-2 gap-3 lg:gap-4 pt-3 lg:pt-4 border-t border-sky-200/50">

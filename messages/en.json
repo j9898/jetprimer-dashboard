@@ -67,7 +67,7 @@
   },
   "dashboard": {
     "title": "Flight Center",
-    "welcome": "Welcome aboard, Captain {captain}",
+    "welcome": "Welcome aboard, CEO {captain}",
     "flight": "Flight",
     "flightCenter": "Flight Center",
     "destination": "DESTINATION",

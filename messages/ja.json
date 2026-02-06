@@ -67,7 +67,7 @@
   },
   "dashboard": {
     "title": "フライトセンター",
-    "welcome": "ようこそ、{captain}機長",
+    "welcome": "{captain} CEO様、ご搭乗を歓迎いたします",
     "flight": "フライト",
     "flightCenter": "フライトセンター",
     "destination": "目的地",

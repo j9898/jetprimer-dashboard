@@ -67,7 +67,7 @@
   },
   "dashboard": {
     "title": "비행 센터",
-    "welcome": "환영합니다, {captain} 기장님",
+    "welcome": "{captain} CEO님, 탑승을 환영합니다",
     "flight": "항공편",
     "flightCenter": "비행 센터",
     "destination": "목적지",

@@ -136,6 +136,7 @@
     "emailSent": "Email sent successfully.",
     "emailFailed": "Failed to send email",
     "emailHistory": "Email History",
+    "goHome": "Go Home",
     "totalEmails": "Recent {count} emails",
     "sentAt": "Sent At",
     "recipient": "Recipient",

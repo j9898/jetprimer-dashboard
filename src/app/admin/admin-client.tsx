@@ -92,6 +92,12 @@ const DownloadIcon = () => (
   </svg>
 )
 
+const HomeIcon = () => (
+  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1h-2z" />
+  </svg>
+)
+
 const CheckboxIcon = ({ checked }: { checked: boolean }) => (
   <div className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-all ${
     checked ? 'bg-slate-700 border-slate-700' : 'border-slate-300 bg-white'
@@ -720,6 +726,16 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
         {/* Navigation */}
         <nav className="flex-1 p-4">
           <ul className="space-y-2">
+            <li>
+              <button
+                onClick={() => router.push('/dashboard')}
+                className="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all text-slate-600 hover:bg-slate-100"
+              >
+                <HomeIcon />
+                <span className="text-sm font-medium">{t('goHome')}</span>
+              </button>
+            </li>
+            <li className="py-1"><div className="border-t border-slate-200/50" /></li>
             <li>
               <button
                 onClick={() => setActiveTab('dashboard')}

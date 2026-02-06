@@ -136,6 +136,7 @@
     "emailSent": "メールが正常に送信されました。",
     "emailFailed": "メール送信に失敗しました",
     "emailHistory": "メール送信履歴",
+    "goHome": "ホームへ",
     "totalEmails": "最近{count}件のメール",
     "sentAt": "送信日時",
     "recipient": "受信者",

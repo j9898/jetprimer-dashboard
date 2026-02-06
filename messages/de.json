@@ -71,6 +71,7 @@
     "flight": "Flugcode (Kunden-ID)",
     "flightCenter": "Flugzentrum",
     "destination": "ZIEL",
+    "departureLanguage": "Abflug (CEO-Sprache)",
     "formed": "GEGRÜNDET",
     "ein": "EIN",
     "bank": "BANK",

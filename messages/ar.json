@@ -71,6 +71,7 @@
     "flight": "رمز الرحلة (رقم العميل)",
     "flightCenter": "مركز الطيران",
     "destination": "الوجهة",
+    "departureLanguage": "المغادرة (لغة المدير التنفيذي)",
     "formed": "تاريخ التأسيس",
     "ein": "EIN",
     "bank": "البنك",

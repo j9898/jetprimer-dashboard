@@ -71,6 +71,7 @@
     "flight": "फ़्लाइट कोड (ग्राहक ID)",
     "flightCenter": "फ़्लाइट सेंटर",
     "destination": "गंतव्य",
+    "departureLanguage": "प्रस्थान (CEO की भाषा)",
     "formed": "गठन तिथि",
     "ein": "EIN",
     "bank": "बैंक",

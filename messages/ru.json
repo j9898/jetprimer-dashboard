@@ -71,6 +71,7 @@
     "flight": "Код рейса (ID клиента)",
     "flightCenter": "Flight Center",
     "destination": "ПУНКТ НАЗНАЧЕНИЯ",
+    "departureLanguage": "Вылет (Язык CEO)",
     "formed": "ОСНОВАНО",
     "ein": "EIN",
     "bank": "БАНК",

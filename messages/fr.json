@@ -71,6 +71,7 @@
     "flight": "Code de Vol (ID Client)",
     "flightCenter": "Centre de Vol",
     "destination": "DESTINATION",
+    "departureLanguage": "Départ (Langue du CEO)",
     "formed": "CRÉÉE LE",
     "ein": "EIN",
     "bank": "BANQUE",

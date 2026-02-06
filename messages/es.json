@@ -71,6 +71,7 @@
     "flight": "Código de Vuelo (ID de Cliente)",
     "flightCenter": "Centro de Vuelos",
     "destination": "DESTINO",
+    "departureLanguage": "Salida (Idioma del CEO)",
     "formed": "CONSTITUIDA",
     "ein": "EIN",
     "bank": "BANCO",

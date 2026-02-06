@@ -317,9 +317,9 @@ export default function DashboardClient({ user, company, waypoints, locale, isPa
             {/* Dashed divider */}
             <div className="mx-5 border-t border-dashed border-slate-200" />
 
-            {/* Language Switcher — styled as destination selector */}
+            {/* Language Switcher — styled as departure language selector */}
             <div className="px-4 py-3">
-              <p className="text-[9px] text-slate-400 tracking-[0.2em] uppercase font-medium px-1 mb-2">{t('destination')}</p>
+              <p className="text-[9px] text-slate-400 tracking-[0.2em] uppercase font-medium px-1 mb-2">{t('departureLanguage')}</p>
               <LanguageSwitcher currentLocale={locale} variant="compact" />
             </div>
 

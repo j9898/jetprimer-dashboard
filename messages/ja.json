@@ -71,6 +71,7 @@
     "flight": "フライトコード（顧客番号）",
     "flightCenter": "フライトセンター",
     "destination": "目的地",
+    "departureLanguage": "出発地（CEO言語）",
     "formed": "設立日",
     "ein": "EIN",
     "bank": "銀行",

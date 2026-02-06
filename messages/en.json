@@ -71,6 +71,7 @@
     "flight": "Flight Code (Customer ID)",
     "flightCenter": "Flight Center",
     "destination": "DESTINATION",
+    "departureLanguage": "Departure (CEO Language)",
     "formed": "FORMED",
     "ein": "EIN",
     "bank": "BANK",

@@ -65,6 +65,7 @@ interface Customer {
   name: string
   email: string
   locale?: string
+  email_locale?: string
   flight_code: string
   created_at: string
   steps: Step[]
@@ -133,23 +134,23 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
     setIsUpdating(false)
   }
 
-  // 고객 언어 설정 업데이트
-  const updateCustomerLocale = async (customerId: number, newLocale: string) => {
+  // 이메일 발송 언어 설정 업데이트 (고객 설정 언어와 별개)
+  const updateEmailLocale = async (customerId: number, newLocale: string) => {
     setIsUpdatingLocale(true)
     const supabase = createClient()
 
     const { error } = await supabase
       .from('customers')
-      .update({ locale: newLocale })
+      .update({ email_locale: newLocale })
       .eq('id', customerId)
 
     if (error) {
-      console.error('Locale update error:', error)
+      console.error('Email locale update error:', error)
       alert(t('localeUpdateFailed'))
     } else {
       // 선택된 고객 정보 업데이트
       if (selectedCustomer && selectedCustomer.id === customerId) {
-        setSelectedCustomer({ ...selectedCustomer, locale: newLocale })
+        setSelectedCustomer({ ...selectedCustomer, email_locale: newLocale })
       }
       router.refresh()
     }
@@ -395,10 +396,10 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
                       {(['ko', 'en', 'ja'] as const).map((locale) => (
                         <button
                           key={locale}
-                          onClick={() => updateCustomerLocale(selectedCustomer.id, locale)}
+                          onClick={() => updateEmailLocale(selectedCustomer.id, locale)}
                           disabled={isUpdatingLocale}
                           className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-all ${
-                            (selectedCustomer.locale || 'ko') === locale
+                            (selectedCustomer.email_locale || 'ko') === locale
                               ? 'bg-slate-700 text-white'
                               : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                           } disabled:opacity-50`}

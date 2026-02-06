@@ -1,12 +1,10 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { getLocale } from 'next-intl/server'
-import { cookies } from 'next/headers'
 import DashboardClient from './dashboard-client'
 
 export default async function DashboardPage() {
   const supabase = await createClient()
-  const cookieStore = await cookies()
 
   const { data: { user } } = await supabase.auth.getUser()
 
@@ -30,18 +28,7 @@ export default async function DashboardPage() {
     .eq('user_id', user.id)
     .single()
 
-  // DB에 저장된 locale이 있으면 쿠키에 적용 (로그인 시 언어 유지)
-  if (customer?.locale) {
-    const currentCookieLocale = cookieStore.get('locale')?.value
-    if (currentCookieLocale !== customer.locale) {
-      cookieStore.set('locale', customer.locale, {
-        path: '/',
-        maxAge: 60 * 60 * 24 * 365,
-        sameSite: 'lax',
-      })
-    }
-  }
-
+  // DB에 저장된 locale 우선 사용, 없으면 쿠키/브라우저 감지 로케일 사용
   const locale = customer?.locale || await getLocale()
 
   // 고객의 진행 단계 조회

@@ -7,6 +7,8 @@ import { useTranslations } from 'next-intl'
 import type { User } from '@supabase/supabase-js'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 import TodoList from '@/components/TodoList'
+import { setLocale } from '@/lib/actions/locale'
+import type { Locale } from '@/i18n/request'
 
 // Icons
 const PlaneIcon = () => (
@@ -94,6 +96,13 @@ export default function DashboardClient({ user, company, waypoints, locale, isPa
   const [crewMessageTime, setCrewMessageTime] = useState<string | null>(null)
   const t = useTranslations('dashboard')
   const tCommon = useTranslations('common')
+
+  // Sync DB locale to cookie (서버 컴포넌트에서 쿠키 수정 불가하므로 클라이언트에서 처리)
+  useEffect(() => {
+    if (locale) {
+      setLocale(locale as Locale).catch(() => {})
+    }
+  }, [locale])
 
   // Record last visit & fetch crew message
   useEffect(() => {

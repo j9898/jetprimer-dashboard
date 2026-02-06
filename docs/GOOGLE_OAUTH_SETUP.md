@@ -14,11 +14,12 @@ JetPrimer 대시보드의 Google OAuth 로그인 기능 설정에 대한 문서�
 ## 1. Google Cloud Console 설정
 
 ### 프로젝트 정보
-- **Google 계정**: cicabearstudio@gmail.com
+- **Google 계정**: cicabearstudio@gmail.com (모든 Google 관련 설정은 이 계정 사용)
 - **프로젝트 이름**: My First Project
 - **프로젝트 ID**: citric-gradient-440107-e5
 
 > **중요**: OAuth 클라이언트는 "JetPrimer"라는 이름의 프로젝트가 아닌, cicabearstudio@gmail.com 계정의 "My First Project"에 설정되어 있습니다.
+> wonderful.hwang@gmail.com 계정에도 "JetPrimer"라는 Google Cloud 프로젝트가 존재하지만, OAuth 설정과는 무관합니다. Google 관련 작업은 반드시 cicabearstudio@gmail.com 계정으로 접속해야 합니다.
 
 ### OAuth 동의 화면 (OAuth Consent Screen)
 - **사용자 유형**: External (외부)

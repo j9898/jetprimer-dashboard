@@ -130,6 +130,17 @@
     "sendEmail": "Send Notification",
     "sendingEmail": "Sending...",
     "emailSent": "Email sent successfully.",
-    "emailFailed": "Failed to send email"
+    "emailFailed": "Failed to send email",
+    "emailHistory": "Email History",
+    "totalEmails": "Recent {count} emails",
+    "sentAt": "Sent At",
+    "recipient": "Recipient",
+    "subject": "Subject",
+    "step": "Step",
+    "emailStatus": "Status",
+    "sentBy": "Sent By",
+    "noEmailLogs": "No emails sent yet.",
+    "emailSentStatus": "Sent",
+    "emailFailedStatus": "Failed"
   }
 }

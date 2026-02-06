@@ -130,6 +130,17 @@
     "sendEmail": "通知を送信",
     "sendingEmail": "送信中...",
     "emailSent": "メールが正常に送信されました。",
-    "emailFailed": "メール送信に失敗しました"
+    "emailFailed": "メール送信に失敗しました",
+    "emailHistory": "メール送信履歴",
+    "totalEmails": "最近{count}件のメール",
+    "sentAt": "送信日時",
+    "recipient": "受信者",
+    "subject": "件名",
+    "step": "ステップ",
+    "emailStatus": "状態",
+    "sentBy": "送信者",
+    "noEmailLogs": "送信されたメールはありません。",
+    "emailSentStatus": "送信済み",
+    "emailFailedStatus": "失敗"
   }
 }

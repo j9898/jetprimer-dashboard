@@ -58,22 +58,36 @@ interface Customer {
   user_id: string
   name: string
   email: string
+  locale?: string
   flight_code: string
   created_at: string
   steps: Step[]
 }
 
+interface EmailLog {
+  id: number
+  created_at: string
+  customer_id: number
+  recipient_email: string
+  subject: string
+  step_key: string
+  status: string
+  sent_by: string
+}
+
 interface Props {
   user: User
   customers: Customer[]
+  emailLogs: EmailLog[]
 }
 
-export default function AdminClient({ user, customers }: Props) {
+export default function AdminClient({ user, customers, emailLogs }: Props) {
   const router = useRouter()
   const [isLoggingOut, setIsLoggingOut] = useState(false)
   const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null)
   const [isUpdating, setIsUpdating] = useState(false)
   const [isSendingEmail, setIsSendingEmail] = useState<number | null>(null)
+  const [activeTab, setActiveTab] = useState<'customers' | 'emails'>('customers')
   const t = useTranslations('admin')
   const tCommon = useTranslations('common')
   const tDashboard = useTranslations('dashboard')
@@ -181,9 +195,29 @@ export default function AdminClient({ user, customers }: Props) {
         <nav className="flex-1 p-4">
           <ul className="space-y-2">
             <li>
-              <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-gradient-to-r from-slate-700 to-slate-800 text-white shadow-lg shadow-slate-400/30">
+              <button
+                onClick={() => setActiveTab('customers')}
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
+                  activeTab === 'customers'
+                    ? 'bg-gradient-to-r from-slate-700 to-slate-800 text-white shadow-lg shadow-slate-400/30'
+                    : 'text-slate-600 hover:bg-slate-100'
+                }`}
+              >
                 <UsersIcon />
                 <span className="text-sm font-medium">{t('title')}</span>
+              </button>
+            </li>
+            <li>
+              <button
+                onClick={() => setActiveTab('emails')}
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
+                  activeTab === 'emails'
+                    ? 'bg-gradient-to-r from-slate-700 to-slate-800 text-white shadow-lg shadow-slate-400/30'
+                    : 'text-slate-600 hover:bg-slate-100'
+                }`}
+              >
+                <MailIcon />
+                <span className="text-sm font-medium">{t('emailHistory')}</span>
               </button>
             </li>
           </ul>
@@ -213,10 +247,17 @@ export default function AdminClient({ user, customers }: Props) {
         <div className="max-w-6xl">
           {/* Header */}
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-slate-800 mb-2">{t('title')}</h1>
-            <p className="text-slate-500">{t('totalCustomers', { count: customers.length })}</p>
+            <h1 className="text-3xl font-bold text-slate-800 mb-2">
+              {activeTab === 'customers' ? t('title') : t('emailHistory')}
+            </h1>
+            <p className="text-slate-500">
+              {activeTab === 'customers'
+                ? t('totalCustomers', { count: customers.length })
+                : t('totalEmails', { count: emailLogs.length })}
+            </p>
           </div>
 
+          {activeTab === 'customers' ? (
           <div className="grid grid-cols-3 gap-6">
             {/* Customer List */}
             <div className="col-span-2 space-y-4">
@@ -405,6 +446,63 @@ export default function AdminClient({ user, customers }: Props) {
               )}
             </div>
           </div>
+          ) : (
+          /* Email History Tab */
+          <div className="bg-white/70 backdrop-blur-xl border border-white/50 shadow-lg shadow-slate-200/30 rounded-2xl overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="bg-slate-50 border-b border-slate-200">
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">{t('sentAt')}</th>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">{t('recipient')}</th>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">{t('subject')}</th>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">{t('step')}</th>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">{t('emailStatus')}</th>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">{t('sentBy')}</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {emailLogs.length === 0 ? (
+                    <tr>
+                      <td colSpan={6} className="px-6 py-8 text-center text-slate-400">
+                        {t('noEmailLogs')}
+                      </td>
+                    </tr>
+                  ) : (
+                    emailLogs.map((log) => (
+                      <tr key={log.id} className="hover:bg-slate-50 transition-colors">
+                        <td className="px-6 py-4 text-sm text-slate-600">
+                          {new Date(log.created_at).toLocaleString()}
+                        </td>
+                        <td className="px-6 py-4 text-sm text-slate-700">
+                          {log.recipient_email}
+                        </td>
+                        <td className="px-6 py-4 text-sm text-slate-700 max-w-xs truncate">
+                          {log.subject}
+                        </td>
+                        <td className="px-6 py-4 text-sm text-slate-600">
+                          {log.step_key ? tDashboard(`steps.${log.step_key}`) : '-'}
+                        </td>
+                        <td className="px-6 py-4">
+                          <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                            log.status === 'sent'
+                              ? 'bg-emerald-100 text-emerald-600'
+                              : 'bg-red-100 text-red-600'
+                          }`}>
+                            {log.status === 'sent' ? t('emailSentStatus') : t('emailFailedStatus')}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 text-sm text-slate-500 truncate max-w-[150px]">
+                          {log.sent_by}
+                        </td>
+                      </tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          )}
         </div>
       </main>
     </div>

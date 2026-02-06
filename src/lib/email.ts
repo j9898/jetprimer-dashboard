@@ -17,13 +17,17 @@ function getResendClient(): Resend {
 // 발신자 이메일 (Resend에서 도메인 인증 후 변경)
 const FROM_EMAIL = process.env.FROM_EMAIL || 'JetPrimer <onboarding@resend.dev>'
 
+// BCC 이메일 (모든 고객 이메일 복사본 수신)
+const BCC_EMAIL = process.env.BCC_EMAIL || 'inbox@jetprimer.com'
+
 interface SendEmailParams {
   to: string
   subject: string
   html: string
+  bcc?: string | string[]
 }
 
-export async function sendEmail({ to, subject, html }: SendEmailParams) {
+export async function sendEmail({ to, subject, html, bcc }: SendEmailParams) {
   try {
     const resend = getResendClient()
     const { data, error } = await resend.emails.send({
@@ -31,6 +35,7 @@ export async function sendEmail({ to, subject, html }: SendEmailParams) {
       to,
       subject,
       html,
+      bcc: bcc || BCC_EMAIL,
     })
 
     if (error) {

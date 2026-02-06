@@ -26,10 +26,10 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
 
-    // 고객 정보 조회
+    // 고객 정보 조회 (locale 포함)
     const { data: customer, error: customerError } = await supabase
       .from('customers')
-      .select('name, email')
+      .select('name, email, locale')
       .eq('id', customerId)
       .single()
 
@@ -37,12 +37,15 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Customer not found' }, { status: 404 })
     }
 
+    // 고객의 locale 사용 (없으면 요청의 locale, 그것도 없으면 'ko')
+    const customerLocale = customer.locale || locale || 'ko'
+
     // 이메일 템플릿 생성
     const { subject, html } = getStepUpdateEmailTemplate({
       customerName: customer.name,
       stepName: stepKey,
       newStatus,
-      locale
+      locale: customerLocale
     })
 
     // 이메일 발송
@@ -51,6 +54,19 @@ export async function POST(request: NextRequest) {
       subject,
       html
     })
+
+    // 이메일 로그 저장
+    const logStatus = result.success ? 'sent' : 'failed'
+    await supabase
+      .from('email_logs')
+      .insert({
+        customer_id: customerId,
+        recipient_email: customer.email,
+        subject,
+        step_key: stepKey,
+        status: logStatus,
+        sent_by: user.email
+      })
 
     if (!result.success) {
       return NextResponse.json({ error: result.error }, { status: 500 })

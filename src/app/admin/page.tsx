@@ -36,10 +36,18 @@ export default async function AdminPage() {
     steps: allSteps?.filter(step => step.customer_id === customer.id) || []
   })) || []
 
+  // 이메일 로그 조회
+  const { data: emailLogs } = await supabase
+    .from('email_logs')
+    .select('*')
+    .order('created_at', { ascending: false })
+    .limit(50)
+
   return (
     <AdminClient
       user={user}
       customers={customersWithSteps}
+      emailLogs={emailLogs || []}
     />
   )
 }

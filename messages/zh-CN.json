@@ -69,6 +69,7 @@
     "title": "飞行中心",
     "welcome": "欢迎登机，CEO {captain}",
     "flight": "航班代码（客户编号）",
+    "sidebarFlightCode": "Flight 客户代码",
     "flightCenter": "飞行中心",
     "destination": "目的地",
     "departureLanguage": "出发地（CEO语言）",

@@ -275,7 +275,7 @@ export default function DashboardClient({ user, company, waypoints, locale, isPa
               {/* Flight info grid */}
               <div className="grid grid-cols-3 gap-3 mb-4">
                 <div>
-                  <p className="text-[9px] text-slate-400 tracking-[0.15em] uppercase font-medium">{t('flight').split('(')[0].trim()}</p>
+                  <p className="text-[9px] text-slate-400 tracking-[0.15em] uppercase font-medium">{t('sidebarFlightCode')}</p>
                   <p className="text-sky-600 font-mono font-bold text-xs">{company.flightNumber}</p>
                 </div>
                 <div>

@@ -69,6 +69,7 @@
     "title": "फ़्लाइट सेंटर",
     "welcome": "बोर्ड पर आपका स्वागत है, CEO {captain}",
     "flight": "फ़्लाइट कोड (ग्राहक ID)",
+    "sidebarFlightCode": "Flight ग्राहक कोड",
     "flightCenter": "फ़्लाइट सेंटर",
     "destination": "गंतव्य",
     "departureLanguage": "प्रस्थान (CEO की भाषा)",

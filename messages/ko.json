@@ -69,6 +69,7 @@
     "title": "비행 센터",
     "welcome": "{captain} CEO님, 탑승을 환영합니다",
     "flight": "플라이트 코드 (고객번호)",
+    "sidebarFlightCode": "Flight 고객 코드",
     "flightCenter": "비행 센터",
     "destination": "목적지",
     "departureLanguage": "출발지(CEO님 언어)",

@@ -69,6 +69,7 @@
     "title": "Trung tâm Chuyến bay",
     "welcome": "Chào mừng lên máy bay, CEO {captain}",
     "flight": "Mã Chuyến bay (Mã Khách hàng)",
+    "sidebarFlightCode": "Mã khách hàng Flight",
     "flightCenter": "Trung tâm Chuyến bay",
     "destination": "ĐIỂM ĐẾN",
     "departureLanguage": "Khởi hành (Ngôn ngữ CEO)",

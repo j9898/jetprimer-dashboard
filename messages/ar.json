@@ -69,6 +69,7 @@
     "title": "مركز الطيران",
     "welcome": "مرحباً بك على متن الطائرة، المدير التنفيذي {captain}",
     "flight": "رمز الرحلة (رقم العميل)",
+    "sidebarFlightCode": "رمز عميل الرحلة",
     "flightCenter": "مركز الطيران",
     "destination": "الوجهة",
     "departureLanguage": "المغادرة (لغة المدير التنفيذي)",

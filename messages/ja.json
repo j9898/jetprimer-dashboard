@@ -69,6 +69,7 @@
     "title": "フライトセンター",
     "welcome": "{captain} CEO様、ご搭乗を歓迎いたします",
     "flight": "フライトコード（顧客番号）",
+    "sidebarFlightCode": "Flight 顧客コード",
     "flightCenter": "フライトセンター",
     "destination": "目的地",
     "departureLanguage": "出発地（CEO言語）",

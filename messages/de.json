@@ -69,6 +69,7 @@
     "title": "Flugzentrum",
     "welcome": "Willkommen an Bord, CEO {captain}",
     "flight": "Flugcode (Kunden-ID)",
+    "sidebarFlightCode": "Flight-Kundencode",
     "flightCenter": "Flugzentrum",
     "destination": "ZIEL",
     "departureLanguage": "Abflug (CEO-Sprache)",

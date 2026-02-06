@@ -69,6 +69,7 @@
     "title": "Flight Center",
     "welcome": "Добро пожаловать на борт, CEO {captain}",
     "flight": "Код рейса (ID клиента)",
+    "sidebarFlightCode": "Код клиента Flight",
     "flightCenter": "Flight Center",
     "destination": "ПУНКТ НАЗНАЧЕНИЯ",
     "departureLanguage": "Вылет (Язык CEO)",

@@ -69,6 +69,7 @@
     "title": "Flight Center",
     "welcome": "Selamat datang di kabin, CEO {captain}",
     "flight": "Kode Penerbangan (ID Pelanggan)",
+    "sidebarFlightCode": "Kode pelanggan Flight",
     "flightCenter": "Flight Center",
     "destination": "TUJUAN",
     "departureLanguage": "Keberangkatan (Bahasa CEO)",

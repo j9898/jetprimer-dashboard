@@ -69,6 +69,7 @@
     "title": "Centre de Vol",
     "welcome": "Bienvenue à bord, CEO {captain}",
     "flight": "Code de Vol (ID Client)",
+    "sidebarFlightCode": "Code client Flight",
     "flightCenter": "Centre de Vol",
     "destination": "DESTINATION",
     "departureLanguage": "Départ (Langue du CEO)",

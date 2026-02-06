@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
+import { sendEmail, getWelcomeEmailTemplate } from '@/lib/email'
 import { NextResponse } from 'next/server'
 
 // 고객번호 생성 (예: JP-2026-0042)
@@ -109,6 +110,27 @@ export async function GET(request: Request) {
 
             if (todoError) {
               console.error('Default todo insert error:', todoError)
+            }
+
+            // 웰컴 이메일 발송 (실패해도 회원가입에 영향 없음)
+            if (user.email) {
+              try {
+                const { subject, html } = getWelcomeEmailTemplate({
+                  customerName: userName,
+                  flightCode,
+                  locale: userLocale,
+                })
+                const emailResult = await sendEmail({
+                  to: user.email,
+                  subject,
+                  html,
+                })
+                if (!emailResult.success) {
+                  console.error('Welcome email failed:', emailResult.error)
+                }
+              } catch (emailError) {
+                console.error('Welcome email error:', emailError)
+              }
             }
           }
         }

@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import type { User } from '@supabase/supabase-js'
 import { useToast } from '@/components/Toast'
+import LanguageSwitcher from '@/components/LanguageSwitcher'
 
 // Icons
 const PlaneIcon = () => (
@@ -838,6 +839,12 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
             </li>
           </ul>
         </nav>
+
+        {/* Language Switcher */}
+        <div className="px-4 py-3 border-t border-slate-200/50">
+          <p className="text-[9px] text-slate-400 tracking-[0.15em] uppercase font-medium px-1 mb-2">{tCommon('localTime')}</p>
+          <LanguageSwitcher variant="compact" />
+        </div>
 
         {/* User Info & Logout */}
         <div className="p-4 border-t border-slate-200/50">

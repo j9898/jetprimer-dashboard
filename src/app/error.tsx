@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react'
 import { useTranslations } from 'next-intl'
+import LanguageSwitcher from '@/components/LanguageSwitcher'
 
 export default function Error({
   error,
@@ -20,6 +21,11 @@ export default function Error({
     <div className="min-h-screen bg-[#0a1628] flex items-center justify-center p-4">
       {/* 배경 그리드 패턴 */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
+
+      {/* 언어 선택기 - 우측 상단 */}
+      <div className="absolute top-4 right-4 z-20">
+        <LanguageSwitcher variant="compact" />
+      </div>
 
       <div className="relative z-10 w-full max-w-lg">
         {/* 공항 안내판 스타일 카드 */}

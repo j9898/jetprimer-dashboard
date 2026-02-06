@@ -120,7 +120,8 @@
     "ticketConfirmedDesc": "Việc lên máy bay đã được xác nhận. Chúc bạn có hành trình tuyệt vời!",
     "service": "DỊCH VỤ",
     "serviceValue": "Gói US LLC Toàn diện",
-    "viewReviews": "Xem đánh giá của hành khách khác"
+    "viewReviews": "Xem đánh giá của hành khách khác",
+    "viewReviewsDesc": "Xem đánh giá thực tế từ hành khách khác"
   },
   "language": {
     "select": "Chọn Ngôn ngữ",

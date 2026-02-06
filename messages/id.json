@@ -120,7 +120,8 @@
     "ticketConfirmedDesc": "Boarding Anda telah dikonfirmasi. Selamat menikmati perjalanan!",
     "service": "LAYANAN",
     "serviceValue": "Paket Lengkap US LLC",
-    "viewReviews": "Lihat ulasan penumpang lain"
+    "viewReviews": "Lihat ulasan penumpang lain",
+    "viewReviewsDesc": "Lihat ulasan nyata dari penumpang lain"
   },
   "language": {
     "select": "Pilih Bahasa",

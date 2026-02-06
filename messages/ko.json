@@ -120,7 +120,8 @@
     "ticketConfirmedDesc": "탑승이 확정되었습니다. 즐거운 여정 되세요!",
     "service": "서비스",
     "serviceValue": "미국 법인설립 풀패키지",
-    "viewReviews": "다른 탑승객 후기 보기"
+    "viewReviews": "다른 탑승객 후기 보기",
+    "viewReviewsDesc": "다른 CEO님들의 실제 이용 후기를 확인하세요"
   },
   "language": {
     "select": "언어 선택",

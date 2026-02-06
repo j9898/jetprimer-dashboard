@@ -120,7 +120,8 @@
     "ticketConfirmedDesc": "Ihr Boarding ist bestätigt. Guten Flug!",
     "service": "SERVICE",
     "serviceValue": "US-LLC-Komplettpaket",
-    "viewReviews": "Bewertungen anderer Passagiere ansehen"
+    "viewReviews": "Bewertungen anderer Passagiere ansehen",
+    "viewReviewsDesc": "Lesen Sie echte Bewertungen anderer Passagiere"
   },
   "language": {
     "select": "Sprache wählen",

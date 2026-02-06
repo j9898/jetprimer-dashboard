@@ -447,8 +447,27 @@ export default function DashboardClient({ user, company, waypoints, locale, isPa
                 </div>
               </div>
 
+              {/* Passenger Reviews button */}
+              <div className="mt-4 pt-4 border-t border-dashed border-slate-200">
+                <button
+                  onClick={() => {/* TODO: Link to reviews page */}}
+                  className="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-gradient-to-r from-violet-50 to-purple-50 border border-violet-200/60 hover:from-violet-100 hover:to-purple-100 transition-all group"
+                >
+                  <div className="w-9 h-9 lg:w-10 lg:h-10 rounded-full bg-violet-100 flex items-center justify-center flex-shrink-0">
+                    <span className="text-base lg:text-lg">💬</span>
+                  </div>
+                  <div className="flex-1 min-w-0 text-left">
+                    <p className="font-semibold text-sm text-violet-600 group-hover:text-violet-700">{t('viewReviews')}</p>
+                    <p className="text-violet-400 text-xs leading-tight mt-0.5">{t('viewReviewsDesc')}</p>
+                  </div>
+                  <svg className="w-4 h-4 text-violet-400 group-hover:text-violet-500 group-hover:translate-x-0.5 transition-all flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+
               {/* Payment Status */}
-              <div className="mt-4 pt-4 border-t border-dashed border-slate-200 flex items-center gap-3">
+              <div className="mt-3 flex items-center gap-3">
                 <div className={`w-9 h-9 lg:w-10 lg:h-10 rounded-full flex items-center justify-center flex-shrink-0 ${
                   isPaid ? 'bg-emerald-100' : 'bg-amber-100'
                 }`}>

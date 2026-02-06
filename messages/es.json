@@ -120,7 +120,8 @@
     "ticketConfirmedDesc": "Su embarque está confirmado. ¡Disfrute su viaje!",
     "service": "SERVICIO",
     "serviceValue": "Paquete completo US LLC",
-    "viewReviews": "Ver reseñas de otros pasajeros"
+    "viewReviews": "Ver reseñas de otros pasajeros",
+    "viewReviewsDesc": "Vea reseñas reales de otros pasajeros"
   },
   "language": {
     "select": "Seleccionar idioma",

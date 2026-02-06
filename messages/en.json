@@ -120,7 +120,8 @@
     "ticketConfirmedDesc": "Your boarding is confirmed. Enjoy your journey!",
     "service": "SERVICE",
     "serviceValue": "US LLC Full Package",
-    "viewReviews": "View Passenger Reviews"
+    "viewReviews": "View Passenger Reviews",
+    "viewReviewsDesc": "See real reviews from other passengers"
   },
   "language": {
     "select": "Select Language",

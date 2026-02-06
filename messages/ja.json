@@ -120,7 +120,8 @@
     "ticketConfirmedDesc": "搭乗が確定されました。良い旅を！",
     "service": "サービス",
     "serviceValue": "米国法人設立フルパッケージ",
-    "viewReviews": "他の搭乗者レビューを見る"
+    "viewReviews": "他の搭乗者レビューを見る",
+    "viewReviewsDesc": "他の搭乗者の実際のレビューをご覧ください"
   },
   "language": {
     "select": "言語を選択",

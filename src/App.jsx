@@ -550,7 +550,7 @@ function CalendarContent({ waypoints }) {
         <div className="absolute left-6 top-0 bottom-0 w-px bg-sky-200"></div>
 
         <div className="space-y-6">
-          {waypoints.map((wp, i) => (
+          {waypoints.map((wp) => (
             <div key={wp.id} className="flex gap-6 items-start">
               <div className={`w-12 h-12 rounded-full flex items-center justify-center z-10 ${
                 wp.status === 'prepare'

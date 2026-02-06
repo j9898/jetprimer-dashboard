@@ -406,9 +406,9 @@ export default function DashboardClient({ user, company, waypoints, locale, isPa
           </div>
 
           {/* Boarding Pass Ticket - Full width, mobile first */}
-          <div className={`rounded-2xl overflow-hidden shadow-lg ${isPaid ? 'shadow-sky-200/40' : 'shadow-sky-200/40'}`}>
+          <div className="rounded-2xl overflow-hidden shadow-lg shadow-sky-200/40">
             {/* Ticket Header */}
-            <div className={`px-4 py-3 lg:px-5 lg:py-4 ${isPaid ? 'bg-gradient-to-r from-sky-500 to-blue-600' : 'bg-gradient-to-r from-sky-500 to-blue-600'}`}>
+            <div className="px-4 py-3 lg:px-5 lg:py-4 bg-gradient-to-r from-sky-500 to-blue-600">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <PlaneIcon />
@@ -494,12 +494,12 @@ export default function DashboardClient({ user, company, waypoints, locale, isPa
             </div>
 
             {/* Ticket Footer - Barcode style */}
-            <div className={`px-4 py-2.5 lg:px-5 lg:py-3 ${isPaid ? 'bg-sky-50' : 'bg-sky-50'}`}>
+            <div className="px-4 py-2.5 lg:px-5 lg:py-3 bg-sky-50">
               <div className="flex items-center justify-center gap-[2px]">
                 {Array.from({ length: 40 }, (_, i) => (
                   <div
                     key={i}
-                    className={`${isPaid ? 'bg-sky-300/60' : 'bg-sky-300/60'}`}
+                    className="bg-sky-300/60"
                     style={{
                       width: `${((i * 7 + 3) % 3) + 1.5}px`,
                       height: `${((i * 13 + 5) % 9) + 14}px`,

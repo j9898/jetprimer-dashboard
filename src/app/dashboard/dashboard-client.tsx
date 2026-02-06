@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
@@ -90,8 +90,32 @@ export default function DashboardClient({ user, company, waypoints, locale, isPa
   const router = useRouter()
   const [isLoggingOut, setIsLoggingOut] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [crewMessage, setCrewMessage] = useState<string | null>(null)
+  const [crewMessageTime, setCrewMessageTime] = useState<string | null>(null)
   const t = useTranslations('dashboard')
   const tCommon = useTranslations('common')
+
+  // Record last visit & fetch crew message
+  useEffect(() => {
+    // Record visit
+    fetch('/api/visit', { method: 'POST' }).catch(() => {})
+
+    // Fetch crew message from DB
+    fetch('/api/crew-message')
+      .then(res => res.json())
+      .then(data => {
+        if (data.success && data.message) {
+          const msg = data.message
+          const localeKey = `message_${locale}` as keyof typeof msg
+          const message = msg[localeKey] || msg.message_ko || msg.message_en
+          if (message) {
+            setCrewMessage(message)
+            setCrewMessageTime(msg.updated_at)
+          }
+        }
+      })
+      .catch(() => {})
+  }, [locale])
 
   const handleLogout = async () => {
     setIsLoggingOut(true)
@@ -329,8 +353,12 @@ export default function DashboardClient({ user, company, waypoints, locale, isPa
               </div>
               <div>
                 <p className="text-sky-700 font-medium mb-1">{t('crewMessage')}</p>
-                <p className="text-slate-600">&quot;{t('crewMessageContent', { days: 71 })}&quot;</p>
-                <p className="text-slate-400 text-sm mt-2">{t('crewSignature', { time: t('hoursAgo', { hours: 2 }) })}</p>
+                <p className="text-slate-600">&quot;{crewMessage || t('crewMessageContent', { days: 71 })}&quot;</p>
+                <p className="text-slate-400 text-sm mt-2">
+                  {crewMessageTime
+                    ? t('crewSignature', { time: new Date(crewMessageTime).toLocaleDateString() })
+                    : t('crewSignature', { time: t('hoursAgo', { hours: 2 }) })}
+                </p>
               </div>
             </div>
           </div>

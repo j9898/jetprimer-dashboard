@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
@@ -123,6 +123,7 @@ interface Customer {
   email_locale?: string
   admin_notes?: string
   is_paid?: boolean
+  last_visited_at?: string
   flight_code: string
   created_at: string
   steps: Step[]
@@ -182,6 +183,11 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
   const [showTodoInput, setShowTodoInput] = useState(false)
   const [customerTodos, setCustomerTodos] = useState<{ id: number; title: string; description?: string; is_completed: boolean; created_by: string; created_at: string }[]>([])
   const [isLoadingTodos, setIsLoadingTodos] = useState(false)
+  const [crewMessageKo, setCrewMessageKo] = useState('')
+  const [crewMessageEn, setCrewMessageEn] = useState('')
+  const [crewMessageJa, setCrewMessageJa] = useState('')
+  const [isSavingCrewMessage, setIsSavingCrewMessage] = useState(false)
+  const [crewMessageSaved, setCrewMessageSaved] = useState(false)
   const ITEMS_PER_PAGE = 10
   const t = useTranslations('admin')
   const tCommon = useTranslations('common')
@@ -341,6 +347,50 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
       showToast(t('todoAddFailed'), 'error')
     }
     setIsAddingTodo(false)
+  }
+
+  // 승무원 메시지 로드
+  useEffect(() => {
+    fetch('/api/admin/crew-message')
+      .then(res => res.json())
+      .then(data => {
+        if (data.success && data.message) {
+          setCrewMessageKo(data.message.message_ko || '')
+          setCrewMessageEn(data.message.message_en || '')
+          setCrewMessageJa(data.message.message_ja || '')
+        }
+      })
+      .catch(() => {})
+  }, [])
+
+  // 승무원 메시지 저장
+  const saveCrewMessage = async () => {
+    setIsSavingCrewMessage(true)
+    try {
+      const response = await fetch('/api/admin/crew-message', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message_ko: crewMessageKo,
+          message_en: crewMessageEn,
+          message_ja: crewMessageJa,
+        })
+      })
+
+      const result = await response.json()
+
+      if (result.success) {
+        showToast(t('crewMessageSaved'), 'success')
+        setCrewMessageSaved(true)
+        setTimeout(() => setCrewMessageSaved(false), 2000)
+      } else {
+        showToast(t('crewMessageFailed'), 'error')
+      }
+    } catch (error) {
+      console.error('Save crew message error:', error)
+      showToast(t('crewMessageFailed'), 'error')
+    }
+    setIsSavingCrewMessage(false)
   }
 
   // 고객 선택 시 메모 로드
@@ -652,56 +702,18 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-100 via-slate-50 to-zinc-100">
-      {/* Mobile Header */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 z-40 bg-white/80 backdrop-blur-xl border-b border-slate-200/50 px-4 py-3">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 bg-gradient-to-br from-slate-700 to-slate-900 rounded-lg flex items-center justify-center text-white shadow-lg shadow-slate-400/30">
-              <PlaneIcon />
-            </div>
-            <h1 className="text-lg font-bold text-slate-800">JetPrimer Admin</h1>
-          </div>
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 rounded-lg hover:bg-slate-100 text-slate-700"
-          >
-            {isMobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Menu Overlay */}
-      {isMobileMenuOpen && (
-        <div
-          className="lg:hidden fixed inset-0 z-30 bg-black/50"
-          onClick={() => setIsMobileMenuOpen(false)}
-        />
-      )}
-
-      {/* Sidebar - Desktop: fixed, Mobile: slide-in */}
-      <div className={`
-        w-64 bg-white/70 backdrop-blur-xl border-r border-white/50 shadow-lg shadow-slate-200/30 flex flex-col h-screen fixed left-0 top-0 z-40
-        transition-transform duration-300 ease-in-out
-        lg:translate-x-0 ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
-      `}>
+      {/* Sidebar - Always visible */}
+      <div className="w-64 bg-white/70 backdrop-blur-xl border-r border-white/50 shadow-lg shadow-slate-200/30 flex flex-col h-screen fixed left-0 top-0 z-40">
         {/* Logo */}
         <div className="p-6 border-b border-slate-200/50">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-slate-700 to-slate-900 rounded-lg flex items-center justify-center text-white shadow-lg shadow-slate-400/30">
-                <PlaneIcon />
-              </div>
-              <div>
-                <h1 className="text-lg font-bold text-slate-800">JetPrimer</h1>
-                <p className="text-xs text-slate-500">{t('console')}</p>
-              </div>
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-gradient-to-br from-slate-700 to-slate-900 rounded-lg flex items-center justify-center text-white shadow-lg shadow-slate-400/30">
+              <PlaneIcon />
             </div>
-            <button
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="lg:hidden p-2 rounded-lg hover:bg-slate-100 text-slate-700"
-            >
-              <CloseIcon />
-            </button>
+            <div>
+              <h1 className="text-lg font-bold text-slate-800">JetPrimer</h1>
+              <p className="text-xs text-slate-500">{t('console')}</p>
+            </div>
           </div>
         </div>
 
@@ -770,7 +782,7 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
       </div>
 
       {/* Main Content */}
-      <main className="lg:ml-64 p-4 md:p-8 pt-20 lg:pt-8">
+      <main className="ml-64 p-4 md:p-8">
         <div className="max-w-6xl">
           {/* Header */}
           <div className="mb-6 md:mb-8">
@@ -881,6 +893,63 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
                 <span className="text-2xl font-bold text-slate-800">
                   {stats.totalCustomers > 0 ? Math.round((stats.paidCustomers / stats.totalCustomers) * 100) : 0}%
                 </span>
+              </div>
+            </div>
+
+            {/* Crew Message Management */}
+            <div className="bg-white/70 backdrop-blur-xl border border-white/50 shadow-lg shadow-slate-200/30 rounded-2xl p-6">
+              <h3 className="text-lg font-semibold text-slate-800 mb-2 flex items-center gap-2">
+                💬 {t('crewMessage')}
+              </h3>
+              <p className="text-slate-500 text-xs mb-4">{t('crewMessageDescription')}</p>
+
+              <div className="space-y-4">
+                {/* Korean */}
+                <div>
+                  <label className="block text-sm font-medium text-slate-600 mb-1">🇰🇷 {t('crewMessageKo')}</label>
+                  <textarea
+                    value={crewMessageKo}
+                    onChange={(e) => { setCrewMessageKo(e.target.value); setCrewMessageSaved(false) }}
+                    placeholder={t('crewMessagePlaceholder')}
+                    className="w-full h-20 p-3 text-sm text-slate-700 bg-slate-50 border border-slate-200 rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-slate-400/50 focus:border-slate-400 transition-all"
+                  />
+                </div>
+
+                {/* English */}
+                <div>
+                  <label className="block text-sm font-medium text-slate-600 mb-1">🇺🇸 {t('crewMessageEn')}</label>
+                  <textarea
+                    value={crewMessageEn}
+                    onChange={(e) => { setCrewMessageEn(e.target.value); setCrewMessageSaved(false) }}
+                    placeholder={t('crewMessagePlaceholder')}
+                    className="w-full h-20 p-3 text-sm text-slate-700 bg-slate-50 border border-slate-200 rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-slate-400/50 focus:border-slate-400 transition-all"
+                  />
+                </div>
+
+                {/* Japanese */}
+                <div>
+                  <label className="block text-sm font-medium text-slate-600 mb-1">🇯🇵 {t('crewMessageJa')}</label>
+                  <textarea
+                    value={crewMessageJa}
+                    onChange={(e) => { setCrewMessageJa(e.target.value); setCrewMessageSaved(false) }}
+                    placeholder={t('crewMessagePlaceholder')}
+                    className="w-full h-20 p-3 text-sm text-slate-700 bg-slate-50 border border-slate-200 rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-slate-400/50 focus:border-slate-400 transition-all"
+                  />
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <span className={`text-xs transition-opacity ${crewMessageSaved ? 'text-emerald-600 opacity-100' : 'opacity-0'}`}>
+                    {t('crewMessageSaved')}
+                  </span>
+                  <button
+                    onClick={saveCrewMessage}
+                    disabled={isSavingCrewMessage}
+                    className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-slate-700 hover:bg-slate-800 rounded-lg transition-all disabled:opacity-50"
+                  >
+                    <SaveIcon />
+                    {isSavingCrewMessage ? t('crewMessageSaving') : t('crewMessageSave')}
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -1143,6 +1212,17 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
                         </p>
                         <p className="text-slate-700 font-medium">
                           {tLanguage(selectedCustomer.locale || 'ko')}
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-slate-400 text-xs flex items-center gap-1">
+                          <ClockIcon />
+                          {t('lastVisit')}
+                        </p>
+                        <p className="text-slate-700 font-medium">
+                          {selectedCustomer.last_visited_at
+                            ? new Date(selectedCustomer.last_visited_at).toLocaleString()
+                            : t('neverVisited')}
                         </p>
                       </div>
                     </div>

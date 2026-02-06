@@ -153,6 +153,11 @@
     "saveNotes": "Save",
     "saving": "Saving...",
     "notesSaved": "Saved",
-    "notesSaveFailed": "Failed to save notes."
+    "notesSaveFailed": "Failed to save notes.",
+    "paymentStatus": "Payment Status",
+    "paymentStatusDescription": "Select the customer's payment status.",
+    "paid": "Paid",
+    "unpaid": "Unpaid",
+    "paidStatusUpdateFailed": "Failed to update payment status."
   }
 }

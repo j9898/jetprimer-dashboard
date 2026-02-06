@@ -91,6 +91,7 @@ interface Customer {
   locale?: string
   email_locale?: string
   admin_notes?: string
+  is_paid?: boolean
   flight_code: string
   created_at: string
   steps: Step[]
@@ -125,6 +126,7 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
   const [isSavingNotes, setIsSavingNotes] = useState(false)
   const [notesSaved, setNotesSaved] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isUpdatingPaidStatus, setIsUpdatingPaidStatus] = useState(false)
   const t = useTranslations('admin')
   const tCommon = useTranslations('common')
   const tDashboard = useTranslations('dashboard')
@@ -209,6 +211,29 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
       router.refresh()
     }
     setIsSavingNotes(false)
+  }
+
+  // 결제 상태 업데이트
+  const updatePaidStatus = async (customerId: number, isPaid: boolean) => {
+    setIsUpdatingPaidStatus(true)
+    const supabase = createClient()
+
+    const { error } = await supabase
+      .from('customers')
+      .update({ is_paid: isPaid })
+      .eq('id', customerId)
+
+    if (error) {
+      console.error('Paid status update error:', error)
+      alert(t('paidStatusUpdateFailed'))
+    } else {
+      // 선택된 고객 정보 업데이트
+      if (selectedCustomer && selectedCustomer.id === customerId) {
+        setSelectedCustomer({ ...selectedCustomer, is_paid: isPaid })
+      }
+      router.refresh()
+    }
+    setIsUpdatingPaidStatus(false)
   }
 
   // 고객 선택 시 메모 로드
@@ -409,7 +434,18 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
                   >
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-2">
                       <div>
-                        <h3 className="text-lg font-semibold text-slate-800">{customer.name}</h3>
+                        <div className="flex items-center gap-2">
+                          <h3 className="text-lg font-semibold text-slate-800">{customer.name}</h3>
+                          {customer.is_paid ? (
+                            <span className="px-2 py-0.5 text-xs font-medium bg-emerald-100 text-emerald-700 rounded-full">
+                              {t('paid')}
+                            </span>
+                          ) : (
+                            <span className="px-2 py-0.5 text-xs font-medium bg-slate-100 text-slate-500 rounded-full">
+                              {t('unpaid')}
+                            </span>
+                          )}
+                        </div>
                         <p className="text-slate-500 text-sm truncate">{customer.email}</p>
                       </div>
                       <div className="sm:text-right">
@@ -506,6 +542,36 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
                           {tLanguage(locale)}
                         </button>
                       ))}
+                    </div>
+                  </div>
+
+                  {/* Payment Status Card */}
+                  <div className="bg-white/70 backdrop-blur-xl border border-white/50 shadow-lg shadow-slate-200/30 rounded-2xl p-6">
+                    <h3 className="text-lg font-semibold text-slate-800 mb-4">{t('paymentStatus')}</h3>
+                    <p className="text-slate-500 text-xs mb-3">{t('paymentStatusDescription')}</p>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => updatePaidStatus(selectedCustomer.id, false)}
+                        disabled={isUpdatingPaidStatus}
+                        className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-all ${
+                          !selectedCustomer.is_paid
+                            ? 'bg-slate-700 text-white'
+                            : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                        } disabled:opacity-50`}
+                      >
+                        {t('unpaid')}
+                      </button>
+                      <button
+                        onClick={() => updatePaidStatus(selectedCustomer.id, true)}
+                        disabled={isUpdatingPaidStatus}
+                        className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-all ${
+                          selectedCustomer.is_paid
+                            ? 'bg-emerald-600 text-white'
+                            : 'bg-slate-100 text-slate-600 hover:bg-emerald-50 hover:text-emerald-600'
+                        } disabled:opacity-50`}
+                      >
+                        {t('paid')}
+                      </button>
                     </div>
                   </div>
 

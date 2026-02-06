@@ -153,6 +153,11 @@
     "saveNotes": "저장",
     "saving": "저장 중...",
     "notesSaved": "저장되었습니다",
-    "notesSaveFailed": "메모 저장에 실패했습니다."
+    "notesSaveFailed": "메모 저장에 실패했습니다.",
+    "paymentStatus": "결제 상태",
+    "paymentStatusDescription": "고객의 결제 여부를 선택하세요.",
+    "paid": "결제 완료",
+    "unpaid": "미결제",
+    "paidStatusUpdateFailed": "결제 상태 변경에 실패했습니다."
   }
 }

@@ -131,7 +131,57 @@ export default function DashboardClient({ user, company, waypoints, locale, isPa
   })
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-sky-100 via-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-gradient-to-br from-sky-100 via-blue-50 to-indigo-100 relative overflow-hidden">
+      {/* Animated Airport Sky Background */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        {/* Cloud layers */}
+        <div className="absolute top-[8%] animate-[drift_35s_linear_infinite] opacity-20">
+          <div className="w-48 h-16 bg-white rounded-full blur-2xl" />
+        </div>
+        <div className="absolute top-[15%] right-0 animate-[drift_50s_linear_infinite_reverse] opacity-15">
+          <div className="w-72 h-20 bg-white rounded-full blur-3xl" />
+        </div>
+        <div className="absolute top-[25%] animate-[drift_40s_linear_infinite] opacity-10" style={{ animationDelay: '-15s' }}>
+          <div className="w-64 h-14 bg-white rounded-full blur-2xl" />
+        </div>
+        <div className="absolute top-[45%] right-[10%] animate-[drift_60s_linear_infinite_reverse] opacity-10">
+          <div className="w-56 h-18 bg-white rounded-full blur-3xl" />
+        </div>
+
+        {/* Airplane flying across - main */}
+        <div className="absolute top-[12%] animate-[flyAcross_18s_linear_infinite]">
+          <svg className="w-8 h-8 lg:w-10 lg:h-10 text-sky-300/40 -rotate-12" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+          </svg>
+          {/* Contrail */}
+          <div className="absolute top-1/2 right-full w-32 lg:w-48 h-[2px] bg-gradient-to-l from-sky-300/20 to-transparent -translate-y-1/2" />
+        </div>
+
+        {/* Airplane flying across - secondary (smaller, higher) */}
+        <div className="absolute top-[6%] animate-[flyAcross_25s_linear_infinite]" style={{ animationDelay: '-8s' }}>
+          <svg className="w-4 h-4 lg:w-5 lg:h-5 text-sky-200/30 -rotate-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+          </svg>
+          <div className="absolute top-1/2 right-full w-20 lg:w-28 h-[1px] bg-gradient-to-l from-sky-200/15 to-transparent -translate-y-1/2" />
+        </div>
+
+        {/* Runway / ground horizon effect - subtle */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-blue-200/20 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-sky-300/20 to-transparent" />
+      </div>
+
+      {/* CSS Keyframes */}
+      <style jsx>{`
+        @keyframes drift {
+          0% { transform: translateX(-200px); }
+          100% { transform: translateX(calc(100vw + 200px)); }
+        }
+        @keyframes flyAcross {
+          0% { left: -80px; }
+          100% { left: calc(100vw + 80px); }
+        }
+      `}</style>
+
       {/* Mobile Header */}
       <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-sky-200/50 px-4 py-3">
         <div className="flex items-center justify-between">
@@ -224,7 +274,7 @@ export default function DashboardClient({ user, company, waypoints, locale, isPa
       </div>
 
       {/* Main Content */}
-      <main className="lg:ml-64 px-4 pb-8 pt-[72px] lg:pt-6 lg:px-8">
+      <main className="lg:ml-64 px-4 pb-8 pt-[72px] lg:pt-6 lg:px-8 relative z-10">
         <div className="max-w-5xl mx-auto space-y-5 lg:space-y-8">
 
           {/* Header - compact on mobile */}

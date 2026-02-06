@@ -201,7 +201,7 @@ export default function DashboardClient({ user, company, waypoints, locale, isPa
             className={`flex items-center gap-1.5 px-3 py-2 -mr-2 rounded-lg font-semibold text-xs tracking-wider transition-all ${
               isMobileMenuOpen
                 ? 'bg-slate-800 text-white shadow-lg'
-                : 'bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-md shadow-sky-400/30 animate-pulse hover:animate-none hover:shadow-lg hover:shadow-sky-400/40'
+                : 'bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-md shadow-orange-400/30 animate-[pulse_1s_ease-in-out_infinite] hover:animate-none hover:shadow-lg hover:shadow-orange-400/40'
             }`}
           >
             {isMobileMenuOpen ? <CloseIcon /> : (
@@ -397,9 +397,9 @@ export default function DashboardClient({ user, company, waypoints, locale, isPa
           </div>
 
           {/* Boarding Pass Ticket - Full width, mobile first */}
-          <div className={`rounded-2xl overflow-hidden shadow-lg ${isPaid ? 'shadow-sky-200/40' : 'shadow-amber-200/40'}`}>
+          <div className={`rounded-2xl overflow-hidden shadow-lg ${isPaid ? 'shadow-sky-200/40' : 'shadow-sky-200/40'}`}>
             {/* Ticket Header */}
-            <div className={`px-4 py-3 lg:px-5 lg:py-4 ${isPaid ? 'bg-gradient-to-r from-sky-500 to-blue-600' : 'bg-gradient-to-r from-amber-500 to-orange-500'}`}>
+            <div className={`px-4 py-3 lg:px-5 lg:py-4 ${isPaid ? 'bg-gradient-to-r from-sky-500 to-blue-600' : 'bg-gradient-to-r from-sky-500 to-blue-600'}`}>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <PlaneIcon />
@@ -469,12 +469,12 @@ export default function DashboardClient({ user, company, waypoints, locale, isPa
               {/* Payment Status */}
               <div className="mt-3 flex items-center gap-3">
                 <div className={`w-9 h-9 lg:w-10 lg:h-10 rounded-full flex items-center justify-center flex-shrink-0 ${
-                  isPaid ? 'bg-emerald-100' : 'bg-amber-100'
+                  isPaid ? 'bg-emerald-100' : 'bg-sky-100'
                 }`}>
                   <span className="text-base lg:text-lg">{isPaid ? '✓' : '⏳'}</span>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className={`font-semibold text-sm ${isPaid ? 'text-emerald-600' : 'text-amber-600'}`}>
+                  <p className={`font-semibold text-sm ${isPaid ? 'text-emerald-600' : 'text-sky-600'}`}>
                     {t(isPaid ? 'ticketConfirmed' : 'ticketPendingPayment')}
                   </p>
                   <p className="text-slate-400 text-xs leading-tight mt-0.5">
@@ -485,12 +485,12 @@ export default function DashboardClient({ user, company, waypoints, locale, isPa
             </div>
 
             {/* Ticket Footer - Barcode style */}
-            <div className={`px-4 py-2.5 lg:px-5 lg:py-3 ${isPaid ? 'bg-sky-50' : 'bg-amber-50'}`}>
+            <div className={`px-4 py-2.5 lg:px-5 lg:py-3 ${isPaid ? 'bg-sky-50' : 'bg-sky-50'}`}>
               <div className="flex items-center justify-center gap-[2px]">
                 {Array.from({ length: 40 }, (_, i) => (
                   <div
                     key={i}
-                    className={`${isPaid ? 'bg-sky-300/60' : 'bg-amber-300/60'}`}
+                    className={`${isPaid ? 'bg-sky-300/60' : 'bg-sky-300/60'}`}
                     style={{
                       width: `${((i * 7 + 3) % 3) + 1.5}px`,
                       height: `${((i * 13 + 5) % 9) + 14}px`,

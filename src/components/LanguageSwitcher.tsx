@@ -4,13 +4,14 @@ import { useTransition, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { setLocale, setLocaleToDatabase } from '@/lib/actions/locale'
 
-type Locale = 'ko' | 'en' | 'ja'
+type Locale = 'ko' | 'en' | 'ja' | 'ar'
 const DEFAULT_LOCALE = 'ko'
 
 const languages: { code: Locale; label: string; flag: string }[] = [
   { code: 'ko', label: '한국어', flag: '🇰🇷' },
   { code: 'en', label: 'English', flag: '🇺🇸' },
   { code: 'ja', label: '日本語', flag: '🇯🇵' },
+  { code: 'ar', label: 'العربية', flag: '🇸🇦' },
 ]
 
 interface LanguageSwitcherProps {

@@ -80,6 +80,11 @@ export function getStepUpdateEmailTemplate({
       pending: '待機',
       in_progress: '進行中',
       completed: '完了'
+    },
+    ar: {
+      pending: 'قيد الانتظار',
+      in_progress: 'قيد التنفيذ',
+      completed: 'مكتمل'
     }
   }
 
@@ -101,6 +106,12 @@ export function getStepUpdateEmailTemplate({
       llc: 'LLC設立',
       ein: 'EIN申請',
       bank: '銀行口座'
+    },
+    ar: {
+      documents: 'تجهيز المستندات',
+      llc: 'تأسيس LLC',
+      ein: 'طلب EIN',
+      bank: 'حساب بنكي'
     }
   }
 
@@ -122,6 +133,12 @@ export function getStepUpdateEmailTemplate({
       greeting: `${customerName}様`,
       body: `LLC設立の進捗状況が更新されました。`,
       footer: 'ご質問がございましたら、お気軽にお問い合わせください。'
+    },
+    ar: {
+      subject: `[JetPrimer] تم تحديث حالة ${stepLabels.ar[stepName] || stepName}`,
+      greeting: `مرحباً ${customerName}`,
+      body: `تم تحديث تقدم تأسيس شركة LLC الخاصة بك.`,
+      footer: 'إذا كان لديك أي أسئلة، لا تتردد في التواصل معنا.'
     }
   }
 
@@ -177,7 +194,7 @@ export function getStepUpdateEmailTemplate({
 
           <!-- CTA Button -->
           <a href="${DASHBOARD_URL}/dashboard" style="display: block; text-align: center; background: linear-gradient(135deg, #38bdf8 0%, #3b82f6 100%); color: white; text-decoration: none; padding: 14px 24px; border-radius: 10px; font-weight: 600; font-size: 16px;">
-            ${locale === 'en' ? 'View Dashboard' : locale === 'ja' ? 'ダッシュボードを見る' : '대시보드 확인하기'}
+            ${locale === 'en' ? 'View Dashboard' : locale === 'ja' ? 'ダッシュボードを見る' : locale === 'ar' ? 'عرض لوحة التحكم' : '대시보드 확인하기'}
           </a>
         </div>
 
@@ -242,6 +259,15 @@ export function getWelcomeEmailTemplate({
       nextStep: 'ダッシュボードでチケットをご購入いただくと、LLC設立手続きが開始されます。書類準備から銀行口座開設まで、JetPrimerクルーがサポートいたします。',
       ctaButton: 'ダッシュボードへ',
       footer: 'ご質問がございましたら、お気軽にお問い合わせください。'
+    },
+    ar: {
+      subject: '[JetPrimer] مرحباً! ابدأ رحلة تأسيس شركتك في أمريكا',
+      greeting: `مرحباً ${customerName}! ✈️`,
+      body: 'شكراً لانضمامك إلى JetPrimer. خدمة تأسيس LLC الأمريكية المتميزة جاهزة لك.',
+      flightCodeLabel: 'رقم العميل (كود الرحلة)',
+      nextStep: 'قم بشراء تذكرتك من لوحة التحكم لبدء إجراءات تأسيس LLC. من تجهيز المستندات إلى فتح الحساب البنكي، فريق JetPrimer معك في كل خطوة.',
+      ctaButton: 'الذهاب إلى لوحة التحكم',
+      footer: 'إذا كان لديك أي أسئلة، لا تتردد في التواصل معنا.'
     }
   }
 

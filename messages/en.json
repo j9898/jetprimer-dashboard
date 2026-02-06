@@ -123,7 +123,8 @@
     "select": "Select Language",
     "ko": "한국어",
     "en": "English",
-    "ja": "日本語"
+    "ja": "日本語",
+    "ar": "العربية"
   },
   "admin": {
     "title": "CEO Management",
@@ -232,6 +233,7 @@
     "crewMessageKo": "Korean Message",
     "crewMessageEn": "English Message",
     "crewMessageJa": "Japanese Message",
+    "crewMessageAr": "Arabic Message",
     "crewMessagePlaceholder": "Enter crew message...",
     "crewMessageSave": "Save Message",
     "crewMessageSaving": "Saving...",

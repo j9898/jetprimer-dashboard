@@ -14,10 +14,12 @@ const DEFAULT_TODO_TITLES: Record<string, string> = {
   ko: 'JetPrimer 미국행 법인설립 티켓 구매하기',
   en: 'Purchase JetPrimer US LLC Formation Ticket',
   ja: 'JetPrimer 米国LLC設立チケットを購入する',
+  ar: 'شراء تذكرة تأسيس شركة أمريكية من JetPrimer',
 }
 
 function getLocaleFromRequest(request: Request): string {
   const acceptLanguage = request.headers.get('accept-language') || ''
+  if (acceptLanguage.includes('ar')) return 'ar'
   if (acceptLanguage.includes('ja')) return 'ja'
   if (acceptLanguage.includes('en')) return 'en'
   return 'ko'

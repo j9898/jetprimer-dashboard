@@ -13,7 +13,7 @@ export async function GET() {
 
     const { data: message, error } = await supabase
       .from('crew_messages')
-      .select('message_ko, message_en, message_ja, updated_at')
+      .select('message_ko, message_en, message_ja, message_ar, updated_at')
       .order('id', { ascending: false })
       .limit(1)
       .single()

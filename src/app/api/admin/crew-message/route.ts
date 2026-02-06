@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json()
-    const { message_ko, message_en, message_ja } = body
+    const { message_ko, message_en, message_ja, message_ar } = body
 
     const adminSupabase = createAdminClient()
 
@@ -74,6 +74,7 @@ export async function POST(request: NextRequest) {
           message_ko: message_ko || '',
           message_en: message_en || '',
           message_ja: message_ja || '',
+          message_ar: message_ar || '',
           updated_at: new Date().toISOString(),
         })
         .eq('id', existing.id)
@@ -90,6 +91,7 @@ export async function POST(request: NextRequest) {
           message_ko: message_ko || '',
           message_en: message_en || '',
           message_ja: message_ja || '',
+          message_ar: message_ar || '',
         })
         .select()
         .single()

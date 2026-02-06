@@ -192,6 +192,7 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
   const [crewMessageKo, setCrewMessageKo] = useState('')
   const [crewMessageEn, setCrewMessageEn] = useState('')
   const [crewMessageJa, setCrewMessageJa] = useState('')
+  const [crewMessageAr, setCrewMessageAr] = useState('')
   const [isSavingCrewMessage, setIsSavingCrewMessage] = useState(false)
   const [crewMessageSaved, setCrewMessageSaved] = useState(false)
   const [isDeletingCustomer, setIsDeletingCustomer] = useState(false)
@@ -366,6 +367,7 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
           setCrewMessageKo(data.message.message_ko || '')
           setCrewMessageEn(data.message.message_en || '')
           setCrewMessageJa(data.message.message_ja || '')
+          setCrewMessageAr(data.message.message_ar || '')
         }
       })
       .catch(() => {})
@@ -382,6 +384,7 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
           message_ko: crewMessageKo,
           message_en: crewMessageEn,
           message_ja: crewMessageJa,
+          message_ar: crewMessageAr,
         })
       })
 
@@ -981,6 +984,18 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
                   />
                 </div>
 
+                {/* Arabic */}
+                <div>
+                  <label className="block text-sm font-medium text-slate-600 mb-1">🇸🇦 {t('crewMessageAr')}</label>
+                  <textarea
+                    value={crewMessageAr}
+                    onChange={(e) => { setCrewMessageAr(e.target.value); setCrewMessageSaved(false) }}
+                    placeholder={t('crewMessagePlaceholder')}
+                    dir="rtl"
+                    className="w-full h-20 p-3 text-sm text-slate-700 bg-slate-50 border border-slate-200 rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-slate-400/50 focus:border-slate-400 transition-all"
+                  />
+                </div>
+
                 <div className="flex items-center justify-between">
                   <span className={`text-xs transition-opacity ${crewMessageSaved ? 'text-emerald-600 opacity-100' : 'opacity-0'}`}>
                     {t('crewMessageSaved')}
@@ -1307,7 +1322,7 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
                     <h3 className="text-lg font-semibold text-slate-800 mb-4">{t('emailLanguageSettings')}</h3>
                     <p className="text-slate-500 text-xs mb-3">{t('emailLanguageDescription')}</p>
                     <div className="flex gap-2">
-                      {(['ko', 'en', 'ja'] as const).map((locale) => (
+                      {(['ko', 'en', 'ja', 'ar'] as const).map((locale) => (
                         <button
                           key={locale}
                           onClick={() => updateEmailLocale(selectedCustomer.id, locale)}

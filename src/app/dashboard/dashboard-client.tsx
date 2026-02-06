@@ -226,66 +226,149 @@ export default function DashboardClient({ user, company, waypoints, locale, isPa
         />
       )}
 
-      {/* Sidebar - Desktop: fixed, Mobile: slide-in */}
+      {/* Sidebar - Desktop: fixed, Mobile: slide-in — Boarding Pass Style */}
       <div className={`
-        w-64 bg-white/70 backdrop-blur-xl border-r border-white/50 shadow-lg shadow-sky-200/30 flex flex-col h-screen fixed left-0 top-0 z-40
+        w-72 lg:w-64 flex flex-col h-screen fixed left-0 top-0 z-40
         transition-transform duration-300 ease-in-out
         lg:translate-x-0 ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
       `}>
-        {/* Logo */}
-        <div className="p-6 border-b border-sky-200/50">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-sky-400 to-blue-500 rounded-lg flex items-center justify-center text-white shadow-lg shadow-sky-400/30">
-                <PlaneIcon />
+        {/* Ticket container with rounded corners and shadow */}
+        <div className="flex flex-col h-full m-2 lg:m-0 lg:mr-0 rounded-2xl lg:rounded-none overflow-hidden shadow-2xl lg:shadow-lg shadow-sky-300/30">
+
+          {/* === Ticket Header — Airline Banner === */}
+          <div className="bg-gradient-to-r from-sky-500 to-blue-600 px-5 py-4 relative">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center text-white">
+                  <PlaneIcon />
+                </div>
+                <div>
+                  <h1 className="text-base font-bold text-white tracking-wide">JetPrimer</h1>
+                  <p className="text-[10px] text-sky-200 font-medium tracking-widest uppercase">{t('boardingPass')}</p>
+                </div>
               </div>
-              <div>
-                <h1 className="text-lg font-bold text-slate-800">JetPrimer</h1>
-                <p className="text-xs text-sky-600">{t('flightCenter')}</p>
+              <button
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="lg:hidden p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white/80 hover:text-white transition-colors"
+              >
+                <CloseIcon />
+              </button>
+            </div>
+            {/* Decorative stripe */}
+            <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-amber-300 to-amber-400" />
+          </div>
+
+          {/* === Perforated Edge === */}
+          <div className="relative bg-white h-4 flex-shrink-0">
+            <div className="absolute -top-2 left-0 right-0 flex justify-between px-0">
+              <div className="w-4 h-4 bg-gradient-to-br from-sky-100 via-blue-50 to-indigo-100 rounded-full -ml-2" />
+              <div className="flex-1 border-b-2 border-dashed border-slate-200 mb-2 mx-1" />
+              <div className="w-4 h-4 bg-gradient-to-br from-sky-100 via-blue-50 to-indigo-100 rounded-full -mr-2" />
+            </div>
+          </div>
+
+          {/* === Ticket Body — Passenger Info === */}
+          <div className="bg-white flex-1 flex flex-col overflow-y-auto">
+            {/* Passenger Details */}
+            <div className="px-5 pb-4">
+              <div className="mb-3">
+                <p className="text-[9px] text-slate-400 tracking-[0.2em] uppercase font-medium">{t('passenger')}</p>
+                <p className="text-slate-800 font-bold text-sm truncate">{company.captain}</p>
+              </div>
+
+              {/* Flight info grid */}
+              <div className="grid grid-cols-3 gap-3 mb-4">
+                <div>
+                  <p className="text-[9px] text-slate-400 tracking-[0.15em] uppercase font-medium">{t('flight').split('(')[0].trim()}</p>
+                  <p className="text-sky-600 font-mono font-bold text-xs">{company.flightNumber}</p>
+                </div>
+                <div>
+                  <p className="text-[9px] text-slate-400 tracking-[0.15em] uppercase font-medium">{t('gate')}</p>
+                  <p className="text-slate-700 font-mono font-bold text-xs">{locale === 'ko' ? 'KR' : locale === 'ja' ? 'JP' : 'US'}</p>
+                </div>
+                <div>
+                  <p className="text-[9px] text-slate-400 tracking-[0.15em] uppercase font-medium">{t('seat')}</p>
+                  <p className="text-slate-700 font-mono font-bold text-xs">1A</p>
+                </div>
+              </div>
+
+              {/* Status indicator */}
+              <div className={`flex items-center gap-2 px-3 py-2 rounded-lg ${isPaid ? 'bg-emerald-50 border border-emerald-200/60' : 'bg-amber-50 border border-amber-200/60'}`}>
+                <span className="text-sm">{isPaid ? '✅' : '⏳'}</span>
+                <span className={`text-[11px] font-semibold ${isPaid ? 'text-emerald-600' : 'text-amber-600'}`}>
+                  {t(isPaid ? 'ticketConfirmed' : 'ticketPendingPayment')}
+                </span>
               </div>
             </div>
-            <button
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="lg:hidden p-2 rounded-lg hover:bg-sky-100 text-slate-700"
-            >
-              <CloseIcon />
-            </button>
-          </div>
-        </div>
 
-        {/* Navigation */}
-        <nav className="flex-1 p-4">
-          <ul className="space-y-2">
-            <li>
-              <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-gradient-to-r from-sky-500 to-blue-500 text-white shadow-lg shadow-sky-400/30">
-                <DashboardIcon />
-                <span className="text-sm font-medium">{t('flightCenter')}</span>
+            {/* Dashed divider */}
+            <div className="mx-5 border-t border-dashed border-slate-200" />
+
+            {/* Navigation — styled as boarding zones */}
+            <nav className="px-4 py-3">
+              <p className="text-[9px] text-slate-400 tracking-[0.2em] uppercase font-medium px-1 mb-2">TERMINAL</p>
+              <ul className="space-y-1.5">
+                <li>
+                  <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl bg-gradient-to-r from-sky-50 to-blue-50 border border-sky-200/50 text-sky-700 shadow-sm">
+                    <DashboardIcon />
+                    <span className="text-xs font-semibold">{t('flightCenter')}</span>
+                    <div className="ml-auto w-1.5 h-1.5 rounded-full bg-sky-500 animate-pulse" />
+                  </button>
+                </li>
+              </ul>
+            </nav>
+
+            {/* Dashed divider */}
+            <div className="mx-5 border-t border-dashed border-slate-200" />
+
+            {/* Language Switcher — styled as destination selector */}
+            <div className="px-4 py-3">
+              <p className="text-[9px] text-slate-400 tracking-[0.2em] uppercase font-medium px-1 mb-2">{t('destination')}</p>
+              <LanguageSwitcher currentLocale={locale} variant="compact" />
+            </div>
+
+            {/* Spacer */}
+            <div className="flex-1" />
+
+            {/* Dashed divider */}
+            <div className="mx-5 border-t border-dashed border-slate-200" />
+
+            {/* User Info & Logout — Gate agent area */}
+            <div className="px-5 py-3">
+              <div className="mb-3">
+                <p className="text-[9px] text-slate-400 tracking-[0.2em] uppercase font-medium">{tCommon('loggedInAs')}</p>
+                <p className="text-xs text-slate-600 truncate font-medium">{user.email}</p>
+              </div>
+              <button
+                onClick={handleLogout}
+                disabled={isLoggingOut}
+                className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg border border-slate-200 text-slate-500 hover:border-rose-300 hover:bg-rose-50 hover:text-rose-600 transition-all text-xs font-medium"
+              >
+                <LogoutIcon />
+                <span>{isLoggingOut ? tCommon('loggingOut') : tCommon('logout')}</span>
               </button>
-            </li>
-          </ul>
-        </nav>
-
-        {/* Language Switcher */}
-        <div className="px-4 pb-2">
-          <LanguageSwitcher currentLocale={locale} variant="compact" />
-        </div>
-
-        {/* User Info & Logout */}
-        <div className="p-4 border-t border-sky-200/50">
-          <div className="mb-3 px-4">
-            <p className="text-xs text-slate-400">{tCommon('loggedInAs')}</p>
-            <p className="text-sm text-slate-700 truncate">{user.email}</p>
+            </div>
           </div>
-          <button
-            onClick={handleLogout}
-            disabled={isLoggingOut}
-            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 hover:bg-rose-50 hover:text-rose-600 transition-all"
-          >
-            <LogoutIcon />
-            <span className="text-sm font-medium">
-              {isLoggingOut ? tCommon('loggingOut') : tCommon('logout')}
-            </span>
-          </button>
+
+          {/* === Ticket Footer — Barcode === */}
+          <div className="bg-slate-50 border-t border-slate-100 px-5 py-3 flex-shrink-0">
+            {/* Mini barcode */}
+            <div className="flex items-center justify-center gap-[1.5px] mb-1.5">
+              {Array.from({ length: 35 }, (_, i) => (
+                <div
+                  key={i}
+                  className="bg-slate-300/70"
+                  style={{
+                    width: `${((i * 7 + 3) % 3) + 1}px`,
+                    height: `${((i * 13 + 5) % 7) + 10}px`,
+                  }}
+                />
+              ))}
+            </div>
+            <p className="text-center text-[9px] text-slate-400 font-mono tracking-[0.3em]">
+              {company.flightNumber}
+            </p>
+          </div>
         </div>
       </div>
 

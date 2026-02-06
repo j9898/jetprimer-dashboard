@@ -208,7 +208,9 @@
     "addTodo": "追加",
     "addingTodo": "追加中...",
     "todoAdded": "タスクが追加されました。",
-    "todoAddFailed": "タスクの追加に失敗しました。"
+    "todoAddFailed": "タスクの追加に失敗しました。",
+    "adminLabel": "管理者",
+    "noTodos": "登録されたタスクはありません。"
   },
   "todos": {
     "title": "やることリスト",

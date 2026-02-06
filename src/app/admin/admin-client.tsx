@@ -180,6 +180,8 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
   const [newTodoDescription, setNewTodoDescription] = useState('')
   const [isAddingTodo, setIsAddingTodo] = useState(false)
   const [showTodoInput, setShowTodoInput] = useState(false)
+  const [customerTodos, setCustomerTodos] = useState<{ id: number; title: string; description?: string; is_completed: boolean; created_by: string; created_at: string }[]>([])
+  const [isLoadingTodos, setIsLoadingTodos] = useState(false)
   const ITEMS_PER_PAGE = 10
   const t = useTranslations('admin')
   const tCommon = useTranslations('common')
@@ -291,6 +293,21 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
     setIsUpdatingPaidStatus(false)
   }
 
+  // 고객 할 일 목록 조회
+  const fetchCustomerTodos = async (customerId: number) => {
+    setIsLoadingTodos(true)
+    try {
+      const response = await fetch(`/api/admin/todos?customer_id=${customerId}`)
+      const result = await response.json()
+      if (result.success) {
+        setCustomerTodos(result.todos || [])
+      }
+    } catch (error) {
+      console.error('Fetch todos error:', error)
+    }
+    setIsLoadingTodos(false)
+  }
+
   // 관리자 할 일 추가
   const addTodoForCustomer = async () => {
     if (!selectedCustomer || !newTodoTitle.trim()) return
@@ -314,6 +331,8 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
         setNewTodoTitle('')
         setNewTodoDescription('')
         setShowTodoInput(false)
+        // 목록 갱신
+        fetchCustomerTodos(selectedCustomer.id)
       } else {
         showToast(t('todoAddFailed'), 'error')
       }
@@ -332,6 +351,8 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
     setNewTodoTitle('')
     setNewTodoDescription('')
     setShowTodoInput(false)
+    setCustomerTodos([])
+    fetchCustomerTodos(customer.id)
   }
 
   // 이메일 미리보기 열기
@@ -1216,6 +1237,50 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
                       📋 {t('customerTodo')}
                     </h3>
                     <p className="text-slate-500 text-xs mb-3">{t('customerTodoDescription')}</p>
+
+                    {/* 할 일 목록 */}
+                    {isLoadingTodos ? (
+                      <div className="text-center py-4 text-slate-400 text-sm">{tCommon('loading')}</div>
+                    ) : customerTodos.length > 0 ? (
+                      <div className="space-y-2 mb-4">
+                        {customerTodos.filter(todo => !todo.is_completed).map(todo => (
+                          <div key={todo.id} className="flex items-start gap-2 p-2.5 bg-slate-50 rounded-lg">
+                            <span className="text-slate-400 mt-0.5">○</span>
+                            <div className="flex-1 min-w-0">
+                              <span className="text-sm text-slate-700">{todo.title}</span>
+                              {todo.created_by === 'admin' && (
+                                <span className="inline-flex items-center gap-1 text-xs ml-2 text-sky-600 bg-sky-50 px-1.5 py-0.5 rounded-full">
+                                  👨‍✈️ {t('adminLabel')}
+                                </span>
+                              )}
+                              {todo.description && (
+                                <p className="text-xs text-slate-400 mt-0.5">{todo.description}</p>
+                              )}
+                            </div>
+                          </div>
+                        ))}
+                        {customerTodos.filter(todo => todo.is_completed).length > 0 && (
+                          <div className="pt-2 border-t border-slate-100">
+                            <p className="text-xs text-slate-400 mb-1">✓ {t('status.completed')} ({customerTodos.filter(todo => todo.is_completed).length})</p>
+                            {customerTodos.filter(todo => todo.is_completed).map(todo => (
+                              <div key={todo.id} className="flex items-start gap-2 p-2 opacity-50">
+                                <span className="text-emerald-500 mt-0.5">✓</span>
+                                <div className="flex-1 min-w-0">
+                                  <span className="text-sm text-slate-500 line-through">{todo.title}</span>
+                                  {todo.created_by === 'admin' && (
+                                    <span className="inline-flex items-center gap-1 text-xs ml-2 text-sky-400 bg-sky-50/50 px-1.5 py-0.5 rounded-full">
+                                      👨‍✈️
+                                    </span>
+                                  )}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <p className="text-center py-3 text-slate-400 text-xs mb-3">{t('noTodos')}</p>
+                    )}
 
                     {!showTodoInput ? (
                       <button

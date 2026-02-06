@@ -11,6 +11,20 @@ function generateFlightCode(): string {
   return randomLetters + randomNumbers
 }
 
+// 기본 할 일 제목 (다국어)
+const DEFAULT_TODO_TITLES: Record<string, string> = {
+  ko: 'JetPrimer 미국행 법인설립 티켓 구매하기',
+  en: 'Purchase JetPrimer US LLC Formation Ticket',
+  ja: 'JetPrimer 米国LLC設立チケットを購入する',
+}
+
+function getLocaleFromRequest(request: Request): string {
+  const acceptLanguage = request.headers.get('accept-language') || ''
+  if (acceptLanguage.includes('ja')) return 'ja'
+  if (acceptLanguage.includes('en')) return 'en'
+  return 'ko'
+}
+
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url)
   const code = searchParams.get('code')
@@ -71,12 +85,14 @@ export async function GET(request: Request) {
               console.error('Steps insert error:', stepsError)
             }
 
-            // 기본 할 일 생성
+            // 기본 할 일 생성 (브라우저 언어에 맞춰)
+            const userLocale = getLocaleFromRequest(request)
+            const defaultTodoTitle = DEFAULT_TODO_TITLES[userLocale] || DEFAULT_TODO_TITLES['ko']
             const { error: todoError } = await supabase
               .from('todos')
               .insert({
                 customer_id: newCustomer.id,
-                title: 'JetPrimer 미국행 법인설립 티켓 구매하기',
+                title: defaultTodoTitle,
                 priority: 2,
                 created_by: 'admin',
               })

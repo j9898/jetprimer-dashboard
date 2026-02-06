@@ -208,7 +208,9 @@
     "addTodo": "Add",
     "addingTodo": "Adding...",
     "todoAdded": "To-do has been added.",
-    "todoAddFailed": "Failed to add to-do."
+    "todoAddFailed": "Failed to add to-do.",
+    "adminLabel": "Admin",
+    "noTodos": "No to-dos registered."
   },
   "todos": {
     "title": "To-Do List",

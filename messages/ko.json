@@ -208,7 +208,9 @@
     "addTodo": "추가",
     "addingTodo": "추가 중...",
     "todoAdded": "할 일이 추가되었습니다.",
-    "todoAddFailed": "할 일 추가에 실패했습니다."
+    "todoAddFailed": "할 일 추가에 실패했습니다.",
+    "adminLabel": "관리자",
+    "noTodos": "등록된 할 일이 없습니다."
   },
   "todos": {
     "title": "할 일 목록",

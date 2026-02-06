@@ -7,14 +7,11 @@ import { setLocale, setLocaleToDatabase } from '@/lib/actions/locale'
 type Locale = 'ko' | 'en' | 'ja' | 'zh-CN' | 'zh-TW' | 'ar' | 'es' | 'hi' | 'pt-BR' | 'fr' | 'de' | 'vi' | 'id' | 'ru'
 const DEFAULT_LOCALE = 'ko'
 
-const primaryLanguages: { code: Locale; label: string; flag: string }[] = [
+const allLanguages: { code: Locale; label: string; flag: string }[] = [
   { code: 'ko', label: '한국어', flag: '🇰🇷' },
   { code: 'en', label: 'English', flag: '🇺🇸' },
   { code: 'ja', label: '日本語', flag: '🇯🇵' },
   { code: 'zh-CN', label: '简体中文', flag: '🇨🇳' },
-]
-
-const moreLanguages: { code: Locale; label: string; flag: string }[] = [
   { code: 'zh-TW', label: '繁體中文', flag: '🇹🇼' },
   { code: 'ar', label: 'العربية', flag: '🇸🇦' },
   { code: 'es', label: 'Español', flag: '🇪🇸' },
@@ -26,6 +23,8 @@ const moreLanguages: { code: Locale; label: string; flag: string }[] = [
   { code: 'id', label: 'Indonesia', flag: '🇮🇩' },
   { code: 'ru', label: 'Русский', flag: '🇷🇺' },
 ]
+
+const PRIMARY_CODES: Locale[] = ['ko', 'en', 'ja', 'zh-CN']
 
 interface LanguageSwitcherProps {
   currentLocale?: string
@@ -49,21 +48,25 @@ export default function LanguageSwitcher({ currentLocale: propLocale, variant = 
     }
   }, [propLocale])
 
-  // If current locale is in moreLanguages, auto-expand
-  useEffect(() => {
-    if (moreLanguages.some(l => l.code === currentLocale)) {
-      setShowMore(true)
-    }
-  }, [currentLocale])
+  const isPrimaryLocale = PRIMARY_CODES.includes(currentLocale as Locale)
+  const currentLangData = allLanguages.find(l => l.code === currentLocale)
 
   const handleLocaleChange = (locale: Locale) => {
     setCurrentLocale(locale)
+    // Always close the expanded list after selection
+    setShowMore(false)
     startTransition(async () => {
       await setLocale(locale)
       await setLocaleToDatabase(locale)
       router.refresh()
     })
   }
+
+  // Build the visible primary buttons:
+  // Always show ko, en, ja, zh-CN.
+  // If current locale is NOT one of these 4, also show it as a "selected extra" badge.
+  const primaryLangs = allLanguages.filter(l => PRIMARY_CODES.includes(l.code))
+  const moreLanguages = allLanguages.filter(l => !PRIMARY_CODES.includes(l.code))
 
   const renderButton = (lang: { code: Locale; label: string; flag: string }, isCompact: boolean) => (
     <button
@@ -91,6 +94,27 @@ export default function LanguageSwitcher({ currentLocale: propLocale, variant = 
     </button>
   )
 
+  // Selected non-primary language badge (shown when list is collapsed)
+  const selectedExtraBadge = (isCompact: boolean) => {
+    if (isPrimaryLocale || !currentLangData) return null
+    return (
+      <button
+        key={currentLangData.code}
+        disabled
+        className={`${isCompact ? 'px-2 py-1 text-xs' : 'px-3 py-2 text-sm flex items-center gap-2'} rounded-lg bg-blue-500 text-white ${isCompact ? '' : 'shadow-lg shadow-blue-500/25'}`}
+      >
+        {isCompact ? (
+          <span>{currentLangData.flag}</span>
+        ) : (
+          <>
+            <span>{currentLangData.flag}</span>
+            <span>{currentLangData.label}</span>
+          </>
+        )}
+      </button>
+    )
+  }
+
   const moreToggleBtn = (isCompact: boolean) => (
     <button
       onClick={() => setShowMore(!showMore)}
@@ -104,7 +128,8 @@ export default function LanguageSwitcher({ currentLocale: propLocale, variant = 
     return (
       <div>
         <div className="flex items-center gap-1 flex-wrap">
-          {primaryLanguages.map((lang) => renderButton(lang, true))}
+          {primaryLangs.map((lang) => renderButton(lang, true))}
+          {!showMore && selectedExtraBadge(true)}
           {moreToggleBtn(true)}
         </div>
         {showMore && (
@@ -119,7 +144,8 @@ export default function LanguageSwitcher({ currentLocale: propLocale, variant = 
   return (
     <div>
       <div className="flex items-center gap-2 flex-wrap">
-        {primaryLanguages.map((lang) => renderButton(lang, false))}
+        {primaryLangs.map((lang) => renderButton(lang, false))}
+        {!showMore && selectedExtraBadge(false)}
         {moreToggleBtn(false)}
       </div>
       {showMore && (

@@ -176,6 +176,10 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
   const [emailPage, setEmailPage] = useState(1)
   const [selectedCustomerIds, setSelectedCustomerIds] = useState<Set<number>>(new Set())
   const [isBulkUpdating, setIsBulkUpdating] = useState(false)
+  const [newTodoTitle, setNewTodoTitle] = useState('')
+  const [newTodoDescription, setNewTodoDescription] = useState('')
+  const [isAddingTodo, setIsAddingTodo] = useState(false)
+  const [showTodoInput, setShowTodoInput] = useState(false)
   const ITEMS_PER_PAGE = 10
   const t = useTranslations('admin')
   const tCommon = useTranslations('common')
@@ -287,11 +291,47 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
     setIsUpdatingPaidStatus(false)
   }
 
+  // 관리자 할 일 추가
+  const addTodoForCustomer = async () => {
+    if (!selectedCustomer || !newTodoTitle.trim()) return
+
+    setIsAddingTodo(true)
+    try {
+      const response = await fetch('/api/admin/todos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          customer_id: selectedCustomer.id,
+          title: newTodoTitle,
+          description: newTodoDescription || null,
+        })
+      })
+
+      const result = await response.json()
+
+      if (result.success) {
+        showToast(t('todoAdded'), 'success')
+        setNewTodoTitle('')
+        setNewTodoDescription('')
+        setShowTodoInput(false)
+      } else {
+        showToast(t('todoAddFailed'), 'error')
+      }
+    } catch (error) {
+      console.error('Add todo error:', error)
+      showToast(t('todoAddFailed'), 'error')
+    }
+    setIsAddingTodo(false)
+  }
+
   // 고객 선택 시 메모 로드
   const handleSelectCustomer = (customer: Customer) => {
     setSelectedCustomer(customer)
     setAdminNotes(customer.admin_notes || '')
     setNotesSaved(false)
+    setNewTodoTitle('')
+    setNewTodoDescription('')
+    setShowTodoInput(false)
   }
 
   // 이메일 미리보기 열기
@@ -1168,6 +1208,71 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
                         {isSavingNotes ? t('saving') : t('saveNotes')}
                       </button>
                     </div>
+                  </div>
+
+                  {/* Customer Todo Card */}
+                  <div className="bg-white/70 backdrop-blur-xl border border-white/50 shadow-lg shadow-slate-200/30 rounded-2xl p-6">
+                    <h3 className="text-lg font-semibold text-slate-800 mb-2 flex items-center gap-2">
+                      📋 {t('customerTodo')}
+                    </h3>
+                    <p className="text-slate-500 text-xs mb-3">{t('customerTodoDescription')}</p>
+
+                    {!showTodoInput ? (
+                      <button
+                        onClick={() => setShowTodoInput(true)}
+                        className="w-full py-2.5 px-4 text-sm font-medium text-sky-600 bg-sky-50 hover:bg-sky-100 rounded-xl transition-all flex items-center justify-center gap-2"
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                        </svg>
+                        {t('addTodoForCustomer')}
+                      </button>
+                    ) : (
+                      <div className="space-y-3">
+                        <input
+                          type="text"
+                          value={newTodoTitle}
+                          onChange={(e) => setNewTodoTitle(e.target.value)}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' && newTodoTitle.trim()) addTodoForCustomer()
+                            if (e.key === 'Escape') {
+                              setShowTodoInput(false)
+                              setNewTodoTitle('')
+                              setNewTodoDescription('')
+                            }
+                          }}
+                          placeholder={t('todoTitlePlaceholder')}
+                          className="w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400/50 focus:border-sky-400 transition-all"
+                          autoFocus
+                        />
+                        <input
+                          type="text"
+                          value={newTodoDescription}
+                          onChange={(e) => setNewTodoDescription(e.target.value)}
+                          placeholder={t('todoDescriptionPlaceholder')}
+                          className="w-full px-3 py-2 text-sm text-slate-500 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400/50 focus:border-sky-400 transition-all"
+                        />
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => {
+                              setShowTodoInput(false)
+                              setNewTodoTitle('')
+                              setNewTodoDescription('')
+                            }}
+                            className="flex-1 py-2 text-sm font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition-all"
+                          >
+                            {t('cancel')}
+                          </button>
+                          <button
+                            onClick={addTodoForCustomer}
+                            disabled={!newTodoTitle.trim() || isAddingTodo}
+                            className="flex-1 py-2 text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 rounded-lg transition-all disabled:opacity-50"
+                          >
+                            {isAddingTodo ? t('addingTodo') : t('addTodo')}
+                          </button>
+                        </div>
+                      </div>
+                    )}
                   </div>
 
                   {/* Steps Card */}

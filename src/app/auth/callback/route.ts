@@ -70,6 +70,20 @@ export async function GET(request: Request) {
             if (stepsError) {
               console.error('Steps insert error:', stepsError)
             }
+
+            // 기본 할 일 생성
+            const { error: todoError } = await supabase
+              .from('todos')
+              .insert({
+                customer_id: newCustomer.id,
+                title: 'JetPrimer 미국행 법인설립 티켓 구매하기',
+                priority: 2,
+                created_by: 'admin',
+              })
+
+            if (todoError) {
+              console.error('Default todo insert error:', todoError)
+            }
           }
         }
       }

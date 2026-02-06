@@ -199,10 +199,20 @@
     "bulkMarkUnpaid": "Mark as Unpaid",
     "clearSelection": "Clear Selection",
     "bulkUpdateSuccess": "{count} customers have been updated.",
-    "bulkUpdateFailed": "Bulk update failed."
+    "bulkUpdateFailed": "Bulk update failed.",
+    "customerTodo": "Customer To-Do",
+    "customerTodoDescription": "Add items to this customer's to-do list.",
+    "addTodoForCustomer": "Add To-Do for Customer",
+    "todoTitlePlaceholder": "Enter to-do title",
+    "todoDescriptionPlaceholder": "Description (optional)",
+    "addTodo": "Add",
+    "addingTodo": "Adding...",
+    "todoAdded": "To-do has been added.",
+    "todoAddFailed": "Failed to add to-do."
   },
   "todos": {
     "title": "To-Do List",
+    "captainMessage": "Message from Captain (Admin)",
     "tasksLeft": "tasks left",
     "addTask": "Add task",
     "taskNamePlaceholder": "Enter a task",

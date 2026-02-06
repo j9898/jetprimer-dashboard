@@ -199,10 +199,20 @@
     "bulkMarkUnpaid": "미결제 처리",
     "clearSelection": "선택 해제",
     "bulkUpdateSuccess": "{count}명의 고객 상태가 업데이트되었습니다.",
-    "bulkUpdateFailed": "일괄 업데이트에 실패했습니다."
+    "bulkUpdateFailed": "일괄 업데이트에 실패했습니다.",
+    "customerTodo": "고객 할 일",
+    "customerTodoDescription": "이 고객의 할 일 목록에 항목을 추가합니다.",
+    "addTodoForCustomer": "고객 할 일 추가",
+    "todoTitlePlaceholder": "할 일 제목을 입력하세요",
+    "todoDescriptionPlaceholder": "설명 (선택사항)",
+    "addTodo": "추가",
+    "addingTodo": "추가 중...",
+    "todoAdded": "할 일이 추가되었습니다.",
+    "todoAddFailed": "할 일 추가에 실패했습니다."
   },
   "todos": {
     "title": "할 일 목록",
+    "captainMessage": "캡틴(운영자)이 입력한 메시지입니다",
     "tasksLeft": "개 남음",
     "addTask": "할 일 추가",
     "taskNamePlaceholder": "할 일을 입력하세요",

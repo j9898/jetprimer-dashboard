@@ -78,6 +78,7 @@ export async function POST(request: NextRequest) {
         description: description?.trim() || null,
         due_date: due_date || null,
         priority: priority || 0,
+        created_by: 'customer',
       })
       .select()
       .single()

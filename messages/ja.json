@@ -199,10 +199,20 @@
     "bulkMarkUnpaid": "未決済にする",
     "clearSelection": "選択解除",
     "bulkUpdateSuccess": "{count}件の顧客ステータスが更新されました。",
-    "bulkUpdateFailed": "一括更新に失敗しました。"
+    "bulkUpdateFailed": "一括更新に失敗しました。",
+    "customerTodo": "顧客タスク",
+    "customerTodoDescription": "この顧客のやることリストに項目を追加します。",
+    "addTodoForCustomer": "顧客のタスクを追加",
+    "todoTitlePlaceholder": "タスクのタイトルを入力",
+    "todoDescriptionPlaceholder": "説明（任意）",
+    "addTodo": "追加",
+    "addingTodo": "追加中...",
+    "todoAdded": "タスクが追加されました。",
+    "todoAddFailed": "タスクの追加に失敗しました。"
   },
   "todos": {
     "title": "やることリスト",
+    "captainMessage": "キャプテン（管理者）からのメッセージです",
     "tasksLeft": "件残り",
     "addTask": "タスクを追加",
     "taskNamePlaceholder": "タスクを入力",

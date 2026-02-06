@@ -1,7 +1,7 @@
 -- Create todos table for customer to-do list
 CREATE TABLE IF NOT EXISTS todos (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  customer_id UUID NOT NULL REFERENCES customers(id) ON DELETE CASCADE,
+  customer_id BIGINT NOT NULL REFERENCES customers(id) ON DELETE CASCADE,
   title TEXT NOT NULL,
   description TEXT,
   is_completed BOOLEAN DEFAULT FALSE,

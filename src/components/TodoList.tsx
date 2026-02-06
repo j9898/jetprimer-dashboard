@@ -10,6 +10,7 @@ interface Todo {
   is_completed: boolean
   due_date: string | null
   priority: number
+  created_by: string
   created_at: string
   updated_at: string
 }
@@ -386,6 +387,11 @@ export default function TodoList() {
                 {todo.description && (
                   <p className="text-xs text-slate-400 mt-0.5 line-clamp-1">{todo.description}</p>
                 )}
+                {todo.created_by === 'admin' && (
+                  <span className="inline-flex items-center gap-1 text-xs mt-1 text-sky-600 bg-sky-50 px-2 py-0.5 rounded-full">
+                    👨‍✈️ {t('captainMessage')}
+                  </span>
+                )}
                 {todo.due_date && (
                   <span className={`inline-flex items-center gap-1 text-xs mt-1 ${getDueDateColor(todo.due_date)}`}>
                     <CalendarIcon />
@@ -465,6 +471,11 @@ export default function TodoList() {
                   {/* Content */}
                   <div className="flex-1 min-w-0">
                     <p className="text-sm text-slate-400 line-through">{todo.title}</p>
+                    {todo.created_by === 'admin' && (
+                      <span className="inline-flex items-center gap-1 text-xs mt-0.5 text-sky-400 bg-sky-50/50 px-2 py-0.5 rounded-full">
+                        👨‍✈️ {t('captainMessage')}
+                      </span>
+                    )}
                   </div>
 
                   {/* Delete */}

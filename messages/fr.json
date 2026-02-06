@@ -119,7 +119,8 @@
     "ticketPendingDesc": "Votre embarquement sera confirmé après le paiement",
     "ticketConfirmedDesc": "Votre embarquement est confirmé. Bon voyage !",
     "service": "SERVICE",
-    "serviceValue": "Package complet LLC américaine"
+    "serviceValue": "Package complet LLC américaine",
+    "viewReviews": "Voir les avis des autres passagers"
   },
   "language": {
     "select": "Choisir la langue",

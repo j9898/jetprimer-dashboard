@@ -119,7 +119,8 @@
     "ticketPendingDesc": "Boarding Anda akan dikonfirmasi setelah pembayaran",
     "ticketConfirmedDesc": "Boarding Anda telah dikonfirmasi. Selamat menikmati perjalanan!",
     "service": "LAYANAN",
-    "serviceValue": "Paket Lengkap US LLC"
+    "serviceValue": "Paket Lengkap US LLC",
+    "viewReviews": "Lihat ulasan penumpang lain"
   },
   "language": {
     "select": "Pilih Bahasa",

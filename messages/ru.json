@@ -119,7 +119,8 @@
     "ticketPendingDesc": "Ваша посадка будет подтверждена после оплаты",
     "ticketConfirmedDesc": "Ваша посадка подтверждена. Приятного путешествия!",
     "service": "УСЛУГА",
-    "serviceValue": "Полный пакет US LLC"
+    "serviceValue": "Полный пакет US LLC",
+    "viewReviews": "Посмотреть отзывы других пассажиров"
   },
   "language": {
     "select": "Выбрать язык",

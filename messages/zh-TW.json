@@ -119,7 +119,8 @@
     "ticketPendingDesc": "付款完成後將確認您的登機",
     "ticketConfirmedDesc": "您的登機已確認，祝旅途愉快！",
     "service": "服務",
-    "serviceValue": "美國LLC全套服務"
+    "serviceValue": "美國LLC全套服務",
+    "viewReviews": "查看其他乘客評價"
   },
   "language": {
     "select": "選擇語言",

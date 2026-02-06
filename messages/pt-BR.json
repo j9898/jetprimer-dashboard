@@ -119,7 +119,8 @@
     "ticketPendingDesc": "Seu embarque será confirmado após o pagamento",
     "ticketConfirmedDesc": "Seu embarque está confirmado. Aproveite sua viagem!",
     "service": "SERVIÇO",
-    "serviceValue": "Pacote completo US LLC"
+    "serviceValue": "Pacote completo US LLC",
+    "viewReviews": "Ver avaliações de outros passageiros"
   },
   "language": {
     "select": "Selecionar idioma",

@@ -288,6 +288,18 @@ export default function DashboardClient({ user, company, waypoints, locale, isPa
                 </div>
               </div>
 
+              {/* Passenger Reviews button */}
+              <button
+                onClick={() => {/* TODO: Link to reviews page */}}
+                className="w-full flex items-center gap-2 px-3 py-2.5 rounded-lg bg-gradient-to-r from-violet-50 to-purple-50 border border-violet-200/60 hover:from-violet-100 hover:to-purple-100 transition-all group mb-2"
+              >
+                <span className="text-sm">💬</span>
+                <span className="text-[11px] font-semibold text-violet-600 group-hover:text-violet-700">{t('viewReviews')}</span>
+                <svg className="w-3.5 h-3.5 ml-auto text-violet-400 group-hover:text-violet-500 group-hover:translate-x-0.5 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+
               {/* Status indicator */}
               <div className={`flex items-center gap-2 px-3 py-2 rounded-lg ${isPaid ? 'bg-emerald-50 border border-emerald-200/60' : 'bg-amber-50 border border-amber-200/60'}`}>
                 <span className="text-sm">{isPaid ? '✅' : '⏳'}</span>

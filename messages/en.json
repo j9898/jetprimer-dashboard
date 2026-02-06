@@ -119,7 +119,8 @@
     "ticketPendingDesc": "Your boarding will be confirmed after payment",
     "ticketConfirmedDesc": "Your boarding is confirmed. Enjoy your journey!",
     "service": "SERVICE",
-    "serviceValue": "US LLC Full Package"
+    "serviceValue": "US LLC Full Package",
+    "viewReviews": "View Passenger Reviews"
   },
   "language": {
     "select": "Select Language",

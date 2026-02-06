@@ -119,7 +119,8 @@
     "ticketPendingDesc": "Việc lên máy bay sẽ được xác nhận sau khi thanh toán",
     "ticketConfirmedDesc": "Việc lên máy bay đã được xác nhận. Chúc bạn có hành trình tuyệt vời!",
     "service": "DỊCH VỤ",
-    "serviceValue": "Gói US LLC Toàn diện"
+    "serviceValue": "Gói US LLC Toàn diện",
+    "viewReviews": "Xem đánh giá của hành khách khác"
   },
   "language": {
     "select": "Chọn Ngôn ngữ",

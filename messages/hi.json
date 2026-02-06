@@ -119,7 +119,8 @@
     "ticketPendingDesc": "भुगतान के बाद आपकी बोर्डिंग की पुष्टि होगी",
     "ticketConfirmedDesc": "आपकी बोर्डिंग की पुष्टि हो गई है। अपनी यात्रा का आनंद लें!",
     "service": "सेवा",
-    "serviceValue": "US LLC पूर्ण पैकेज"
+    "serviceValue": "US LLC पूर्ण पैकेज",
+    "viewReviews": "अन्य यात्रियों की समीक्षा देखें"
   },
   "language": {
     "select": "भाषा चुनें",

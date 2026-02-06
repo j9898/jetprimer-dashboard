@@ -119,7 +119,8 @@
     "ticketPendingDesc": "سيتم تأكيد صعودك بعد إتمام الدفع",
     "ticketConfirmedDesc": "تم تأكيد صعودك. رحلة سعيدة!",
     "service": "الخدمة",
-    "serviceValue": "باقة تأسيس LLC الأمريكية الكاملة"
+    "serviceValue": "باقة تأسيس LLC الأمريكية الكاملة",
+    "viewReviews": "عرض تقييمات الركاب الآخرين"
   },
   "language": {
     "select": "اختيار اللغة",

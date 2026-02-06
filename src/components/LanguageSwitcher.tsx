@@ -2,7 +2,7 @@
 
 import { useTransition, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { setLocale } from '@/lib/actions/locale'
+import { setLocale, setLocaleToDatabase } from '@/lib/actions/locale'
 
 type Locale = 'ko' | 'en' | 'ja'
 const DEFAULT_LOCALE = 'ko'
@@ -38,7 +38,10 @@ export default function LanguageSwitcher({ currentLocale: propLocale, variant = 
   const handleLocaleChange = (locale: Locale) => {
     setCurrentLocale(locale)
     startTransition(async () => {
+      // 쿠키에 저장 (즉시 적용용)
       await setLocale(locale)
+      // Supabase DB에도 저장 (로그인 시 유지용)
+      await setLocaleToDatabase(locale)
       router.refresh()
     })
   }

@@ -69,6 +69,7 @@ export async function GET(request: Request) {
               user_id: user.id,
               flight_code: flightCode,
               name: userName,
+              email: user.email,
             })
             .select('id')
             .single()

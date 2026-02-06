@@ -238,7 +238,13 @@
     "crewMessageSaved": "クルーメッセージが保存されました。",
     "crewMessageFailed": "クルーメッセージの保存に失敗しました。",
     "lastVisit": "最終訪問",
-    "neverVisited": "訪問記録なし"
+    "neverVisited": "訪問記録なし",
+    "deleteCustomer": "このCEOを削除",
+    "deleteConfirmMessage": "本当に削除しますか？このCEOのすべてのデータ（ステップ、タスク、メール履歴）が完全に削除されます。",
+    "deletingCustomer": "削除中...",
+    "confirmDelete": "削除確認",
+    "customerDeleted": "CEOが削除されました。",
+    "customerDeleteFailed": "CEOの削除に失敗しました。"
   },
   "todos": {
     "title": "やることリスト",

@@ -238,7 +238,13 @@
     "crewMessageSaved": "승무원 메시지가 저장되었습니다.",
     "crewMessageFailed": "승무원 메시지 저장에 실패했습니다.",
     "lastVisit": "마지막 방문",
-    "neverVisited": "방문 기록 없음"
+    "neverVisited": "방문 기록 없음",
+    "deleteCustomer": "이 CEO님 삭제",
+    "deleteConfirmMessage": "정말 삭제하시겠습니까? 이 CEO님의 모든 데이터(진행 단계, 할 일, 이메일 내역)가 영구 삭제됩니다.",
+    "deletingCustomer": "삭제 중...",
+    "confirmDelete": "삭제 확인",
+    "customerDeleted": "CEO님이 삭제되었습니다.",
+    "customerDeleteFailed": "CEO님 삭제에 실패했습니다."
   },
   "todos": {
     "title": "할 일 목록",

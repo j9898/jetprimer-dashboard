@@ -194,6 +194,8 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
   const [crewMessageJa, setCrewMessageJa] = useState('')
   const [isSavingCrewMessage, setIsSavingCrewMessage] = useState(false)
   const [crewMessageSaved, setCrewMessageSaved] = useState(false)
+  const [isDeletingCustomer, setIsDeletingCustomer] = useState(false)
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
   const ITEMS_PER_PAGE = 10
   const t = useTranslations('admin')
   const tCommon = useTranslations('common')
@@ -408,7 +410,33 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
     setNewTodoDescription('')
     setShowTodoInput(false)
     setCustomerTodos([])
+    setShowDeleteConfirm(false)
     fetchCustomerTodos(customer.id)
+  }
+
+  const deleteCustomer = async () => {
+    if (!selectedCustomer) return
+
+    setIsDeletingCustomer(true)
+    try {
+      const response = await fetch(`/api/admin/customers?customer_id=${selectedCustomer.id}`, {
+        method: 'DELETE',
+      })
+
+      const result = await response.json()
+      if (result.success) {
+        showToast(t('customerDeleted'), 'success')
+        setSelectedCustomer(null)
+        setShowDeleteConfirm(false)
+        router.refresh()
+      } else {
+        showToast(t('customerDeleteFailed'), 'error')
+      }
+    } catch (error) {
+      console.error('Delete customer error:', error)
+      showToast(t('customerDeleteFailed'), 'error')
+    }
+    setIsDeletingCustomer(false)
   }
 
   // 이메일 미리보기 열기
@@ -1240,6 +1268,36 @@ export default function AdminClient({ user, customers, emailLogs }: Props) {
                             ? new Date(selectedCustomer.last_visited_at).toLocaleString()
                             : t('neverVisited')}
                         </p>
+                      </div>
+                      {/* Delete Button */}
+                      <div className="pt-3 mt-3 border-t border-slate-200">
+                        {!showDeleteConfirm ? (
+                          <button
+                            onClick={() => setShowDeleteConfirm(true)}
+                            className="w-full py-2.5 px-4 text-sm font-medium text-red-500 bg-red-50 hover:bg-red-100 rounded-xl transition-all"
+                          >
+                            {t('deleteCustomer')}
+                          </button>
+                        ) : (
+                          <div className="space-y-2">
+                            <p className="text-xs text-red-600 font-medium">{t('deleteConfirmMessage')}</p>
+                            <div className="flex gap-2">
+                              <button
+                                onClick={() => setShowDeleteConfirm(false)}
+                                className="flex-1 py-2 px-3 text-xs font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition-all"
+                              >
+                                {t('cancel')}
+                              </button>
+                              <button
+                                onClick={deleteCustomer}
+                                disabled={isDeletingCustomer}
+                                className="flex-1 py-2 px-3 text-xs font-medium text-white bg-red-500 hover:bg-red-600 disabled:opacity-50 rounded-lg transition-all"
+                              >
+                                {isDeletingCustomer ? t('deletingCustomer') : t('confirmDelete')}
+                              </button>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>

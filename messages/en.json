@@ -238,7 +238,13 @@
     "crewMessageSaved": "Crew message has been saved.",
     "crewMessageFailed": "Failed to save crew message.",
     "lastVisit": "Last Visit",
-    "neverVisited": "Never visited"
+    "neverVisited": "Never visited",
+    "deleteCustomer": "Delete this CEO",
+    "deleteConfirmMessage": "Are you sure? All data for this CEO (steps, to-dos, email history) will be permanently deleted.",
+    "deletingCustomer": "Deleting...",
+    "confirmDelete": "Confirm Delete",
+    "customerDeleted": "CEO has been deleted.",
+    "customerDeleteFailed": "Failed to delete CEO."
   },
   "todos": {
     "title": "To-Do List",

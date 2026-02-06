@@ -68,7 +68,7 @@
   "dashboard": {
     "title": "Flight Center",
     "welcome": "Welcome aboard, CEO {captain}",
-    "flight": "Customer ID",
+    "flight": "Flight Code (Customer ID)",
     "flightCenter": "Flight Center",
     "destination": "DESTINATION",
     "formed": "FORMED",

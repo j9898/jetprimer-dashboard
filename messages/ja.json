@@ -68,7 +68,7 @@
   "dashboard": {
     "title": "フライトセンター",
     "welcome": "{captain} CEO様、ご搭乗を歓迎いたします",
-    "flight": "顧客番号",
+    "flight": "フライトコード（顧客番号）",
     "flightCenter": "フライトセンター",
     "destination": "目的地",
     "formed": "設立日",

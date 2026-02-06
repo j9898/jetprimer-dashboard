@@ -173,7 +173,7 @@ export function getStepUpdateEmailTemplate({
           </div>
 
           <!-- CTA Button -->
-          <a href="https://jetprimer-dashboard.vercel.app/dashboard" style="display: block; text-align: center; background: linear-gradient(135deg, #38bdf8 0%, #3b82f6 100%); color: white; text-decoration: none; padding: 14px 24px; border-radius: 10px; font-weight: 600; font-size: 16px;">
+          <a href="https://dashboard.jetprimer.com/dashboard" style="display: block; text-align: center; background: linear-gradient(135deg, #38bdf8 0%, #3b82f6 100%); color: white; text-decoration: none; padding: 14px 24px; border-radius: 10px; font-weight: 600; font-size: 16px;">
             ${locale === 'en' ? 'View Dashboard' : locale === 'ja' ? 'ダッシュボードを見る' : '대시보드 확인하기'}
           </a>
         </div>
